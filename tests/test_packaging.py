@@ -71,6 +71,25 @@ class ArchiveTest(unittest.TestCase):
             with self.subTest(bad=bad[0][:2]), self.assertRaises(ValueError):
                 install_emulators.entries(unix_zip(bad))
 
+    def test_frameworks_zipped_without_their_links_get_them_back(self):
+        framework = 'Azahar.app/Contents/Frameworks/QtCore.framework'
+        files = {'QtCore': b'library', 'Resources/Info.plist': b'plist', '_CodeSignature/CodeResources': b'seal'}
+        flattened = [(f'{framework}/Versions/A/{name}', data, 0o755, False) for name, data in files.items()]
+        flattened += [(f'{framework}/Versions/Current/{name}', data, 0o755, False) for name, data in files.items()]
+        flattened += [(f'{framework}/QtCore', b'library', 0o755, False),
+                      (f'{framework}/Resources/Info.plist', b'plist', 0o644, False)]
+        entries = install_emulators.entries(unix_zip(flattened))
+        links = {str(e.path): e.link for e in entries if e.link}
+        self.assertEqual(links, {f'{framework}/Versions/Current': 'A',
+                                 f'{framework}/QtCore': 'Versions/Current/QtCore',
+                                 f'{framework}/Resources': 'Versions/Current/Resources'})
+        self.assertEqual(sorted(str(e.path) for e in entries if not e.link),
+                         sorted(f'{framework}/Versions/A/{name}' for name in files))
+        # A copy that differs from its version is real content: left alone.
+        changed = [(name, b'other' if name.endswith('Current/QtCore') else data, mode, link)
+                   for name, data, mode, link in flattened]
+        self.assertFalse([e for e in install_emulators.entries(unix_zip(changed)) if e.link])
+
     def test_architectures_of_windows_and_mac_programs(self):
         pe = bytearray(512)
         pe[:2] = b'MZ'

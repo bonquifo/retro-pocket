@@ -168,7 +168,48 @@ class Entry:
     path: PurePosixPath   # Inside the package folder
     mode: int             # Permission bits
     link: str | None      # Symlink target, or None for a file
-    info: zipfile.ZipInfo
+    info: zipfile.ZipInfo | None  # None for a link restored by relink_frameworks()
+
+
+def relink_frameworks(result):
+    """Restore the symlinks of macOS frameworks that were zipped as copies.
+
+    A framework keeps its files in Versions/A, with Versions/Current -> A and
+    each top-level item (the library, Resources) -> Versions/Current/<item>.
+    Zipping without keeping symlinks (as Azahar's macOS release does) turns
+    those links into duplicate copies, which code-signature checks reject.
+    Copies identical to what they stand for (size and CRC) become links again.
+    """
+    frameworks = {}
+    for entry in result:
+        for index, part in enumerate(entry.path.parts):
+            if part.endswith('.framework'):
+                frameworks.setdefault(PurePosixPath(*entry.path.parts[:index + 1]), []).append(entry)
+                break
+
+    def same(a, b):
+        return a.link is None and b.link is None and (a.info.CRC, a.info.file_size) == (b.info.CRC, b.info.file_size)
+
+    dropped, restored = set(), []
+    for framework, members in frameworks.items():
+        inside = {entry.path.relative_to(framework).as_posix(): entry for entry in members}
+        versions = {name.split('/')[1] for name in inside if name.startswith('Versions/') and name.count('/') >= 2}
+        if 'Current' not in versions or len(versions - {'Current'}) != 1 or any(e.link for e in members):
+            continue  # Not flattened, or not a layout this understands: leave it alone
+        version = (versions - {'Current'}).pop()
+        real = {name[len(f'Versions/{version}/'):]: entry for name, entry in inside.items()
+                if name.startswith(f'Versions/{version}/')}
+        current = {name[len('Versions/Current/'):]: entry for name, entry in inside.items()
+                   if name.startswith('Versions/Current/')}
+        top = {name: entry for name, entry in inside.items() if not name.startswith('Versions/')}
+        if (current.keys() != real.keys() or not all(same(entry, real[name]) for name, entry in current.items())
+                or not all(name in real and same(entry, real[name]) for name, entry in top.items())):
+            continue
+        dropped |= {id(entry) for entry in (*current.values(), *top.values())}
+        restored.append(Entry(framework / 'Versions' / 'Current', 0o755, version, None))
+        restored += [Entry(framework / item, 0o755, f'Versions/Current/{item}', None)
+                     for item in sorted({name.split('/')[0] for name in top})]
+    return [entry for entry in result if id(entry) not in dropped] + restored
 
 
 def entries(archive: zipfile.ZipFile):
@@ -191,6 +232,7 @@ def entries(archive: zipfile.ZipFile):
                 raise ValueError(f'Unsafe link in archive: {path} -> {link}')
         mode = stat.S_IMODE(unix) or 0o644
         result.append(Entry(PurePosixPath(*path.parts[1:]) if strip else path, mode, link, info))
+    result = relink_frameworks(result)
     for entry in result:  # A link must stay inside the package.
         if entry.link and '..' in PurePosixPath(posixpath.normpath(str(entry.path.parent / entry.link))).parts:
             raise ValueError(f'Link leaves the package: {entry.path} -> {entry.link}')

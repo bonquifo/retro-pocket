@@ -59,7 +59,7 @@ def run_program(argv, expect, cwd=None, any_status=False, timeout=90):
     result = subprocess.run([str(a) for a in argv], cwd=cwd, stdin=subprocess.DEVNULL, capture_output=True,
                             text=True, errors='replace', timeout=timeout)
     output = (result.stdout + result.stderr).strip()
-    if (result.returncode and not any_status) or expect.lower() not in output.lower():
+    if (result.returncode and not any_status) or expect.lower() not in output.lower() or not output:
         raise RuntimeError(f'exit {result.returncode}; output: {output[-600:]!r}')
     return output.splitlines()[0][:100] if output else ''
 
@@ -200,8 +200,9 @@ def run_emulators(checks, programs, scratch, arch):
                 return run_program([scratch / 'melonds' / program, '--help'], 'usage')
             checks.run('melonDS starts (per-game copy)', melonds)
         if 'n64' in programs:
+            # It prints only its version, such as "v148".
             checks.run('ares starts', lambda: run_program(
-                [programs['n64'], '--settings-file', scratch / 'ares-settings.bml', '--version'], 'ares'))
+                [programs['n64'], '--settings-file', scratch / 'ares-settings.bml', '--version'], ''))
         if '3ds' in programs:
             def azahar():
                 (scratch / 'azahar' / 'user').mkdir(parents=True)  # Portable mode, as for a game
@@ -209,18 +210,22 @@ def run_emulators(checks, programs, scratch, arch):
                 return run_program([programs['3ds'], '-v'], 'azahar', cwd=scratch / 'azahar')
             checks.run('Azahar starts', azahar)
 
+        def codesign(*arguments):
+            result = subprocess.run(['/usr/bin/codesign', '--verify', *map(str, arguments)],
+                                    capture_output=True, text=True)
+            if result.returncode:
+                raise RuntimeError(f'{arguments[-1]}: {(result.stdout + result.stderr).strip()[-800:]}')
+
         def signatures():
             checked = []
             for program in programs.values():
                 target = compat.bundle_of(program) or program
-                subprocess.run(['/usr/bin/codesign', '--verify', '--deep', '--strict', str(target)],
-                               check=True, capture_output=True, text=True)
+                codesign('--deep', '--strict', target)
                 checked.append(target.name)
             if arch == 'arm64':  # Apple Silicon runs only signed code; Intel code may be unsigned
                 from core import locate_core
                 for target in (Path(sys.executable), Path(locate_core())):
-                    subprocess.run(['/usr/bin/codesign', '--verify', str(target)], check=True,
-                                   capture_output=True, text=True)
+                    codesign(target)
                     checked.append(target.name)
             return ', '.join(checked)
         checks.run('code signatures', signatures)
