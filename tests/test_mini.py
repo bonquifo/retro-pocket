@@ -42,7 +42,7 @@ class MiniLaunchTests(unittest.TestCase):
         else:
             staged.write_bytes(b'stale')  # Windows without symlink rights: a stale copy instead.
         with patch.dict(os.environ, {'RETRO_POCKET_POKEMINI': str(self.executable)}):
-            process = launch(rom, 'mini-test', Path(os.path.relpath(self.save_dir)))
+            process = launch(rom, 'mini-test', support.relative(self.save_dir))
             self.assertIsInstance(process, subprocess.Popen)
             self.assertEqual(process.wait(timeout=10), 0)
         self.assertFalse(staged.is_symlink())

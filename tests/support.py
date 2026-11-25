@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import shutil
 import sys
+import tempfile
 import unittest
 import zipfile
 
@@ -13,6 +14,23 @@ import compat  # noqa: E402
 WINDOWS = compat.WINDOWS
 MACOS = compat.MACOS
 LINUX = sys.platform.startswith('linux')
+
+# Temporary folders under the canonical path, which the code under test
+# produces when it resolves paths: macOS's /var is a link to /private/var, and
+# Windows may name the temp folder with 8.3 short names (C:\Users\RUNNER~1).
+# Every test run imports this module while discovering tests, before any runs.
+tempfile.tempdir = os.path.realpath(tempfile.gettempdir())
+
+
+def relative(path) -> Path:
+    """``path`` relative to the working directory, to test relative input.
+
+    On Windows a path on another drive can't be relative: then it stays absolute.
+    """
+    try:
+        return Path(os.path.relpath(path))
+    except ValueError:
+        return Path(path)
 
 
 def _launcher():

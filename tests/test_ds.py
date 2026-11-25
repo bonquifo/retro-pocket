@@ -45,7 +45,7 @@ class DSLaunchTests(unittest.TestCase):
         staged = self.save_dir / 'test-game.nds'
         self.save_dir.mkdir()
         staged.write_bytes(b'stale bytes')
-        relative_save_dir = Path(os.path.relpath(self.save_dir))
+        relative_save_dir = support.relative(self.save_dir)
         with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             proc = launch(rom, 'test-game', relative_save_dir)
             self.assertIsInstance(proc, subprocess.Popen)

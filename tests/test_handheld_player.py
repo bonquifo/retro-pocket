@@ -26,7 +26,9 @@ class HandheldCLITest(unittest.TestCase):
             result = self.invoke(rom, core, root / 'saves', 'A title with spaces')
         self.assertEqual(result.returncode, 1, result.stderr)
         self.assertIn('Traceback (most recent call last)', result.stderr)
-        self.assertIn(f'RETRO_POCKET_ERROR: {core}', result.stderr)
+        # The error line names the core ("<core>: invalid ELF header" on Linux, "dlopen(<core>, ...)" on macOS).
+        errors = [line for line in result.stderr.splitlines() if line.startswith('RETRO_POCKET_ERROR: ')]
+        self.assertTrue(errors and str(core) in errors[-1], result.stderr)
 
     def test_relative_paths_are_rejected(self):
         with TemporaryDirectory() as tmp:

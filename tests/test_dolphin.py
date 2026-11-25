@@ -47,7 +47,7 @@ class DolphinLaunchTests(unittest.TestCase):
     def test_launch_passes_staged_path_to_child_without_copying(self):
         from dolphin_backend import launch
 
-        process = launch(Path(os.path.relpath(self.rom)), 'one', self.saves)
+        process = launch(support.relative(self.rom), 'one', self.saves)
         self.assertIsInstance(process, subprocess.Popen)
         self.assertEqual(process.wait(timeout=10), 0)
         self.assertFalse(list(self.saves.rglob('*.iso')))

@@ -64,7 +64,7 @@ class AzaharLaunchTests(unittest.TestCase):
     def run_child(self, game_id='3ds-example'):
         from azahar_backend import launch
 
-        child = launch(Path(os.path.relpath(self.rom)), game_id, self.saves)
+        child = launch(support.relative(self.rom), game_id, self.saves)
         self.assertIsInstance(child, subprocess.Popen)
         try:
             self.assertEqual(child.wait(timeout=10), 0)

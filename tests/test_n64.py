@@ -61,7 +61,7 @@ class N64LaunchTests(unittest.TestCase):
         self.save_dir.mkdir()
         staged = self.save_dir / 'test-game.z64'
         staged.write_bytes(b'stale')
-        proc = launch(rom, 'test-game', Path(os.path.relpath(self.save_dir)))
+        proc = launch(rom, 'test-game', support.relative(self.save_dir))
         self.assertIsInstance(proc, subprocess.Popen)
         self.assertEqual(proc.wait(timeout=10), 0)
         self.assertEqual(staged.read_bytes(), rom)
