@@ -1,0 +1,187 @@
+[
+  {
+    "id": "n64-stadium-jp",
+    "title": "Pokémon Stadium (Japan)",
+    "platform": "N64",
+    "year": 1998,
+    "variants": [
+      {
+        "label": "Japan",
+        "size": 16777216,
+        "sha1": "8bc8d2ff7df25b26bd0c353d2adfe83e4e3a7a87"
+      }
+    ]
+  },
+  {
+    "id": "n64-snap",
+    "title": "Pokémon Snap",
+    "platform": "N64",
+    "year": 1999,
+    "variants": [
+      {
+        "label": "USA",
+        "size": 16777216,
+        "sha1": "edc7c49cc568c045fe48be0d18011c30f393cbaf"
+      },
+      {
+        "label": "Australia",
+        "size": 16777216,
+        "sha1": "eb388731bb7530f60e3ad4a1652f79296b5063ec"
+      },
+      {
+        "label": "Europe",
+        "size": 16777216,
+        "sha1": "d575b393812a0a59fbb52f3ce55ce4d7bc5f3225"
+      },
+      {
+        "label": "France",
+        "size": 16777216,
+        "sha1": "9ee1ed91ad6e00cc50e1a1513a256ccceb9a41df"
+      },
+      {
+        "label": "Germany",
+        "size": 16777216,
+        "sha1": "f1fe20e26c3803c0e4ea33711be5e0edf8e9c4be"
+      },
+      {
+        "label": "Italy",
+        "size": 16777216,
+        "sha1": "a4dae7f86e463fe5351b3e74a1d044a95f3cbf41"
+      },
+      {
+        "label": "Japan",
+        "size": 16777216,
+        "sha1": "5d7b3b8d4bb64da5b7ae5e1f132b26a282c33909"
+      },
+      {
+        "label": "Spain",
+        "size": 16777216,
+        "sha1": "24da787140662d1fb40d8e17199ce6412d72dedc"
+      }
+    ]
+  },
+  {
+    "id": "n64-stadium",
+    "title": "Pokémon Stadium",
+    "platform": "N64",
+    "year": 2000,
+    "variants": [
+      {
+        "label": "USA",
+        "size": 33554432,
+        "sha1": "ed7bef5a306f88c0a6e96b15e71fee2ef32058f3"
+      },
+      {
+        "label": "USA (Rev 1)",
+        "size": 33554432,
+        "sha1": "488bb6d112427823d77fcecdd9297fd86875263d"
+      },
+      {
+        "label": "USA (Rev 2)",
+        "size": 33554432,
+        "sha1": "0d3b1d740c6ee6da6923550bf24ad827262fd8c0"
+      },
+      {
+        "label": "Europe",
+        "size": 33554432,
+        "sha1": "6f26e3c8b35c3232058375e30d19665facb23123"
+      },
+      {
+        "label": "Europe (Rev 1)",
+        "size": 33554432,
+        "sha1": "9470f899ad0107677b7dfd24e1dd567723a5f84f"
+      },
+      {
+        "label": "France",
+        "size": 33554432,
+        "sha1": "4f7267ccaba4a8a9b0ae2cb89e191bc69b153ddc"
+      },
+      {
+        "label": "Germany",
+        "size": 33554432,
+        "sha1": "6a25903e733f071e7d6ea54529b7fd60b760cda3"
+      },
+      {
+        "label": "Italy",
+        "size": 33554432,
+        "sha1": "db5f2797c377fa8957b97465fc5738d6999ff240"
+      },
+      {
+        "label": "Spain",
+        "size": 33554432,
+        "sha1": "f39911ad0bedccc3e44d4338507c73bfa97856bf"
+      }
+    ]
+  },
+  {
+    "id": "n64-puzzle-league",
+    "title": "Pokémon Puzzle League",
+    "platform": "N64",
+    "year": 2000,
+    "variants": [
+      {
+        "label": "USA",
+        "size": 33554432,
+        "sha1": "8173866fc8c7652abd44c48efcab85441c6806a1"
+      },
+      {
+        "label": "Europe",
+        "size": 33554432,
+        "sha1": "184f0cac8fdfad47590c515fc637076d2ded58d7"
+      },
+      {
+        "label": "France",
+        "size": 33554432,
+        "sha1": "72760a2d87ed3e70756a4aa689b9b26786669a52"
+      },
+      {
+        "label": "Germany",
+        "size": 33554432,
+        "sha1": "dbc9d0de131f3604a9115b58368e9050f1a6303f"
+      }
+    ]
+  },
+  {
+    "id": "n64-stadium-2",
+    "title": "Pokémon Stadium 2",
+    "platform": "N64",
+    "year": 2001,
+    "variants": [
+      {
+        "label": "USA",
+        "size": 67108864,
+        "sha1": "d8343e69a7dc63b869cf6361d87cde64444281d3"
+      },
+      {
+        "label": "Europe",
+        "size": 67108864,
+        "sha1": "f6a7e8146433a48bf101722e30bf86311a641f7b"
+      },
+      {
+        "label": "France",
+        "size": 67108864,
+        "sha1": "d7e13535b671024a92822db01507e87bd42f68ec"
+      },
+      {
+        "label": "Germany",
+        "size": 67108864,
+        "sha1": "6de05180d77e73dcf32d57af7c8c1529c7acda59"
+      },
+      {
+        "label": "Italy",
+        "size": 67108864,
+        "sha1": "4926db649c76521f61ae51c13e452a2c8001354c"
+      },
+      {
+        "label": "Japan (Stadium Kin Gin)",
+        "size": 67108864,
+        "sha1": "05682e60b13479ca1c54656e5a5b1ee6d099c1a4"
+      },
+      {
+        "label": "Spain",
+        "size": 67108864,
+        "sha1": "ab1cdf753bed70487923ea3129278e45d6325773"
+      }
+    ]
+  }
+]

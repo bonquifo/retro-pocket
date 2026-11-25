@@ -1,0 +1,93 @@
+[
+  {
+    "id": "3ds-x",
+    "title": "Pokémon X",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [
+      {
+        "label": "USA (decrypted dump)",
+        "size": 2147483648,
+        "sha1": "20b7278f10a32ab440b4dff1d382a1401590aceb"
+      }
+    ]
+  },
+  {
+    "id": "3ds-y",
+    "title": "Pokémon Y",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [
+      {
+        "label": "USA (decrypted dump)",
+        "size": 2147483648,
+        "sha1": "d41e08f879c741c1866eb33447c6a8d4e9b1a1f5"
+      }
+    ]
+  },
+  {
+    "id": "3ds-alpha-sapphire",
+    "title": "Pokémon Alpha Sapphire",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [
+      {
+        "label": "USA (Rev 2) (decrypted dump)",
+        "size": 2147483648,
+        "sha1": "ecee5558f2365f11f6f12ba37508f793c78ca011"
+      }
+    ]
+  },
+  {
+    "id": "3ds-omega-ruby",
+    "title": "Pokémon Omega Ruby",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [
+      {
+        "label": "USA (Rev 2) (decrypted dump)",
+        "size": 2147483648,
+        "sha1": "d8f31e313bbe2503a0d02c3cf5e5ad37afe8505e"
+      }
+    ]
+  },
+  {
+    "id": "3ds-moon",
+    "title": "Pokémon Moon",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [
+      {
+        "label": "USA (decrypted dump)",
+        "size": 4294967296,
+        "sha1": "deb6831605df5ccad1a6c7fe910d779ea508e5c1"
+      }
+    ]
+  },
+  {
+    "id": "3ds-sun",
+    "title": "Pokémon Sun",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [
+      {
+        "label": "USA (decrypted dump)",
+        "size": 4294967296,
+        "sha1": "ee95c40e484c4ad51fee190abe11a5b6b55365e0"
+      }
+    ]
+  },
+  {
+    "id": "3ds-ultra-moon",
+    "title": "Pokémon Ultra Moon",
+    "platform": "3DS",
+    "year": 2017,
+    "variants": [
+      {
+        "label": "USA (decrypted dump)",
+        "size": 4294967296,
+        "sha1": "f974b991347c2fae5836a88a82c7fcbb9aac9e80"
+      }
+    ]
+  }
+]

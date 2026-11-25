@@ -1,0 +1,92 @@
+[
+  {
+    "id": "pokemon-trading-card-game",
+    "title": "Pokémon Trading Card Game",
+    "platform": "GBC",
+    "year": 2000,
+    "variants": [
+      {"label": "USA, Australia", "size": 1048576, "sha1": "0f8670a583255cff3e5b7ca71b5d7454d928fc48"},
+      {"label": "Europe (En,Fr,De)", "size": 2097152, "sha1": "868e7b376e39f7d65a735538d90fbe6bbc99d198"},
+      {"label": "Europe (En,Fr,De) (Rev 1)", "size": 2097152, "sha1": "dffc15f3063a4c2df84c6361406b41aec1696d3e"},
+      {"label": "Europe (En,Es,It)", "size": 2097152, "sha1": "2138a422d135a13c49fce71229ae36bc1dc4fbb5"},
+      {"label": "Europe (En,Es,It) (Rev 1)", "size": 2097152, "sha1": "c54b81e638b0c45d3569f9f5f0345df9e95ce975"}
+    ]
+  },
+  {
+    "id": "pokemon-pinball",
+    "title": "Pokémon Pinball",
+    "platform": "GBC",
+    "year": 1999,
+    "variants": [
+      {"label": "USA, Australia (Rumble Version)", "size": 1048576, "sha1": "9402014d14969432142abfde728c6f1a10ee4dac"},
+      {"label": "Europe (En,Fr,De,Es,It) (Rumble Version)", "size": 2097152, "sha1": "24c693b8048594e2bf61ec1dc2182e75d81e532d"}
+    ]
+  },
+  {
+    "id": "pokemon-puzzle-challenge",
+    "title": "Pokémon Puzzle Challenge",
+    "platform": "GBC",
+    "year": 2000,
+    "variants": [
+      {"label": "USA, Australia", "size": 2097152, "sha1": "bbf952412250ae511b3b862566e424ce6a672f99"},
+      {"label": "Europe (En,Fr,De,Es,It)", "size": 2097152, "sha1": "e40d6a7f78b449e5a55baaaea7e227ab19d510e4"}
+    ]
+  },
+  {
+    "id": "pokemon-pinball-ruby-sapphire",
+    "title": "Pokémon Pinball: Ruby & Sapphire",
+    "platform": "GBA",
+    "year": 2003,
+    "variants": [
+      {"label": "USA", "size": 8388608, "sha1": "9fec81ce2c5df589e0371a0bf2f92a5fe8db730b"},
+      {"label": "Europe (En,Fr,De,Es,It)", "size": 16777216, "sha1": "b8b7881eaa9856b5ada99078ad1053d31cb79827"}
+    ]
+  },
+  {
+    "id": "pokemon-mystery-dungeon-red-rescue-team",
+    "title": "Pokémon Mystery Dungeon: Red Rescue Team",
+    "platform": "GBA",
+    "year": 2006,
+    "variants": [
+      {"label": "USA, Australia", "size": 33554432, "sha1": "9f4cfc5b5f4859d17169a485462e977c7aac2b89"},
+      {"label": "Europe (En,Fr,De,Es,It)", "size": 33554432, "sha1": "afee3b060dd5fd4a68afb1b003456aef3a2af073"}
+    ]
+  },
+  {
+    "id": "pokemon-green-jp",
+    "title": "Pocket Monsters Green (Japan)",
+    "platform": "GB",
+    "year": 1996,
+    "variants": [
+      {"label": "Japan", "size": 524288, "sha1": "82c0eef40a5e2423699d9fd8ba15dfaa8b51d196"},
+      {"label": "Japan (Rev 1)", "size": 524288, "sha1": "4b97cd44aa3f0dd290bfe7b3ac17b7bd8270897b"}
+    ]
+  },
+  {
+    "id": "pokemon-blue-jp",
+    "title": "Pocket Monsters Blue (Japan)",
+    "platform": "GB",
+    "year": 1996,
+    "variants": [
+      {"label": "Japan", "size": 524288, "sha1": "0da501e3e5c51ab8fef55b092dcdd7e6b050e424"}
+    ]
+  },
+  {
+    "id": "pokemon-crystal-jp",
+    "title": "Pocket Monsters Crystal (Japan)",
+    "platform": "GBC",
+    "year": 2000,
+    "variants": [
+      {"label": "Japan", "size": 2097152, "sha1": "95127b901bbce2407daf43cce9f45d4c27ef635d"}
+    ]
+  },
+  {
+    "id": "pokemon-trading-card-game-2-jp",
+    "title": "Pokémon Card GB2: GR Dan Sanjou! (Japan)",
+    "platform": "GBC",
+    "year": 2001,
+    "variants": [
+      {"label": "Japan", "size": 2097152, "sha1": "a7e12bcc5f514e3aad8de570fd511aab0a308822"}
+    ]
+  }
+]

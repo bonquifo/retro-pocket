@@ -1,0 +1,12 @@
+__pycache__/
+.venv/
+*.pyc
+# Emulators downloaded by tools/setup_windows.py
+emulators/
+# Game dumps are the owner's own and never part of the repository; keep the folder.
+roms/*
+!roms/.gitkeep
+# macOS Finder and Windows Explorer metadata
+.DS_Store
+Thumbs.db
+desktop.ini

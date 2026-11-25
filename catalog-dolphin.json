@@ -1,0 +1,76 @@
+[
+  {
+    "id": "gcn-channel",
+    "title": "Pokémon Channel",
+    "platform": "GCN",
+    "year": 2003,
+    "variants": [
+      {
+        "label": "(USA)",
+        "size": 1459978240,
+        "sha1": "559d108818704474c147ef8c17f2e1751ac1c145"
+      },
+      {
+        "label": "(Europe) (En,Fr,De,Es,It)",
+        "size": 1459978240,
+        "sha1": "64dc845f39e971b1c15c0e20622bfc09050b1d75"
+      },
+      {
+        "label": "(Australia)",
+        "size": 1459978240,
+        "sha1": "71b4703d8f5fcf72d75cd70e5e3ae94f134b6f7f"
+      },
+      {
+        "label": "(Japan)",
+        "size": 1459978240,
+        "sha1": "7e64cf41852a957d4d5d3a031aa96c600b12372e"
+      }
+    ]
+  },
+  {
+    "id": "gcn-colosseum",
+    "title": "Pokémon Colosseum",
+    "platform": "GCN",
+    "year": 2003,
+    "variants": [
+      {
+        "label": "(USA)",
+        "size": 1459978240,
+        "sha1": "96b2b686d202a13dd15261fb7cffbcb2f08c0a77"
+      },
+      {
+        "label": "(Europe) (En,Fr,De,Es,It)",
+        "size": 1459978240,
+        "sha1": "127c4cb4d3c9c2e181f3a29e96b44fa55a77dfb2"
+      },
+      {
+        "label": "(Japan)",
+        "size": 1459978240,
+        "sha1": "170f72ae718a375f49e9ccae526d5da1b493fca0"
+      }
+    ]
+  },
+  {
+    "id": "gcn-xd-gale-of-darkness",
+    "title": "Pokémon XD: Gale of Darkness",
+    "platform": "GCN",
+    "year": 2005,
+    "variants": [
+      {
+        "label": "(USA)",
+        "size": 1459978240,
+        "sha1": "c1b5218f832403d15aa500ac4d6aacc8865c792d"
+      },
+      {
+        "label": "(Europe) (En,Fr,De,Es,It)",
+        "size": 1459978240,
+        "sha1": "2b7e287df4264ddd07824d316a9d6e063d96aec5"
+      },
+      {
+        "label": "(Japan)",
+        "size": 1459978240,
+        "sha1": "c803390dd982fccb43a958471debf9ddaa8c6407"
+      }
+    ]
+  }
+]

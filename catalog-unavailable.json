@@ -1,0 +1,1362 @@
+[
+  {
+    "id": "n64-hey-you-pikachu",
+    "title": "Hey You, Pikachu!",
+    "platform": "N64",
+    "year": 1998,
+    "variants": [],
+    "unavailable": "Requires the N64 Voice Recognition Unit and microphone; that input has not been validated in Retro Pocket."
+  },
+  {
+    "id": "n64-stadium-jp",
+    "title": "Pokémon Stadium (Japan)",
+    "platform": "N64",
+    "year": 1998,
+    "variants": [],
+    "unavailable": "Japan-only first Stadium game, distinct from the international Pokémon Stadium. Retro Pocket does not run N64 software."
+  },
+  {
+    "id": "n64-snap",
+    "title": "Pokémon Snap",
+    "platform": "N64",
+    "year": 1999,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run N64 software."
+  },
+  {
+    "id": "n64-stadium",
+    "title": "Pokémon Stadium",
+    "platform": "N64",
+    "year": 1999,
+    "variants": [],
+    "unavailable": "The international Pokémon Stadium; originally released in Japan as Pokémon Stadium 2. Retro Pocket does not run N64 software."
+  },
+  {
+    "id": "n64-puzzle-league",
+    "title": "Pokémon Puzzle League",
+    "platform": "N64",
+    "year": 2000,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run N64 software."
+  },
+  {
+    "id": "n64-stadium-2",
+    "title": "Pokémon Stadium 2",
+    "platform": "N64",
+    "year": 2000,
+    "variants": [],
+    "unavailable": "The international Pokémon Stadium 2; originally released in Japan as Pokémon Stadium Gold and Silver. Retro Pocket does not run N64 software."
+  },
+  {
+    "id": "gcn-box-ruby-sapphire",
+    "title": "Pokémon Box Ruby & Sapphire",
+    "platform": "GCN",
+    "year": 2003,
+    "variants": [],
+    "unavailable": "GameCube storage utility for compatible Game Boy Advance games, not a standalone RPG. Retro Pocket does not run GameCube software."
+  },
+  {
+    "id": "gcn-channel",
+    "title": "Pokémon Channel",
+    "platform": "GCN",
+    "year": 2003,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run GameCube software."
+  },
+  {
+    "id": "gcn-colosseum",
+    "title": "Pokémon Colosseum",
+    "platform": "GCN",
+    "year": 2003,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run GameCube software."
+  },
+  {
+    "id": "gcn-xd-gale-of-darkness",
+    "title": "Pokémon XD: Gale of Darkness",
+    "platform": "GCN",
+    "year": 2005,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run GameCube software."
+  },
+  {
+    "id": "wii-battle-revolution",
+    "title": "Pokémon Battle Revolution",
+    "platform": "Wii",
+    "year": 2006,
+    "variants": [],
+    "unavailable": "Official Nintendo Wi-Fi Connection ended; local modes are distinct. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-snap-vc",
+    "title": "Pokémon Snap (Virtual Console)",
+    "platform": "Wii",
+    "year": 2007,
+    "variants": [],
+    "unavailable": "N64 reissue via Wii Virtual Console; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-my-pokemon-ranch",
+    "title": "My Pokémon Ranch",
+    "platform": "Wii",
+    "year": 2008,
+    "variants": [],
+    "unavailable": "WiiWare storage companion for compatible Nintendo DS games; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-puzzle-league-vc",
+    "title": "Pokémon Puzzle League (Virtual Console)",
+    "platform": "Wii",
+    "year": 2008,
+    "variants": [],
+    "unavailable": "N64 reissue via Wii Virtual Console; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-light-adventure-squad",
+    "title": "Pokémon Mystery Dungeon: Go For It! Light Adventure Squad",
+    "platform": "Wii",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "Japan-only WiiWare release; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-blazing-adventure-squad",
+    "title": "Pokémon Mystery Dungeon: Keep Going! Blazing Adventure Squad",
+    "platform": "Wii",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "Japan-only WiiWare release; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-stormy-adventure-squad",
+    "title": "Pokémon Mystery Dungeon: Let's Go! Stormy Adventure Squad",
+    "platform": "Wii",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "Japan-only WiiWare release; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-rumble",
+    "title": "Pokémon Rumble",
+    "platform": "Wii",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "WiiWare release; no new Wii Shop purchases. Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-pokepark-pikachu",
+    "title": "PokéPark Wii: Pikachu's Adventure",
+    "platform": "Wii",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wii-pokepark-2",
+    "title": "PokéPark 2: Wonders Beyond",
+    "platform": "Wii",
+    "year": 2011,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Wii software."
+  },
+  {
+    "id": "wiiu-rumble-u",
+    "title": "Pokémon Rumble U",
+    "platform": "Wii U",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "Wii U eShop release; no new purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-pinball-ruby-sapphire-vc",
+    "title": "Pokémon Pinball: Ruby & Sapphire (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "GBA reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-pokepark-pikachu-reissue",
+    "title": "PokéPark Wii: Pikachu's Adventure (Wii U Download)",
+    "platform": "Wii U",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Wii game reissued via the Wii U eShop; no new purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-pokken-tournament",
+    "title": "Pokkén Tournament",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Wii U port of the arcade game, distinct from Switch DX; Nintendo ended standard Wii U online play. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-blue-rescue-team-vc",
+    "title": "Pokémon Mystery Dungeon: Blue Rescue Team (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "DS reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-explorers-of-sky-vc",
+    "title": "Pokémon Mystery Dungeon: Explorers of Sky (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "DS reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-red-rescue-team-vc",
+    "title": "Pokémon Mystery Dungeon: Red Rescue Team (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "GBA reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-ranger-vc",
+    "title": "Pokémon Ranger (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "DS reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-ranger-guardian-signs-vc",
+    "title": "Pokémon Ranger: Guardian Signs (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "DS reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-ranger-shadows-of-almia-vc",
+    "title": "Pokémon Ranger: Shadows of Almia (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "DS reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "wiiu-snap-vc",
+    "title": "Pokémon Snap (Virtual Console)",
+    "platform": "Wii U",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "N64 reissue via Wii U Virtual Console; no new eShop purchases. Retro Pocket does not run Wii U software."
+  },
+  {
+    "id": "3ds-pokedex-3d",
+    "title": "Pokédex 3D",
+    "platform": "3DS",
+    "year": 2011,
+    "variants": [],
+    "unavailable": "Digital Pokédex reference app, not a game. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-rumble-blast",
+    "title": "Pokémon Rumble Blast",
+    "platform": "3DS",
+    "year": 2011,
+    "variants": [],
+    "unavailable": "Also released as Super Pokémon Rumble in PAL regions. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-pokedex-3d-pro",
+    "title": "Pokédex 3D Pro",
+    "platform": "3DS",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Expanded digital Pokédex reference app, not a game. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-dream-radar",
+    "title": "Pokémon Dream Radar",
+    "platform": "3DS",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Downloadable companion game for Pokémon Black 2 and White 2; no new eShop downloads. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-gates-to-infinity",
+    "title": "Pokémon Mystery Dungeon: Gates to Infinity",
+    "platform": "3DS",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-poke-transporter",
+    "title": "Poké Transporter",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "Transfer companion for Pokémon Bank, not a standalone game; no new eShop downloads. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-bank",
+    "title": "Pokémon Bank",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "Online storage utility; new downloads are closed and service is scheduled to end in February 2027. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-tretta-lab",
+    "title": "Pokémon Tretta Lab",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "Japan-only companion software for the Tretta scanner accessory and arcade tokens. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-x",
+    "title": "Pokémon X",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-y",
+    "title": "Pokémon Y",
+    "platform": "3DS",
+    "year": 2013,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-alpha-sapphire",
+    "title": "Pokémon Alpha Sapphire",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-art-academy",
+    "title": "Pokémon Art Academy",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-battle-trozei",
+    "title": "Pokémon Battle Trozei",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Also released as Pokémon Link: Battle! in PAL regions. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-omega-ruby",
+    "title": "Pokémon Omega Ruby",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-puzzle-challenge-vc",
+    "title": "Pokémon Puzzle Challenge (Virtual Console)",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "GBC reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-trading-card-game-vc",
+    "title": "Pokémon Trading Card Game (Virtual Console)",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "GBC reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-thieves-1000-pokemon",
+    "title": "The Thieves and the 1000 Pokémon",
+    "platform": "3DS",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Limited-distribution Japan-only 3DS download. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-picross",
+    "title": "Pokémon Picross",
+    "platform": "3DS",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "3DS eShop puzzle game; no new downloads. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-rumble-world",
+    "title": "Pokémon Rumble World",
+    "platform": "3DS",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Originally free-to-start on eShop; also released in a separate packaged edition. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-shuffle",
+    "title": "Pokémon Shuffle",
+    "platform": "3DS",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "3DS eShop puzzle game; no new downloads, distinct from Shuffle Mobile. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-super-mystery-dungeon",
+    "title": "Pokémon Super Mystery Dungeon",
+    "platform": "3DS",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-detective-pikachu-birth-of-a-new-duo",
+    "title": "Detective Pikachu – Birth of a New Duo",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Japan-only download; the story was expanded in the 2018 release. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-blue-jp-vc",
+    "title": "Pokémon Blue (Japan, Virtual Console)",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Japanese Game Boy version, distinct from international Blue; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-blue-vc",
+    "title": "Pokémon Blue (Virtual Console)",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "International Game Boy version reissued via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-green-jp-vc",
+    "title": "Pokémon Green (Japan, Virtual Console)",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Japan-only Game Boy version reissued via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-moon",
+    "title": "Pokémon Moon",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-red-vc",
+    "title": "Pokémon Red (Virtual Console)",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Game Boy reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-sun",
+    "title": "Pokémon Sun",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-yellow-vc",
+    "title": "Pokémon Yellow (Virtual Console)",
+    "platform": "3DS",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Game Boy reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-gold-vc",
+    "title": "Pokémon Gold (Virtual Console)",
+    "platform": "3DS",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "GBC reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-silver-vc",
+    "title": "Pokémon Silver (Virtual Console)",
+    "platform": "3DS",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "GBC reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-ultra-moon",
+    "title": "Pokémon Ultra Moon",
+    "platform": "3DS",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "Enhanced follow-up to Pokémon Moon, sold as a standalone game. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-ultra-sun",
+    "title": "Pokémon Ultra Sun",
+    "platform": "3DS",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "Enhanced follow-up to Pokémon Sun, sold as a standalone game. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-detective-pikachu",
+    "title": "Detective Pikachu",
+    "platform": "3DS",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "Full 3DS release, distinct from its early Japan-only release and Switch sequel. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "3ds-crystal-vc",
+    "title": "Pokémon Crystal (Virtual Console)",
+    "platform": "3DS",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "GBC reissue via 3DS Virtual Console; no new eShop purchases. No verified dump is listed for this 3DS title yet, so Retro Pocket will not launch it."
+  },
+  {
+    "id": "switch-pokken-tournament-dx",
+    "title": "Pokkén Tournament DX",
+    "platform": "Switch",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "Enhanced Switch port of Pokkén Tournament. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-quest",
+    "title": "Pokémon Quest",
+    "platform": "Switch",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-lets-go-eevee",
+    "title": "Pokémon: Let's Go, Eevee!",
+    "platform": "Switch",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-lets-go-pikachu",
+    "title": "Pokémon: Let's Go, Pikachu!",
+    "platform": "Switch",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-shield",
+    "title": "Pokémon Shield",
+    "platform": "Switch",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-sword",
+    "title": "Pokémon Sword",
+    "platform": "Switch",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-cafe-remix",
+    "title": "Pokémon Café ReMix",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Launched as Pokémon Café Mix; ReMix is the updated title. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-home",
+    "title": "Pokémon HOME",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Cloud storage and transfer client, not an offline cartridge game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-rescue-team-dx",
+    "title": "Pokémon Mystery Dungeon: Rescue Team DX",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Switch remake of the original GBA and DS Rescue Team games. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-shield-plus-expansion-pass",
+    "title": "Pokémon Shield + Expansion Pass",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Bundle of the base game and its DLC, not a separate game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-shield-expansion-pass",
+    "title": "Pokémon Shield Expansion Pass",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Paid DLC for Pokémon Shield only; includes The Isle of Armor and The Crown Tundra. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-sword-plus-expansion-pass",
+    "title": "Pokémon Sword + Expansion Pass",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Bundle of the base game and its DLC, not a separate game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-sword-expansion-pass",
+    "title": "Pokémon Sword Expansion Pass",
+    "platform": "Switch",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Paid DLC for Pokémon Sword only; includes The Isle of Armor and The Crown Tundra. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-new-snap",
+    "title": "New Pokémon Snap",
+    "platform": "Switch",
+    "year": 2021,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-brilliant-diamond",
+    "title": "Pokémon Brilliant Diamond",
+    "platform": "Switch",
+    "year": 2021,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-shining-pearl",
+    "title": "Pokémon Shining Pearl",
+    "platform": "Switch",
+    "year": 2021,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-unite",
+    "title": "Pokémon UNITE",
+    "platform": "Switch",
+    "year": 2021,
+    "variants": [],
+    "unavailable": "Online team battle game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-legends-arceus",
+    "title": "Pokémon Legends: Arceus",
+    "platform": "Switch",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-puzzle-league-nso",
+    "title": "Pokémon Puzzle League (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "N64 reissue through Nintendo Switch Online + Expansion Pack in supported regions. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-scarlet",
+    "title": "Pokémon Scarlet",
+    "platform": "Switch",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-snap-nso",
+    "title": "Pokémon Snap (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "N64 reissue through Nintendo Switch Online + Expansion Pack. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-violet",
+    "title": "Pokémon Violet",
+    "platform": "Switch",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-detective-pikachu-returns",
+    "title": "Detective Pikachu Returns",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-scarlet-plus-hidden-treasure",
+    "title": "Pokémon Scarlet + The Hidden Treasure of Area Zero",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Bundle of the base game and its DLC, not a separate game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-scarlet-hidden-treasure",
+    "title": "Pokémon Scarlet: The Hidden Treasure of Area Zero",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Paid DLC for Pokémon Scarlet only; includes The Teal Mask and The Indigo Disk. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-stadium-nso",
+    "title": "Pokémon Stadium (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "N64 reissue through Nintendo Switch Online + Expansion Pack, not the 1998 Japan-only game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-stadium-2-nso",
+    "title": "Pokémon Stadium 2 (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "N64 reissue through Nintendo Switch Online + Expansion Pack. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-trading-card-game-nso",
+    "title": "Pokémon Trading Card Game (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "GBC reissue through Nintendo Switch Online. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-violet-plus-hidden-treasure",
+    "title": "Pokémon Violet + The Hidden Treasure of Area Zero",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Bundle of the base game and its DLC, not a separate game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-violet-hidden-treasure",
+    "title": "Pokémon Violet: The Hidden Treasure of Area Zero",
+    "platform": "Switch",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Paid DLC for Pokémon Violet only; includes The Teal Mask and The Indigo Disk. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-red-rescue-team-nso",
+    "title": "Pokémon Mystery Dungeon: Red Rescue Team (Nintendo Classics)",
+    "platform": "Switch",
+    "year": 2024,
+    "variants": [],
+    "unavailable": "GBA reissue through Nintendo Switch Online + Expansion Pack. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-friends",
+    "title": "Pokémon Friends",
+    "platform": "Switch",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Switch puzzle game, also released on mobile; Switch 2 compatibility is not a separate edition. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-legends-za",
+    "title": "Pokémon Legends: Z-A",
+    "platform": "Switch",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Base Switch release; the enhanced Switch 2 Edition is listed separately. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-legends-za-mega-dimension",
+    "title": "Pokémon Legends: Z-A – Mega Dimension",
+    "platform": "Switch",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Paid DLC; requires the Switch base game or its Switch 2 Edition. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-champions",
+    "title": "Pokémon Champions",
+    "platform": "Switch",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Online battle-focused spinoff; also available on Switch 2 and mobile. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-firered",
+    "title": "Pokémon FireRed Version (Switch Reissue)",
+    "platform": "Switch",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Stand-alone official Switch reissue of the GBA game, not a Nintendo Classics subscription release. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-leafgreen",
+    "title": "Pokémon LeafGreen Version (Switch Reissue)",
+    "platform": "Switch",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Stand-alone official Switch reissue of the GBA game, not a Nintendo Classics subscription release. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch-legends-za-bundle",
+    "title": "Pokémon Legends: Z-A Bundle (Game + DLC)",
+    "platform": "Switch",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Digital bundle of the Switch base game and Mega Dimension, not a separate game. Retro Pocket does not run Nintendo Switch software."
+  },
+  {
+    "id": "switch2-legends-za",
+    "title": "Pokémon Legends: Z-A – Nintendo Switch 2 Edition",
+    "platform": "Switch 2",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Enhanced edition of the Switch base game; not a sequel or DLC. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "switch2-legends-za-bundle",
+    "title": "Pokémon Legends: Z-A – Nintendo Switch 2 Edition + Mega Dimension",
+    "platform": "Switch 2",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Bundle of the enhanced base game and paid DLC, not a separate game. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "switch2-pokopia",
+    "title": "Pokémon Pokopia",
+    "platform": "Switch 2",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Nintendo Switch 2 spinoff, not a mainline RPG. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "switch2-pokopia-bundle",
+    "title": "Pokémon Pokopia Bundle (Game + Expansion Pass)",
+    "platform": "Switch 2",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Bundle of the Switch 2 base game and its DLC pass, not a separate game. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "switch2-pokopia-expansion-pass",
+    "title": "Pokémon Pokopia Expansion Pass",
+    "platform": "Switch 2",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Paid DLC requiring Pokémon Pokopia; Part 1: Bubbly Basin is released. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "switch2-xd-gale-of-darkness-nso",
+    "title": "Pokémon XD: Gale of Darkness (Nintendo Classics)",
+    "platform": "Switch 2",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "GameCube reissue through Nintendo Switch Online + Expansion Pack on Switch 2. Retro Pocket does not run Nintendo Switch 2 software."
+  },
+  {
+    "id": "mini-party-mini",
+    "title": "Pokémon Party mini",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-pinball-mini",
+    "title": "Pokémon Pinball mini",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-puzzle-collection",
+    "title": "Pokémon Puzzle Collection",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-zany-cards",
+    "title": "Pokémon Zany Cards",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-pichu-bros-mini",
+    "title": "Pichu Bros. mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-breeder-mini",
+    "title": "Pokémon Breeder mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-puzzle-collection-2",
+    "title": "Pokémon Puzzle Collection Vol. 2",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-race-mini",
+    "title": "Pokémon Race mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-tetris",
+    "title": "Pokémon Tetris",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mini-togepis-great-adventure",
+    "title": "Togepi's Great Adventure",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run Pokémon mini software."
+  },
+  {
+    "id": "mobile-pokemate",
+    "title": "Pokémate",
+    "platform": "Mobile",
+    "year": 2006,
+    "variants": [],
+    "unavailable": "Japan-only feature-phone companion app. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-say-tap",
+    "title": "Pokémon Say Tap?",
+    "platform": "Mobile",
+    "year": 2011,
+    "variants": [],
+    "unavailable": "Japan-only mobile rhythm game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-pokedex-ios",
+    "title": "Pokédex for iOS",
+    "platform": "Mobile",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Mobile Pokédex reference app, not a game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-camp-pokemon",
+    "title": "Camp Pokémon",
+    "platform": "Mobile",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Children's activity app. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-tcg-online",
+    "title": "Pokémon Trading Card Game Online",
+    "platform": "Mobile",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Tablet client of the retired online card game; official servers shut down in 2023. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-dancing-pokemon-band",
+    "title": "Dancing? Pokémon Band",
+    "platform": "Mobile",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Japan-only mobile rhythm game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-shuffle",
+    "title": "Pokémon Shuffle Mobile",
+    "platform": "Mobile",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Mobile port of the 3DS puzzle game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-duel",
+    "title": "Pokémon Duel",
+    "platform": "Mobile",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "First released in Japan as Pokémon Comaster; official service ended in 2019. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-go",
+    "title": "Pokémon GO",
+    "platform": "Mobile",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Location-based online mobile game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-playhouse",
+    "title": "Pokémon Playhouse",
+    "platform": "Mobile",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "Children's mobile activity app. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-magikarp-jump",
+    "title": "Pokémon: Magikarp Jump",
+    "platform": "Mobile",
+    "year": 2017,
+    "variants": [],
+    "unavailable": "Mobile training game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-quest",
+    "title": "Pokémon Quest",
+    "platform": "Mobile",
+    "year": 2018,
+    "variants": [],
+    "unavailable": "Mobile version of the Switch action RPG. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-masters-ex",
+    "title": "Pokémon Masters EX",
+    "platform": "Mobile",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Online mobile RPG originally launched as Pokémon Masters. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-rumble-rush",
+    "title": "Pokémon Rumble Rush",
+    "platform": "Mobile",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Official service ended in 2020; previously installed copies no longer play. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-cafe-remix",
+    "title": "Pokémon Café ReMix",
+    "platform": "Mobile",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Launched as Pokémon Café Mix; ReMix is the updated title. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-home",
+    "title": "Pokémon HOME",
+    "platform": "Mobile",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Cloud storage and trading client, not an offline cartridge game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-smile",
+    "title": "Pokémon Smile",
+    "platform": "Mobile",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Toothbrushing activity app. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-unite",
+    "title": "Pokémon UNITE",
+    "platform": "Mobile",
+    "year": 2021,
+    "variants": [],
+    "unavailable": "Mobile version of the online team battle game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-sleep",
+    "title": "Pokémon Sleep",
+    "platform": "Mobile",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Sleep-tracking mobile game. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-tcg-live",
+    "title": "Pokémon Trading Card Game Live",
+    "platform": "Mobile",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Online card game; requires its official client and service. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-tcg-pocket",
+    "title": "Pokémon Trading Card Game Pocket",
+    "platform": "Mobile",
+    "year": 2024,
+    "variants": [],
+    "unavailable": "Online mobile card collection and battle game, distinct from TCG Live. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-friends",
+    "title": "Pokémon Friends",
+    "platform": "Mobile",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Mobile puzzle game, also released on Switch. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-goita-tutorial",
+    "title": "Pokémon GOITA: Tutorial App",
+    "platform": "Mobile",
+    "year": 2025,
+    "variants": [],
+    "unavailable": "Regional board game tutorial with CPU play, not an online multiplayer service. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "mobile-champions",
+    "title": "Pokémon Champions",
+    "platform": "Mobile",
+    "year": 2026,
+    "variants": [],
+    "unavailable": "Mobile version of the online battle game; launched separately from the console release. Retro Pocket does not run mobile software."
+  },
+  {
+    "id": "arcade-dance-pikachu",
+    "title": "Dance! Pikachu",
+    "platform": "Arcade",
+    "year": 1999,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-pikachu-great-surfing-adventure",
+    "title": "Pikachu's Great Surfing Adventure",
+    "platform": "Arcade",
+    "year": 2000,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-crayon-kids",
+    "title": "Pokémon: Crayon Kids",
+    "platform": "Arcade",
+    "year": 2001,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-wobbuffet-fell-down",
+    "title": "Pokémon: Wobbuffet Fell Down!",
+    "platform": "Arcade",
+    "year": 2006,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-battrio",
+    "title": "Pokémon Battrio",
+    "platform": "Arcade",
+    "year": 2007,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-get-round-and-round",
+    "title": "Pokémon Get Round and Round",
+    "platform": "Arcade",
+    "year": 2010,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-tug-of-war",
+    "title": "Pokémon Tug of War Tournament: Absolutely Get Medal!",
+    "platform": "Arcade",
+    "year": 2010,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-medal-world",
+    "title": "Pokémon Medal World",
+    "platform": "Arcade",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-tretta",
+    "title": "Pokémon Tretta",
+    "platform": "Arcade",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-card-game-gacha",
+    "title": "Pokémon Card Game Gacha",
+    "platform": "Arcade",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-battle-nine",
+    "title": "Pokémon: Battle Nine",
+    "platform": "Arcade",
+    "year": 2014,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-pokken-tournament",
+    "title": "Pokkén Tournament",
+    "platform": "Arcade",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Original arcade release, distinct from the Wii U port and Switch DX. Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-mega-get",
+    "title": "Pokémon Mega Get!",
+    "platform": "Arcade",
+    "year": 2015,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-ga-ole",
+    "title": "Pokémon Ga-Olé",
+    "platform": "Arcade",
+    "year": 2016,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-mezastar",
+    "title": "Pokémon Mezastar",
+    "platform": "Arcade",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-corogarena",
+    "title": "Pokémon Corogarena",
+    "platform": "Arcade",
+    "year": 2022,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "arcade-frienda",
+    "title": "Pokémon Frienda",
+    "platform": "Arcade",
+    "year": 2024,
+    "variants": [],
+    "unavailable": "Retro Pocket does not run arcade software."
+  },
+  {
+    "id": "pc-play-it",
+    "title": "Pokémon Play It!",
+    "platform": "PC",
+    "year": 1999,
+    "variants": [],
+    "unavailable": "Windows trading card game tutorial. Retro Pocket does not run PC software."
+  },
+  {
+    "id": "pc-play-it-2",
+    "title": "Pokémon Play It! Version 2",
+    "platform": "PC",
+    "year": 2000,
+    "variants": [],
+    "unavailable": "Expanded Windows trading card game tutorial. Retro Pocket does not run PC software."
+  },
+  {
+    "id": "pc-tcg-online",
+    "title": "Pokémon Trading Card Game Online",
+    "platform": "PC",
+    "year": 2012,
+    "variants": [],
+    "unavailable": "Desktop client of the retired online card game; official servers shut down in 2023. Retro Pocket does not run PC software."
+  },
+  {
+    "id": "pc-tcg-live",
+    "title": "Pokémon Trading Card Game Live",
+    "platform": "PC",
+    "year": 2023,
+    "variants": [],
+    "unavailable": "Online card game for Windows and macOS; requires its official client and service. Retro Pocket does not run PC software."
+  },
+  {
+    "id": "web-card-game-online-jp",
+    "title": "Pokémon Card Game Online",
+    "platform": "Web",
+    "year": 2009,
+    "variants": [],
+    "unavailable": "Japanese browser game, distinct from the later international TCG Online. Retro Pocket does not run browser software."
+  },
+  {
+    "id": "web-tcg-online",
+    "title": "Pokémon Trading Card Game Online",
+    "platform": "Web",
+    "year": 2011,
+    "variants": [],
+    "unavailable": "Original browser release; official service shut down in 2023. Retro Pocket does not run browser software."
+  },
+  {
+    "id": "web-medallion-battle",
+    "title": "Pokémon Medallion Battle",
+    "platform": "Web",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Browser game originally released on Facebook Gaming. Retro Pocket does not run browser software."
+  },
+  {
+    "id": "web-tower-battle",
+    "title": "Pokémon Tower Battle",
+    "platform": "Web",
+    "year": 2019,
+    "variants": [],
+    "unavailable": "Browser game originally released on Facebook Gaming. Retro Pocket does not run browser software."
+  },
+  {
+    "id": "web-kids-winter-fest",
+    "title": "Pokémon: Kids Winter Fest",
+    "platform": "Web",
+    "year": 2020,
+    "variants": [],
+    "unavailable": "Browser activity collection. Retro Pocket does not run browser software."
+  }
+]

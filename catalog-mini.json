@@ -1,0 +1,182 @@
+[
+  {
+    "id": "mini-party-mini",
+    "title": "Pokémon Party mini",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [
+      {
+        "label": "(Europe)",
+        "size": 524288,
+        "sha1": "58c3210187497cffe989debcc095cb99c465e970"
+      },
+      {
+        "label": "(USA)",
+        "size": 524288,
+        "sha1": "ac94ed80d6f857e9530d17cc77c43aa809bf0415"
+      },
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "4db4568b990077c21320b50dee6a3ceb258809db"
+      }
+    ]
+  },
+  {
+    "id": "mini-pinball-mini",
+    "title": "Pokémon Pinball mini",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [
+      {
+        "label": "(USA, Europe)",
+        "size": 524288,
+        "sha1": "3ec1e04de413c22e9034074789ff2c45646ec0ac"
+      },
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "57c78731f17f29d9cddfc7e21b4d8801e8569ca6"
+      }
+    ]
+  },
+  {
+    "id": "mini-puzzle-collection",
+    "title": "Pokémon Puzzle Collection",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [
+      {
+        "label": "(USA, Europe)",
+        "size": 524288,
+        "sha1": "9c5fa07cc9f93874b297f759a6c6fd98f6ec6f47"
+      },
+      {
+        "label": "(France)",
+        "size": 524288,
+        "sha1": "5a2927770c1e2c7df3f8cc80c9252bb1111ca3a6"
+      },
+      {
+        "label": "(Germany)",
+        "size": 524288,
+        "sha1": "7c83682f595dc6eafc9c438d92eba7920ff3b2ca"
+      },
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "2da4d24ed3192a88ab0b71ade7aec387987c5000"
+      }
+    ]
+  },
+  {
+    "id": "mini-zany-cards",
+    "title": "Pokémon Zany Cards",
+    "platform": "Mini",
+    "year": 2001,
+    "variants": [
+      {
+        "label": "(USA, Europe)",
+        "size": 524288,
+        "sha1": "f34909ed7d1c1d432819ff774c0767ebfa42fb84"
+      },
+      {
+        "label": "(France)",
+        "size": 524288,
+        "sha1": "7a8b3f6a3751cd39431d822fa3a8016ffd2d26d8"
+      },
+      {
+        "label": "(Germany)",
+        "size": 524288,
+        "sha1": "0922e0147ff097e56d5ec98bf66ef050539329fa"
+      },
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "2c3aee0d0db8b4a80083732b8db07b0cc72608a8"
+      }
+    ]
+  },
+  {
+    "id": "mini-pichu-bros-mini",
+    "title": "Pichu Bros. mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "6f9bded4842b451102083d181db9deac2a7696e4"
+      }
+    ]
+  },
+  {
+    "id": "mini-breeder-mini",
+    "title": "Pokémon Breeder mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "3b87d4d61ba3db92190b6ffa055f463adea2363c"
+      }
+    ]
+  },
+  {
+    "id": "mini-puzzle-collection-2",
+    "title": "Pokémon Puzzle Collection Vol. 2",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "11775bbac2e985ef90d4192ed6322dd3b8352ac9"
+      }
+    ]
+  },
+  {
+    "id": "mini-race-mini",
+    "title": "Pokémon Race mini",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "12bfbd2c8a810b49338148feb6162e29a540ac3a"
+      }
+    ]
+  },
+  {
+    "id": "mini-tetris",
+    "title": "Pokémon Tetris",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Europe) (En,Fr,De)",
+        "size": 524288,
+        "sha1": "5fd1198a4725e21629edd4869535b70edfe165d4"
+      },
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "e81c3576b0c96e6ca28b958f8dda11cea5fce078"
+      }
+    ]
+  },
+  {
+    "id": "mini-togepis-great-adventure",
+    "title": "Togepi's Great Adventure",
+    "platform": "Mini",
+    "year": 2002,
+    "variants": [
+      {
+        "label": "(Japan)",
+        "size": 524288,
+        "sha1": "0f56e0a3e72180b1113b900a6d3e4f8e8f570bb3"
+      }
+    ]
+  }
+]

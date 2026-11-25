@@ -1,0 +1,15 @@
+# One repository for Linux, macOS and Windows: store text with LF line endings,
+# and check out LF everywhere except Windows batch files, which cmd.exe needs
+# with CRLF.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary formats (none are tracked yet; listed so they are never converted).
+*.png binary
+*.jpg binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.exe binary
+*.zip binary

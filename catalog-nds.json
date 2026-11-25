@@ -1,0 +1,184 @@
+[
+  {
+    "id": "pokemon-diamond",
+    "title": "Pokémon Diamond",
+    "platform": "NDS",
+    "year": 2007,
+    "variants": [
+      {"label": "USA, Australia (Rev 5)", "size": 67108864, "sha1": "a46233d8b79a69ea87aa295a0efad5237d02841e"}
+    ]
+  },
+  {
+    "id": "pokemon-pearl",
+    "title": "Pokémon Pearl",
+    "platform": "NDS",
+    "year": 2007,
+    "variants": [
+      {"label": "USA (Rev 5)", "size": 67108864, "sha1": "99083bf15ec7c6b81b4ba241ee10abd9e80999ac"}
+    ]
+  },
+  {
+    "id": "pokemon-platinum",
+    "title": "Pokémon Platinum",
+    "platform": "NDS",
+    "year": 2009,
+    "variants": [
+      {"label": "USA", "size": 134217728, "sha1": "ce81046eda7d232513069519cb2085349896dec7"},
+      {"label": "USA (Rev 1)", "size": 134217728, "sha1": "0862ec35b24de5c7e2dcb88c9eea0873110d755c"}
+    ]
+  },
+  {
+    "id": "pokemon-heartgold",
+    "title": "Pokémon HeartGold",
+    "platform": "NDS",
+    "year": 2010,
+    "variants": [
+      {"label": "USA", "size": 134217728, "sha1": "4fcded0e2713dc03929845de631d0932ea2b5a37"}
+    ]
+  },
+  {
+    "id": "pokemon-soulsilver",
+    "title": "Pokémon SoulSilver",
+    "platform": "NDS",
+    "year": 2010,
+    "variants": [
+      {"label": "USA, Australia", "size": 134217728, "sha1": "f8dc38ea20c17541a43b58c5e6d18c1732c7e582"}
+    ]
+  },
+  {
+    "id": "pokemon-black",
+    "title": "Pokémon Black",
+    "platform": "NDS",
+    "year": 2011,
+    "variants": [
+      {"label": "USA, Europe (NDSi Enhanced)", "size": 268435456, "sha1": "26ad0b9967aa279c4a266ee69f52b9b2332399a5"}
+    ]
+  },
+  {
+    "id": "pokemon-white",
+    "title": "Pokémon White",
+    "platform": "NDS",
+    "year": 2011,
+    "variants": [
+      {"label": "USA, Europe (NDSi Enhanced)", "size": 268435456, "sha1": "bc696a0dfb448c7b3a8a206f0f8214411a039208"}
+    ]
+  },
+  {
+    "id": "pokemon-black-2",
+    "title": "Pokémon Black 2",
+    "platform": "NDS",
+    "year": 2012,
+    "variants": [
+      {"label": "USA, Europe (NDSi Enhanced)", "size": 536870912, "sha1": "e51e6dfb8678a3d19dcd2a10691b96a569ca0abb"}
+    ]
+  },
+  {
+    "id": "pokemon-white-2",
+    "title": "Pokémon White 2",
+    "platform": "NDS",
+    "year": 2012,
+    "variants": [
+      {"label": "USA, Europe (NDSi Enhanced)", "size": 536870912, "sha1": "b5d7490be7b415b8f1e672a53e978a9cc667e56a"}
+    ]
+  },
+  {
+    "id": "pokemon-dash",
+    "title": "Pokémon Dash",
+    "platform": "NDS",
+    "year": 2005,
+    "variants": [
+      {"label": "USA", "size": 16777216, "sha1": "daec6e6c42143f28b46f83216c9c05b2faf82cc5"}
+    ]
+  },
+  {
+    "id": "pokemon-trozei",
+    "title": "Pokémon Trozei!",
+    "platform": "NDS",
+    "year": 2006,
+    "variants": [
+      {"label": "USA", "size": 16777216, "sha1": "3b16ac1885cb2472865e6530ba82d93b201ff281"}
+    ]
+  },
+  {
+    "id": "pokemon-mystery-dungeon-blue-rescue-team",
+    "title": "Pokémon Mystery Dungeon: Blue Rescue Team",
+    "platform": "NDS",
+    "year": 2006,
+    "variants": [
+      {"label": "USA, Australia", "size": 33554432, "sha1": "503edef4fe6088bca00616efcac3b13da90cd105"}
+    ]
+  },
+  {
+    "id": "pokemon-ranger",
+    "title": "Pokémon Ranger",
+    "platform": "NDS",
+    "year": 2006,
+    "variants": [
+      {"label": "USA", "size": 33554432, "sha1": "b45be8df861a8bc8e2361ff02b9b0f08c0498ac6"}
+    ]
+  },
+  {
+    "id": "pokemon-mystery-dungeon-explorers-of-time",
+    "title": "Pokémon Mystery Dungeon: Explorers of Time",
+    "platform": "NDS",
+    "year": 2008,
+    "variants": [
+      {"label": "USA", "size": 67108864, "sha1": "19763f0065a6b32f7b5c2a936404a65eafb0238a"}
+    ]
+  },
+  {
+    "id": "pokemon-mystery-dungeon-explorers-of-darkness",
+    "title": "Pokémon Mystery Dungeon: Explorers of Darkness",
+    "platform": "NDS",
+    "year": 2008,
+    "variants": [
+      {"label": "USA", "size": 67108864, "sha1": "ee69bb80ff278851fb5074a118039bd4a86f01e0"}
+    ]
+  },
+  {
+    "id": "pokemon-ranger-shadows-of-almia",
+    "title": "Pokémon Ranger: Shadows of Almia",
+    "platform": "NDS",
+    "year": 2008,
+    "variants": [
+      {"label": "USA", "size": 67108864, "sha1": "ca9c27752547e4d31fe5560265d9b7e09f9f83eb"}
+    ]
+  },
+  {
+    "id": "pokemon-mystery-dungeon-explorers-of-sky",
+    "title": "Pokémon Mystery Dungeon: Explorers of Sky",
+    "platform": "NDS",
+    "year": 2009,
+    "variants": [
+      {"label": "USA", "size": 134217728, "sha1": "5fa96ca8d8dd6405d6cd2bad73ed68bc73a9d152"}
+    ]
+  },
+  {
+    "id": "pokemon-ranger-guardian-signs",
+    "title": "Pokémon Ranger: Guardian Signs",
+    "platform": "NDS",
+    "year": 2010,
+    "variants": [
+      {"label": "USA, Australia", "size": 134217728, "sha1": "4a59c624ec69c5fc4eb76b7653af47047e106567"}
+    ]
+  },
+  {
+    "id": "pokemon-conquest",
+    "title": "Pokémon Conquest",
+    "platform": "NDS",
+    "year": 2012,
+    "variants": [
+      {"label": "USA, Australia (NDSi Enhanced)", "size": 268435456, "sha1": "cb52f4f8131d790d4d4e805f975e6bd47492ef6d"},
+      {"label": "USA, Australia (Rev 1) (NDSi Enhanced)", "size": 268435456, "sha1": "308e1609929dd78dbbff4f531a2cd17f873a3778"}
+    ]
+  },
+  {
+    "id": "pokemon-typing-adventure",
+    "title": "Learn with Pokémon: Typing Adventure",
+    "platform": "NDS",
+    "year": 2012,
+    "variants": [
+      {"label": "Europe", "size": 134217728, "sha1": "45184ec8998ca6fe4641df154820ad6923b7db1f"}
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+# Pokémon mini
+
+All ten retail titles and 20 cartridge variants in `catalog-mini.json` are verified by file size and SHA-1 against the [No-Intro DAT dated 2026.11.14](https://raw.githubusercontent.com/libretro/libretro-database/90601bff67dba7057381292f17e08ed2cecbd6dc/metadat/no-intro/Nintendo%20-%20Pokemon%20Mini.dat). The catalogue includes regional retail variants but skips previews, GameCube extracts and non-Pokémon homebrew. The Japanese releases of Zany Cards and Tetris have distinct DAT names; they are listed as variants of those titles.
+
+The launcher was tested on Linux with [PokeMini 0.60 SDL2 at commit `6ce9b614`](https://github.com/gameblabla/pokemini/tree/6ce9b614bd99c69311f12fa831fc2ad380b4a19f). `tests/smoke_mini.py` booted an original synthetic cartridge with FreeBIOS, verified keyboard input against the LCD, wrote an EEPROM byte and verified it after reopening. No commercial ROMs were used or distributed. The test does not establish game-by-game compatibility or accessory support.

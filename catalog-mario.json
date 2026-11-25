@@ -1,0 +1,31 @@
+[
+  {
+    "id": "n64-super-mario-64",
+    "title": "Super Mario 64",
+    "series": "Mario",
+    "platform": "N64",
+    "year": 1996,
+    "variants": [
+      {
+        "label": "USA",
+        "size": 8388608,
+        "sha1": "9bef1128717f958171a4afac3ed78ee2bb4e86ce"
+      },
+      {
+        "label": "Europe (En,Fr,De)",
+        "size": 8388608,
+        "sha1": "4ac5721683d0e0b6bbb561b58a71740845dceea9"
+      },
+      {
+        "label": "Japan",
+        "size": 8388608,
+        "sha1": "8a20a5c83d6ceb0f0506cfc9fa20d8f438cafe51"
+      },
+      {
+        "label": "Japan (Rev 3) (Shindou Edition)",
+        "size": 8388608,
+        "sha1": "3f319ae697533a255a1003d09202379d78d5a2e0"
+      }
+    ]
+  }
+]

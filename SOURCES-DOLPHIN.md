@@ -1,0 +1,9 @@
+# Dolphin: GameCube and Wii
+
+`catalog-dolphin.json` accepts retail GameCube disc images for Pokémon Channel, Pokémon Colosseum and Pokémon XD: Gale of Darkness. The file size and SHA-1 for each listed variant come from the [Redump GameCube DAT dated 2026.11.14](https://raw.githubusercontent.com/libretro/libretro-database/90601bff67dba7057381292f17e08ed2cecbd6dc/metadat/redump/Nintendo%20-%20GameCube.dat). Imports require the exact uncompressed ISO; trimmed, patched, compressed and bonus-disc images are not listed. This release does not set up GBA connectivity or enable Pokémon Box.
+
+Ubuntu's Dolphin 2512 native X11 frontend launched, rendered, and exited cleanly with the author's [GameCube 240p Test Suite 1.10b](https://sourceforge.net/projects/testsuite240p/files/OldFiles/Gamecube/GameCube-240pSuite-1.10b.zip/download). The ISO tested was 1,507,328 bytes, with SHA-256 `d8c13c75107d0545e89c1839810471fd63ad7d6bbdb1f8543f326e37ce030f25`. The Qt frontend did not complete the same virtual-display smoke test, so the native X11 frontend is preferred when available. This smoke test did not exercise commercial games, memory-card readback, GBA connectivity or game-specific compatibility.
+
+Wii support is not enabled in the catalogue. The [Redump Wii DAT](https://raw.githubusercontent.com/libretro/libretro-database/90601bff67dba7057381292f17e08ed2cecbd6dc/metadat/redump/Nintendo%20-%20Wii.dat) has hashes for disc releases, but opening a window with Wii homebrew did not pass the rendering check in the test setup. Motion, pointer and NAND persistence still need verification before enabling Wii titles.
+
+Run the GameCube smoke on a disposable X11 display with `PYTHONPATH=. .venv/bin/python tests/smoke_dolphin.py /path/to/GameCube-240pSuite-1.10b.iso`. The test does not download files. No commercial images are included.

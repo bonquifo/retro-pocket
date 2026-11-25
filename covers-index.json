@@ -1,0 +1,485 @@
+{
+ "source": "https://github.com/libretro-thumbnails",
+ "covers": {
+  "pokemon-red": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy/f033af49af2d9761d6821aff479bb0ba5feea5e3/Named_Boxarts/Pokemon%20-%20Red%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29.png",
+   "size": 478309,
+   "sha256": "48f38b05a808b61aa7578260b94dcbf9826597fb0b4cc1b0b274ff07eeb66c5c",
+   "release": "Pokemon - Red Version (USA, Europe) (SGB Enhanced)"
+  },
+  "pokemon-blue": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy/f033af49af2d9761d6821aff479bb0ba5feea5e3/Named_Boxarts/Pokemon%20-%20Blue%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29.png",
+   "size": 570913,
+   "sha256": "388f13f807861fa72520a3f7755f0d2e5f4bbfe9436e508a7a6f4177ede0d6de",
+   "release": "Pokemon - Blue Version (USA, Europe) (SGB Enhanced)"
+  },
+  "pokemon-yellow": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy/f033af49af2d9761d6821aff479bb0ba5feea5e3/Named_Boxarts/Pokemon%20-%20Yellow%20Version%20-%20Special%20Pikachu%20Edition%20%28USA%2C%20Europe%29%20%28CGB%2BSGB%20Enhanced%29.png",
+   "size": 481547,
+   "sha256": "f9cd4497279a2e64ea5f552ab2f71247de2e38f1ace4be70379ca01a96011dd4",
+   "release": "Pokemon - Yellow Version - Special Pikachu Edition (USA, Europe) (CGB+SGB Enhanced)"
+  },
+  "pokemon-gold": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20-%20Gold%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.png",
+   "size": 448661,
+   "sha256": "d443bb5a99c64eb88faf4d9f0c60bff9f64bae299adb1f2c9512e979a4661812",
+   "release": "Pokemon - Gold Version (USA, Europe) (SGB Enhanced) (GB Compatible)"
+  },
+  "pokemon-silver": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20-%20Silver%20Version%20%28USA%2C%20Europe%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.png",
+   "size": 370307,
+   "sha256": "8e69b4e9b61c3cf45009270b991513d0deab090558e29c8d2f8ffcbf901e4f98",
+   "release": "Pokemon - Silver Version (USA, Europe) (SGB Enhanced) (GB Compatible)"
+  },
+  "pokemon-crystal": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20-%20Crystal%20Version%20%28USA%29.png",
+   "size": 427867,
+   "sha256": "f43784edc9d10ead4d93d1be9551d676b341dd5ae8d3c585a29de678d6433337",
+   "release": "Pokemon - Crystal Version (USA)"
+  },
+  "pokemon-ruby": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20-%20Ruby%20Version%20%28USA%2C%20Europe%29.png",
+   "size": 455614,
+   "sha256": "0c264af577ca175f0d73b6766b1100dd4b78d6728bbcfb07298679500f0316e1",
+   "release": "Pokemon - Ruby Version (USA, Europe)"
+  },
+  "pokemon-sapphire": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20-%20Sapphire%20Version%20%28USA%2C%20Europe%29.png",
+   "size": 479223,
+   "sha256": "2bcea4502d475507ed7f07f3bbaf45f36ec30446c5a02519f950bea31b3154fb",
+   "release": "Pokemon - Sapphire Version (USA, Europe)"
+  },
+  "pokemon-firered": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20-%20FireRed%20Version%20%28USA%2C%20Europe%29.png",
+   "size": 522140,
+   "sha256": "d7c4f0661bf528d6555969da7b18efc7611fc35d0a4d911538fd1c398c7ce964",
+   "release": "Pokemon - FireRed Version (USA, Europe)"
+  },
+  "pokemon-leafgreen": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20-%20LeafGreen%20Version%20%28USA%2C%20Europe%29.png",
+   "size": 519106,
+   "sha256": "7d73f2d7fecd2b5d2339bdf4d6000d45f20e046951f6e89dd2f73476498bc373",
+   "release": "Pokemon - LeafGreen Version (USA, Europe)"
+  },
+  "pokemon-emerald": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20-%20Emerald%20Version%20%28USA%2C%20Europe%29.png",
+   "size": 469902,
+   "sha256": "f39a4d3d7044d2ad693a60f6af362619f7268cd9187c6576f3d4e3373dfa49b5",
+   "release": "Pokemon - Emerald Version (USA, Europe)"
+  },
+  "3ds-x": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20X%20%28USA%29.png",
+   "size": 343465,
+   "sha256": "e0a341107959e1403b39280d30d43914fca62e026d61f855f32065e929ceca6a",
+   "release": "Pokemon X (USA)"
+  },
+  "3ds-y": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Y%20%28USA%29.png",
+   "size": 420891,
+   "sha256": "68dcf812bf1a8c0c05b3ff128f265090029f193b14b13bb82a40ca90f62412b7",
+   "release": "Pokemon Y (USA)"
+  },
+  "3ds-alpha-sapphire": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Alpha%20Sapphire%20%28USA%29.png",
+   "size": 376244,
+   "sha256": "ef958cf25eba01bbb521c1ca97d667fbc28e073a6d95b3e1a4cd04704815b5ab",
+   "release": "Pokemon Alpha Sapphire (USA)"
+  },
+  "3ds-omega-ruby": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Omega%20Ruby%20%28USA%29.png",
+   "size": 429340,
+   "sha256": "8098a26a1959445eb58b9eeaf08beee3b75907a3e469ce593af5298a15de74b7",
+   "release": "Pokemon Omega Ruby (USA)"
+  },
+  "3ds-moon": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Moon%20%28USA%29%20%28En%2CJa%2CFr%2CDe%2CEs%2CIt%2CZh%2CKo%29.png",
+   "size": 449018,
+   "sha256": "923c1d2ea03abab6500ae241024d1ffb426d9970dc871597e27ae3567b244175",
+   "release": "Pokemon Moon (USA) (En,Ja,Fr,De,Es,It,Zh,Ko)"
+  },
+  "3ds-sun": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Sun%20%28USA%29%20%28En%2CJa%2CFr%2CDe%2CEs%2CIt%2CZh%2CKo%29.png",
+   "size": 453775,
+   "sha256": "f325ae8ae5c48bda6ed30f3ee34400de9dc73faedb591e8e0a9b9adf0284de51",
+   "release": "Pokemon Sun (USA) (En,Ja,Fr,De,Es,It,Zh,Ko)"
+  },
+  "3ds-ultra-moon": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Ultra%20Moon%20%28USA%29%20%28En%2CJa%2CFr%2CDe%2CEs%2CIt%2CZh%2CKo%29.png",
+   "size": 402526,
+   "sha256": "885ab1a1ab4896dd0090374958727f829ffbf7666c24881df49d849c6da19cad",
+   "release": "Pokemon Ultra Moon (USA) (En,Ja,Fr,De,Es,It,Zh,Ko)"
+  },
+  "gcn-channel": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/c0e778f3242811f31f4815ff2807022c1c5ac7bd/Named_Boxarts/Pokemon%20Channel%20%28USA%29.png",
+   "size": 562429,
+   "sha256": "784946ea189b65fe0e9a8a40897dbe76165e162fe2accbfa38007fda425cfa72",
+   "release": "Pokemon Channel (USA)"
+  },
+  "gcn-colosseum": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/c0e778f3242811f31f4815ff2807022c1c5ac7bd/Named_Boxarts/Pokemon%20Colosseum%20%28USA%29.png",
+   "size": 608446,
+   "sha256": "5c44c59896d22eaacbf321a396719e5f12d3e15a20134b22439601c1789036b8",
+   "release": "Pokemon Colosseum (USA)"
+  },
+  "gcn-xd-gale-of-darkness": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_GameCube/c0e778f3242811f31f4815ff2807022c1c5ac7bd/Named_Boxarts/Pokemon%20XD%20-%20Gale%20of%20Darkness%20%28USA%29.png",
+   "size": 496515,
+   "sha256": "9fe49425c8cbe071d7f2648d2df4ea1a27fc13386928ee2fe1e95010c3b76149",
+   "release": "Pokemon XD - Gale of Darkness (USA)"
+  },
+  "pokemon-trading-card-game": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20Trading%20Card%20Game%20%28USA%2C%20Australia%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.png",
+   "size": 416977,
+   "sha256": "7937ce7e7bcbd7abf8965c497a56eb3967cc6d31ec802c2e54cc5f3e30274195",
+   "release": "Pokemon Trading Card Game (USA, Australia) (SGB Enhanced) (GB Compatible)"
+  },
+  "pokemon-pinball": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20Pinball%20%28USA%2C%20Australia%29%20%28Rumble%20Version%29%20%28SGB%20Enhanced%29%20%28GB%20Compatible%29.png",
+   "size": 461093,
+   "sha256": "b126f1df64ef4cc65c942b6b424ab1c4ba9eac2b27f6721d8d4087f9dcaf0ca9",
+   "release": "Pokemon Pinball (USA, Australia) (Rumble Version) (SGB Enhanced) (GB Compatible)"
+  },
+  "pokemon-puzzle-challenge": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20Puzzle%20Challenge%20%28USA%2C%20Australia%29.png",
+   "size": 536216,
+   "sha256": "b104b3576b025b69ee4b988e2d47d9776d3ea457d7f8816fbca2eeb0f7d915e6",
+   "release": "Pokemon Puzzle Challenge (USA, Australia)"
+  },
+  "pokemon-pinball-ruby-sapphire": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20Pinball%20-%20Ruby%20_%20Sapphire%20%28USA%29.png",
+   "size": 540467,
+   "sha256": "77ec408ef78ffc34cc0b39d2982b8cdc83d939c3bbdfbed13954852fd485d4dc",
+   "release": "Pokemon Pinball - Ruby & Sapphire (USA)"
+  },
+  "pokemon-mystery-dungeon-red-rescue-team": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Advance/23b8665408e767fd3220bfb83fd5ad8dfe1a9aa1/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Red%20Rescue%20Team%20%28USA%2C%20Australia%29.png",
+   "size": 472430,
+   "sha256": "1fd4bcaf808b791aab934549740cd26c253f6ca2249915b9594d41cf9d02cbaa",
+   "release": "Pokemon Mystery Dungeon - Red Rescue Team (USA, Australia)"
+  },
+  "pokemon-green-jp": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy/f033af49af2d9761d6821aff479bb0ba5feea5e3/Named_Boxarts/Pocket%20Monsters%20-%20Midori%20%28Japan%29%20%28SGB%20Enhanced%29.png",
+   "size": 362332,
+   "sha256": "430810513e8dc309a1f0cdc3a21ffa8c6df1c405a057480fce49833dac7db99f",
+   "release": "Pocket Monsters - Midori (Japan) (SGB Enhanced)"
+  },
+  "pokemon-blue-jp": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy/f033af49af2d9761d6821aff479bb0ba5feea5e3/Named_Boxarts/Pocket%20Monsters%20-%20Ao%20%28Japan%29%20%28SGB%20Enhanced%29.png",
+   "size": 390070,
+   "sha256": "62a506e46592cbd957e5e0640ecd363ae23a6987cb3ed54b47037d053be76b12",
+   "release": "Pocket Monsters - Ao (Japan) (SGB Enhanced)"
+  },
+  "pokemon-crystal-jp": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pocket%20Monsters%20-%20Crystal%20Version%20%28Japan%29.png",
+   "size": 634988,
+   "sha256": "7757ddd8d01f0afe311e246264f9950816c59287dc0be4de538094cf4f1179b9",
+   "release": "Pocket Monsters - Crystal Version (Japan)"
+  },
+  "pokemon-trading-card-game-2-jp": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Game_Boy_Color/0931985ba8a3a9f38fb87f006611a13dc094260f/Named_Boxarts/Pokemon%20Card%20GB%202%20-%20GR%20Dan%20Sanjou%21%20%28Japan%29.png",
+   "size": 572222,
+   "sha256": "878854b0219777041a1add7e1292f8d9fdd94469456f2ff30a63171bdb1e9498",
+   "release": "Pokemon Card GB 2 - GR Dan Sanjou! (Japan)"
+  },
+  "n64-super-mario-64": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Super%20Mario%2064%20%28USA%29.png",
+   "size": 276622,
+   "sha256": "ec5ba1a5967bf2b5276ac164e5ce2970cee6c5bec4eb3013396faf2a6aa1ec2c",
+   "release": "Super Mario 64 (USA)"
+  },
+  "mini-party-mini": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Party%20Mini%20%28Europe%29.png",
+   "size": 133746,
+   "sha256": "cecd6aafcf567938b3e130a8e83a4b661fb507bb8d29822f656f6a255e6b3fa8",
+   "release": "Pokemon Party Mini (Europe)"
+  },
+  "mini-pinball-mini": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Pinball%20Mini%20%28USA%2C%20Europe%29.png",
+   "size": 123557,
+   "sha256": "d19aeb1573efc9006dcf0a64f50e41cf00164b842ae6f2b2d63e7a3be5062c5c",
+   "release": "Pokemon Pinball Mini (USA, Europe)"
+  },
+  "mini-puzzle-collection": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Puzzle%20Collection%20%28USA%2C%20Europe%29.png",
+   "size": 112545,
+   "sha256": "9288a8ef02ec86e59b2c957c35d60c02f21ee5e5030dab51b2c7c0023c303448",
+   "release": "Pokemon Puzzle Collection (USA, Europe)"
+  },
+  "mini-zany-cards": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Zany%20Cards%20%28USA%2C%20Europe%29.png",
+   "size": 116832,
+   "sha256": "a55b81f928b674ed7ac06151c0a17f22d9842ed111b38f160e3e874e07eff8be",
+   "release": "Pokemon Zany Cards (USA, Europe)"
+  },
+  "mini-pichu-bros-mini": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pichu%20Bros.%20Mini%20%28Japan%29.png",
+   "size": 153990,
+   "sha256": "8604619e9245b5fc89b077e0690eac14272fd38f4bff5804187c80fd53c02973",
+   "release": "Pichu Bros. Mini (Japan)"
+  },
+  "mini-breeder-mini": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Sodateyasan%20Mini%20%28Japan%29.png",
+   "size": 136223,
+   "sha256": "bcbffab779e9617700d67281b00100849d65c25621b1bdf34baba0bbbac3ecec",
+   "release": "Pokemon Sodateyasan Mini (Japan)"
+  },
+  "mini-puzzle-collection-2": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Puzzle%20Collection%20Vol.%202%20%28Japan%29.png",
+   "size": 129370,
+   "sha256": "97d7eff58aa0a65561e53c2a3a47333c2a28720277c459c45c6890c0dfbd8efa",
+   "release": "Pokemon Puzzle Collection Vol. 2 (Japan)"
+  },
+  "mini-race-mini": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Race%20Mini%20%28Japan%29.png",
+   "size": 123002,
+   "sha256": "c0cb69e7b6fa48e5f7a30c08e46b86a5ae42a6ec6497f06be9144d2a49c6fa69",
+   "release": "Pokemon Race Mini (Japan)"
+  },
+  "mini-tetris": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Pokemon%20Shock%20Tetris%20%28Japan%29.png",
+   "size": 112384,
+   "sha256": "bd1caccf4232918809f5294e5db120568713de2ce05b65f0018fb8722337d166",
+   "release": "Pokemon Shock Tetris (Japan)"
+  },
+  "mini-togepis-great-adventure": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Pokemon_Mini/4185f3cb95440af9ea1623ecd20c59d3683603ac/Named_Boxarts/Togepi%20no%20Daibouken%20%28Japan%29.png",
+   "size": 128107,
+   "sha256": "d99aade1c399532702306c1f8b1b71338c4aeaaa96db6f3bd976303e73078d4d",
+   "release": "Togepi no Daibouken (Japan)"
+  },
+  "n64-stadium-jp": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Pokemon%20Stadium%20%28Japan%29.png",
+   "size": 670385,
+   "sha256": "43966d0b1e084c62bab9a68741918b13019dce747f9d66367b039f1af84edc42",
+   "release": "Pokemon Stadium (Japan)"
+  },
+  "n64-snap": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Pokemon%20Snap%20%28USA%29.png",
+   "size": 297202,
+   "sha256": "17ca1f3c511fceaa80dcff17be39fd364b7d00b88a14e8a812c51f519d832c74",
+   "release": "Pokemon Snap (USA)"
+  },
+  "n64-stadium": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Pokemon%20Stadium%20%28USA%29.png",
+   "size": 304929,
+   "sha256": "efec928bbb0f1be0cfcc83e8a75c98226449a903e3744df3d5ee5e91214f264e",
+   "release": "Pokemon Stadium (USA)"
+  },
+  "n64-puzzle-league": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Pokemon%20Puzzle%20League%20%28USA%29.png",
+   "size": 300367,
+   "sha256": "45e7a19391a26048678be554d14f4f71a597467485a985185ce107cd10c3c0b3",
+   "release": "Pokemon Puzzle League (USA)"
+  },
+  "n64-stadium-2": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Pokemon%20Stadium%202%20%28USA%29.png",
+   "size": 320041,
+   "sha256": "05f631761dc79b5775b9a044ebfc33d2598a883728e7cb11573917491ef5b593",
+   "release": "Pokemon Stadium 2 (USA)"
+  },
+  "pokemon-diamond": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20Diamond%20Version%20%28USA%29%20%28Rev%205%29.png",
+   "size": 344416,
+   "sha256": "653c4ca73a651b88d127932eeb00d32530c1a0d73c1823f8ce0c1e62e3bc6628",
+   "release": "Pokemon - Diamond Version (USA) (Rev 5)"
+  },
+  "pokemon-pearl": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20Pearl%20Version%20%28USA%29%20%28Rev%205%29.png",
+   "size": 347156,
+   "sha256": "6f034335a65d26b56cfdbca37c08c0d22157fb5f1cbe35bc71ca99f880df794b",
+   "release": "Pokemon - Pearl Version (USA) (Rev 5)"
+  },
+  "pokemon-platinum": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20Platinum%20Version%20%28USA%29.png",
+   "size": 369346,
+   "sha256": "6ee7d02d2b7410db3f0cd425bc27c1217e5193b454560d639180f01b6380a9e8",
+   "release": "Pokemon - Platinum Version (USA)"
+  },
+  "pokemon-heartgold": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20HeartGold%20Version%20%28USA%29.png",
+   "size": 407072,
+   "sha256": "aba83351cb8e5f04d94458b5beeef2e83db7905f9c706e640c35fdf6b2bcf3b7",
+   "release": "Pokemon - HeartGold Version (USA)"
+  },
+  "pokemon-soulsilver": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20SoulSilver%20Version%20%28USA%2C%20Australia%29.png",
+   "size": 380863,
+   "sha256": "b9d01b0a461098b273025ba0d8b349714150d319b8a8be8c56000bacb43f91af",
+   "release": "Pokemon - SoulSilver Version (USA, Australia)"
+  },
+  "pokemon-black": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20Black%20Version%20%28USA%2C%20Europe%29%20%28NDSi%20Enhanced%29.png",
+   "size": 282740,
+   "sha256": "b8cfbdd19331672fadf5bcfcf1666229148648a19c837c79b0f15c76dcec6737",
+   "release": "Pokemon - Black Version (USA, Europe) (NDSi Enhanced)"
+  },
+  "pokemon-white": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20White%20Version%20%28USA%2C%20Europe%29%20%28NDSi%20Enhanced%29.png",
+   "size": 276744,
+   "sha256": "705ff9224c1baa144be33afd2d3bfdb826c938bc4415ebf87b0d839c8125accd",
+   "release": "Pokemon - White Version (USA, Europe) (NDSi Enhanced)"
+  },
+  "pokemon-black-2": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20Black%20Version%202%20%28USA%2C%20Europe%29%20%28NDSi%20Enhanced%29.png",
+   "size": 416405,
+   "sha256": "8eb7886092c881e7caaff7891fc0161bd3b93866c92e0c626ab289d2bfd61144",
+   "release": "Pokemon - Black Version 2 (USA, Europe) (NDSi Enhanced)"
+  },
+  "pokemon-white-2": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20-%20White%20Version%202%20%28USA%2C%20Europe%29%20%28NDSi%20Enhanced%29.png",
+   "size": 447007,
+   "sha256": "4c5bcda70909347b4c8083f081dbc5d9cf815bb1bf0070c7611110c468a071e9",
+   "release": "Pokemon - White Version 2 (USA, Europe) (NDSi Enhanced)"
+  },
+  "pokemon-dash": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Dash%20%28USA%29.png",
+   "size": 391663,
+   "sha256": "5aeb3d4a3dec7bf1c31f583abda699dfa72515af8ed65f85df90ebb5564ee631",
+   "release": "Pokemon Dash (USA)"
+  },
+  "pokemon-trozei": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Trozei%21%20%28USA%29.png",
+   "size": 318205,
+   "sha256": "af30ae888e02055939e13df6c96322a9d75700765255d17aca60bc31c3710564",
+   "release": "Pokemon Trozei! (USA)"
+  },
+  "pokemon-mystery-dungeon-blue-rescue-team": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Blue%20Rescue%20Team%20%28USA%2C%20Australia%29.png",
+   "size": 314662,
+   "sha256": "4365c0ebb0fc4d6b545da0f26a1d34f76561da25405f4fd7318d085da50c0edd",
+   "release": "Pokemon Mystery Dungeon - Blue Rescue Team (USA, Australia)"
+  },
+  "pokemon-ranger": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Ranger%20%28USA%29.png",
+   "size": 377451,
+   "sha256": "2db302ae702f3e351e08baf054483a765e3b76ce8d75a685faaf79d81180c654",
+   "release": "Pokemon Ranger (USA)"
+  },
+  "pokemon-mystery-dungeon-explorers-of-time": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Explorers%20of%20Time%20%28USA%29.png",
+   "size": 355348,
+   "sha256": "cdd0dd0aa5cb6584807744d32fdbf9cc00cac6af13240cbd4d6c1992373ccff6",
+   "release": "Pokemon Mystery Dungeon - Explorers of Time (USA)"
+  },
+  "pokemon-mystery-dungeon-explorers-of-darkness": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Explorers%20of%20Darkness%20%28USA%29.png",
+   "size": 332389,
+   "sha256": "d4f5e38ac7fc3f5e3fb3ff818ad8d71e0142769036ef6ee0e7e7d82339fab50f",
+   "release": "Pokemon Mystery Dungeon - Explorers of Darkness (USA)"
+  },
+  "pokemon-ranger-shadows-of-almia": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Ranger%20-%20Shadows%20of%20Almia%20%28USA%29.png",
+   "size": 411152,
+   "sha256": "7e821f3cb245232580b96f777eaae945a1891610b51ad0951523c2dbb3c7e6a8",
+   "release": "Pokemon Ranger - Shadows of Almia (USA)"
+  },
+  "pokemon-mystery-dungeon-explorers-of-sky": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Explorers%20of%20Sky%20%28USA%29.png",
+   "size": 338638,
+   "sha256": "2c2b68df7ca112d5fd57e1cdf09f0cb6a457e45d07749f95613edb53824b8fc1",
+   "release": "Pokemon Mystery Dungeon - Explorers of Sky (USA)"
+  },
+  "pokemon-ranger-guardian-signs": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Ranger%20-%20Guardian%20Signs%20%28USA%2C%20Australia%29.png",
+   "size": 423048,
+   "sha256": "4c5d003f8c779b4ecc9a3a258dc362569b9f86065f48ace1a5bb8f48dfbebf34",
+   "release": "Pokemon Ranger - Guardian Signs (USA, Australia)"
+  },
+  "pokemon-conquest": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Pokemon%20Conquest%20%28USA%2C%20Australia%29%20%28NDSi%20Enhanced%29.png",
+   "size": 408639,
+   "sha256": "148f07e9a107553fe4430ad9752c856c14ca77d6ef283c04361e23554a0775d5",
+   "release": "Pokemon Conquest (USA, Australia) (NDSi Enhanced)"
+  },
+  "pokemon-typing-adventure": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_DS/a119dcab8fa04c9974b9c229eda824318d923322/Named_Boxarts/Learn%20with%20Pokemon%20-%20Typing%20Adventure%20%28Europe%29.png",
+   "size": 185851,
+   "sha256": "5de3842244fc6f6522b09262b32d4d897731b4dc5ec84847257296137c2a675b",
+   "release": "Learn with Pokemon - Typing Adventure (Europe)"
+  },
+  "n64-hey-you-pikachu": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_64/ff0badea277f2d2d15e9008b04f1a0fd6abc40a3/Named_Boxarts/Hey%20You%2C%20Pikachu%21%20%28USA%29.png",
+   "size": 368664,
+   "sha256": "9d1b70fcc427442b1b00c05a441f57ba7df7125cefa0fd381ed6944e70dd0b92",
+   "release": "Hey You, Pikachu! (USA)"
+  },
+  "wii-battle-revolution": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/1a44c6f4251dc9ef051043f22f8d9df4237c1ee8/Named_Boxarts/Pokemon%20Battle%20Revolution%20%28USA%29.png",
+   "size": 542676,
+   "sha256": "3b19585f8e162a707c6865968970cb30a5ee33717677404f7f8be9c7df37c307",
+   "release": "Pokemon Battle Revolution (USA)"
+  },
+  "wii-my-pokemon-ranch": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/1a44c6f4251dc9ef051043f22f8d9df4237c1ee8/Named_Boxarts/My%20Pokemon%20Ranch%20%28USA%29.png",
+   "size": 574178,
+   "sha256": "6a19ce40948e2c279d6f03f911f7960ec22dff51fd6be5e60aa2ae07100330e9",
+   "release": "My Pokemon Ranch (USA)"
+  },
+  "wii-rumble": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/1a44c6f4251dc9ef051043f22f8d9df4237c1ee8/Named_Boxarts/Pokemon%20Rumble%20%28USA%29.png",
+   "size": 472131,
+   "sha256": "aacef7d81330d88485a52b01f781118242a18844d5be95e21a71abefa030a321",
+   "release": "Pokemon Rumble (USA)"
+  },
+  "wii-pokepark-pikachu": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/1a44c6f4251dc9ef051043f22f8d9df4237c1ee8/Named_Boxarts/PokePark%20Wii%20-%20Pikachu%27s%20Adventure%20%28USA%29.png",
+   "size": 613433,
+   "sha256": "57425212d0b4d7885e83bb8d9ee6c636ddb8b673982899f8ec194f49bd08b148",
+   "release": "PokePark Wii - Pikachu's Adventure (USA)"
+  },
+  "wii-pokepark-2": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Wii/1a44c6f4251dc9ef051043f22f8d9df4237c1ee8/Named_Boxarts/PokePark%202%20-%20Wonders%20Beyond%20%28USA%29.png",
+   "size": 655886,
+   "sha256": "2914f97b52b0dcfc8414758d12072520974422dbec6b2fb8b1e1c878bf6984a0",
+   "release": "PokePark 2 - Wonders Beyond (USA)"
+  },
+  "3ds-rumble-blast": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Rumble%20Blast%20%28USA%29.png",
+   "size": 432170,
+   "sha256": "f96098280abdf8bc1c84bd0b552d89c904e0b92773022519e575e8115604184b",
+   "release": "Pokemon Rumble Blast (USA)"
+  },
+  "3ds-gates-to-infinity": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Mystery%20Dungeon%20-%20Gates%20to%20Infinity%20%28USA%29.png",
+   "size": 383210,
+   "sha256": "b8dc8b921cc1da5c2f6d7ac220bd113ac1845b33d508b838da193685844b8b3f",
+   "release": "Pokemon Mystery Dungeon - Gates to Infinity (USA)"
+  },
+  "3ds-art-academy": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Art%20Academy%20%28USA%29.png",
+   "size": 63508,
+   "sha256": "dfb29c41481718e6a275b318fa226980ee4b0b0fc0679dd9876cb363683abd6d",
+   "release": "Pokemon Art Academy (USA)"
+  },
+  "3ds-picross": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Picross%20%28USA%29.png",
+   "size": 45070,
+   "sha256": "f67ee4ff9cd5d4d18f41899d42f9f5315d9aa6d49b123b3aebc3eaf9ff887500",
+   "release": "Pokemon Picross (USA)"
+  },
+  "3ds-rumble-world": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Rumble%20World%20%28USA%29.png",
+   "size": 462404,
+   "sha256": "d38dcb2bf2802d2b2d07a04e6e4334795faafe5e1f6e76ec644950dce91b6716",
+   "release": "Pokemon Rumble World (USA)"
+  },
+  "3ds-super-mystery-dungeon": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Super%20Mystery%20Dungeon%20%28USA%29.png",
+   "size": 445803,
+   "sha256": "be4125cc8d83e50dab25efed39248a7f2b619b3832e71c13037035d110af6e6a",
+   "release": "Pokemon Super Mystery Dungeon (USA)"
+  },
+  "3ds-ultra-sun": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Pokemon%20Ultra%20Sun%20%28USA%29%20%28En%2CJa%2CFr%2CDe%2CEs%2CIt%2CZh%2CKo%29.png",
+   "size": 405997,
+   "sha256": "a3f55995772378814063fb2e96f1751c47b4aca059d71af4beeba2a3c66f2757",
+   "release": "Pokemon Ultra Sun (USA) (En,Ja,Fr,De,Es,It,Zh,Ko)"
+  },
+  "3ds-detective-pikachu": {
+   "url": "https://raw.githubusercontent.com/libretro-thumbnails/Nintendo_-_Nintendo_3DS/a1e242aca9d194ba7c168e38e14c637ff206189f/Named_Boxarts/Detective%20Pikachu%20%28USA%29.png",
+   "size": 192619,
+   "sha256": "9217a55185c2037ce8e0bc1c2bdd4fe5e8141d878f31de78aa35666280c9c6ef",
+   "release": "Detective Pikachu (USA)"
+  }
+ }
+}
