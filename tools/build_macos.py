@@ -22,7 +22,6 @@ start (see README.md). Downloads are cached in build/cache/.
 import argparse
 from dataclasses import dataclass
 import datetime
-import importlib.util
 from pathlib import Path, PurePosixPath
 import plistlib
 import posixpath
@@ -30,14 +29,14 @@ import stat
 import struct
 import sys
 import tarfile
-import time
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import bundle  # noqa: E402
+from bundle import CACHE, ROOT, add_python_file  # noqa: E402
 import install_emulators as emulators  # noqa: E402
 
-ROOT = Path(__file__).resolve().parents[1]
-CACHE = ROOT / 'build' / 'cache'
+AppZip = bundle.Archive
 VERSION = '1.0'
 
 _PBS = 'https://github.com/astral-sh/python-build-standalone/releases/download/20261124/'
@@ -72,8 +71,6 @@ TARGETS = {
     'x86_64': Target('x86_64', 'Intel', 'Intel', '10.15', 'macos-x86_64'),
 }
 
-# Retro Pocket's own files in the app: the program and its catalogue.
-APP_FILES = ('*.py', 'catalog*.json', 'covers-index.json', 'README.md', 'SOURCES*.md')
 APP_EXCLUDE = {'_win32.py'}  # Windows only
 # Parts of the standalone Python the app doesn't use. MacOS/python3.12 has
 # libpython built in, and no extension module links the separate library.
@@ -82,7 +79,6 @@ PYTHON_EXCLUDE = ('bin/', 'include/', 'share/', 'lib/libpython3.12.dylib', 'lib/
                   'lib/python3.12/turtledemo/', 'lib/python3.12/ensurepip/_bundled/',
                   'lib/python3.12/site-packages/pip/', 'lib/python3.12/site-packages/pip-')
 SITE_PACKAGES = 'Contents/Resources/python/lib/python3.12/site-packages/'
-WHEEL_EXCLUDE = ('pygame/docs/', 'pygame/examples/', 'pygame/tests/')
 
 LAUNCHER = r'''#!/bin/sh
 # Retro Pocket for macOS ({label}): starts the game library with the Python
@@ -130,59 +126,6 @@ exec "$CONTENTS/MacOS/python3.12" "$RESOURCES/app/app.py" "$@"
 '''
 
 
-class AppZip:
-    """A zip of one .app, with Unix permissions and symlinks as macOS restores them."""
-
-    def __init__(self, path: Path, app: str):
-        self.zip = zipfile.ZipFile(path, 'w', zipfile.ZIP_DEFLATED, compresslevel=6)
-        self.app = app
-        self.names = set()
-        self.stamp = time.localtime()[:6]
-
-    def _info(self, name, kind, mode):
-        name = f'{self.app}/{name}'
-        if name in self.names:
-            raise ValueError(f'Two files at {name}')
-        self.names.add(name)
-        info = zipfile.ZipInfo(name, self.stamp)
-        info.create_system = 3  # Unix: Archive Utility and ditto apply external_attr
-        info.external_attr = (kind | mode) << 16
-        info.compress_type = zipfile.ZIP_DEFLATED
-        return info
-
-    def file(self, name, data: bytes, mode=0o644):
-        self.zip.writestr(self._info(name, stat.S_IFREG, mode), data)
-
-    def link(self, name, target: str):
-        info = self._info(name, stat.S_IFLNK, 0o755)
-        info.compress_type = zipfile.ZIP_STORED
-        self.zip.writestr(info, target.encode())
-
-    def close(self):
-        self.zip.close()
-
-
-def pyc(source: bytes, name: str):
-    """Bytecode that needs no timestamp check (the app's files never change), or None."""
-    if sys.version_info[:2] != (3, 12):
-        return None  # Bytecode is per Python version: the app's Python compiles at run time instead.
-    from importlib._bootstrap_external import _code_to_hash_pyc
-    try:
-        code = compile(source, name, 'exec', dont_inherit=True)
-    except (SyntaxError, ValueError):
-        return None
-    return _code_to_hash_pyc(code, importlib.util.source_hash(source), checked=False)
-
-
-def add_python_file(out: AppZip, name: str, data: bytes, mode: int):
-    out.file(name, data, mode)
-    if name.endswith('.py'):
-        compiled = pyc(data, name)
-        if compiled is not None:
-            path = PurePosixPath(name)
-            out.file(str(path.parent / '__pycache__' / f'{path.stem}.cpython-312.pyc'), compiled)
-
-
 def add_python(out: AppZip, archive: Path):
     """The standalone CPython: its program in MacOS/, everything else in Resources/python/."""
     with tarfile.open(archive) as tar:
@@ -203,44 +146,9 @@ def add_python(out: AppZip, archive: Path):
                 add_python_file(out, name, tar.extractfile(member).read(), stat.S_IMODE(member.mode) or 0o644)
 
 
-def add_wheel(out: AppZip, wheel: Path):
-    with zipfile.ZipFile(wheel) as archive:
-        for info in archive.infolist():
-            if info.is_dir() or '.data/' in info.filename or info.filename.startswith(WHEEL_EXCLUDE):
-                continue
-            unix = stat.S_IMODE(info.external_attr >> 16) if info.create_system == 3 else 0
-            add_python_file(out, SITE_PACKAGES + info.filename, archive.read(info), unix or 0o644)
-
-
-def add_emulators(out: AppZip, target: Target):
-    for name, package in emulators.PLATFORMS[target.packages].items():
-        archive_path, digest = emulators.cached(package.url, package.size, package.sha256, CACHE)
-        if package.sha256 is None:
-            print(f'  {name}: unpinned nightly build, SHA-256 {digest}')
-        base = f'Contents/Resources/app/emulators/{name}'
-        found = False
-        with zipfile.ZipFile(archive_path) as archive:
-            for entry in emulators.entries(archive):
-                path = f'{base}/{entry.path}'
-                if entry.link is not None:
-                    out.link(path, entry.link)
-                    continue
-                data = archive.read(entry.info)
-                if str(entry.path) == package.check:
-                    found = True
-                    if package.arch and package.arch not in emulators.header_architectures(data[:4096]):
-                        raise ValueError(f'{name}: {package.check} is not built for {package.arch}')
-                out.file(path, data, entry.mode)
-        if not found:
-            raise ValueError(f'{name}: the archive has no {package.check}')
-        out.file(f'{base}/{emulators.MARKER}', (package.sha256 or digest).encode())
-
-
 def add_retro_pocket(out: AppZip):
-    for pattern in APP_FILES:
-        for path in sorted(ROOT.glob(pattern)):
-            if path.name not in APP_EXCLUDE and path.is_file():
-                add_python_file(out, f'Contents/Resources/app/{path.name}', path.read_bytes(), 0o644)
+    for name, path in bundle.retro_pocket_files(exclude=APP_EXCLUDE):
+        add_python_file(out, f'Contents/Resources/app/{name}', path.read_bytes())
 
 
 def info_plist(target: Target):
@@ -350,9 +258,9 @@ def build(target: Target, output: Path):
         out.file('Contents/MacOS/RetroPocket', LAUNCHER.format(arch=target.arch, label=target.label).encode(), 0o755)
         add_python(out, python)
         for wheel in wheels:
-            add_wheel(out, wheel)
+            bundle.add_wheel(out, wheel, SITE_PACKAGES, bundle.PYGAME_EXCLUDE)
         add_retro_pocket(out)
-        add_emulators(out, target)
+        bundle.add_emulators(out, target.packages, 'Contents/Resources/app/emulators')
     finally:
         out.close()
     verify(partial, target)

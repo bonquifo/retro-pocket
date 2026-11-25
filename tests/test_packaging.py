@@ -9,8 +9,12 @@ import unittest
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'tools'))
+import build_linux  # noqa: E402
+import bundle  # noqa: E402
 import build_macos  # noqa: E402
+import build_windows  # noqa: E402
 import install_emulators  # noqa: E402
+import tarfile  # noqa: E402
 
 ARM64, X86_64 = 0x0100000c, 0x01000007
 
@@ -138,8 +142,34 @@ class MacBuildCheckTest(unittest.TestCase):
                 build_macos.verify(*self.build(self.complete(**{
                     'Contents/MacOS/python3.12': (fat, 0o755)}), arch))
 
+    def test_linux_tarball_has_runnable_scripts_and_no_windows_code(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = build_linux.build(Path(tmp))
+            with tarfile.open(path) as tar:
+                members = {m.name.split('/', 1)[1]: m for m in tar.getmembers()}
+        for script in ('setup.sh', 'RetroPocket.sh'):
+            self.assertEqual(members[script].mode & 0o777, 0o755, script)
+        self.assertIn('ds_input_shim.c', members)  # The Linux DeSmuME keyboard fix is built at launch
+        self.assertIn('roms/README.txt', members)
+        self.assertNotIn('_win32.py', members)
+
+    def test_windows_check_finds_missing_files_and_foreign_binaries(self):
+        tmp = Path(self.enterContext(tempfile.TemporaryDirectory()))
+        path = tmp / 'windows.zip'
+        out = build_macos.AppZip(path, build_windows.FOLDER)
+        arm = bytearray(512)
+        arm[:2] = b'MZ'
+        struct.pack_into('<I', arm, 0x3C, 0x80)
+        arm[0x80:0x86] = b'PE\0\0' + struct.pack('<H', 0xAA64)  # 64-bit Arm
+        out.file('python/python.exe', bytes(arm))
+        out.close()
+        with self.assertRaises(ValueError) as caught:
+            build_windows.verify(path)
+        self.assertIn('missing app.py', str(caught.exception))
+        self.assertIn('not a 64-bit x86 Windows binary: python/python.exe', str(caught.exception))
+
     def test_bytecode_needs_no_timestamp(self):
-        compiled = build_macos.pyc(b'x = 1\n', 'x.py')
+        compiled = bundle.pyc(b'x = 1\n', 'x.py')
         if sys.version_info[:2] != (3, 12):
             self.assertIsNone(compiled)
         else:

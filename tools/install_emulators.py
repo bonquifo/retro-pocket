@@ -241,6 +241,9 @@ def header_architectures(header: bytes):
     if header[:4] in (b'\xcf\xfa\xed\xfe', b'\xce\xfa\xed\xfe'):
         cpu, = struct.unpack_from('<I', header, 4)
         return {_MACHO_CPUS.get(cpu, hex(cpu))}
+    if header[:4] == b'\x7fELF' and len(header) >= 20:  # Linux
+        machine, = struct.unpack_from('<H' if header[5] == 1 else '>H', header, 18)
+        return {{0x3E: 'x86_64', 0xB7: 'arm64'}.get(machine, hex(machine))}
     return set()
 
 

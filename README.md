@@ -1,6 +1,21 @@
 # Retro Pocket
 
+[![Build and verify](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml/badge.svg)](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml)
+
 A game library and player for Pokémon and Mario games, for Linux, Windows and macOS (Apple Silicon and Intel).
+
+## Downloads
+
+Every push to `main` builds and checks all four versions on GitHub Actions. Download them from the latest successful run on the [Actions page](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml), under **Artifacts**:
+
+| Version | File | To start |
+| --- | --- | --- |
+| Windows (64-bit) | `Retro-Pocket-Windows.zip` | Unzip anywhere and double-click **Retro Pocket.cmd**. Everything is included: Python and the emulators. Put dumps in its `roms` folder |
+| Linux (x86_64) | `Retro-Pocket-Linux.tar.gz` | Unpack, install the emulators from your distribution (see Run on Ubuntu), run `./setup.sh`, then `./RetroPocket.sh` |
+| macOS, Apple Silicon | `Retro-Pocket-macOS-Apple-Silicon.zip` | See Run on macOS |
+| macOS, Intel | `Retro-Pocket-macOS-Intel.zip` | See Run on macOS |
+
+No version includes or downloads games. To build them yourself, run `tools/build_windows.py`, `tools/build_linux.py` or `tools/build_macos.py` (each runs on any OS and writes to `dist/`). `tools/verify_build.py` then checks a build from the inside with its own Python, as CI does: the mGBA core emulating a test cartridge, each emulator found and built for the right CPU, box art over HTTPS, and on macOS and Windows the emulators starting.
 
 The catalogue opens on **your games**: everything found in your ROM folder, shown as a grid of covers grouped by system (Game Boy, Game Boy Color, Game Boy Advance, Pokémon mini, DS, 3DS, Nintendo 64, GameCube). Click **Full catalogue** or press C to also see every catalogued release, including ones you don't have yet (marked *Not owned*) and ones that can't be played here (*Not playable*). Start with `--all` to open on the full catalogue.
 
@@ -22,6 +37,8 @@ To use your own picture instead (PNG or JPEG, up to 16 MB), save it either:
 Your pictures win over downloaded art; restart Retro Pocket to pick up new ones. `tools/build_cover_index.py` regenerates the index (see `SOURCES-COVERS.md`).
 
 ## Run on Windows
+
+The simplest way is the `Retro-Pocket-Windows.zip` download (see Downloads): nothing to install. To run from this folder instead:
 
 1. Install Python 3.11 or newer from <https://www.python.org/downloads/windows/> (3.12 recommended).
 2. Double-click **`setup.cmd`**. It creates `.venv`, installs pygame-ce, and downloads the emulators into `emulators\`:
@@ -90,9 +107,8 @@ Open a terminal inside a graphical desktop session:
 ```sh
 sudo apt install libretro-mgba desmume python3-venv
 cd /home/bonquifo/projects/retro-pocket
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/python app.py
+./setup.sh          # creates .venv with pygame-ce and names any missing emulator packages
+./RetroPocket.sh    # or: .venv/bin/python app.py
 ```
 
 If mGBA is installed in a nonstandard location, pass `--core /path/to/mgba_libretro.so` (trusted local core only). Library data and per-game cartridge saves are stored under your XDG data directory by default; `--data-dir` overrides the location.

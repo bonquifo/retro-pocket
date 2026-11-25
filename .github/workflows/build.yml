@@ -1,0 +1,133 @@
+# Build and verify all four versions of Retro Pocket on every push:
+# Windows (x86_64), Linux (x86_64), macOS Apple Silicon (arm64) and macOS Intel (x86_64).
+#
+# Each job sets up from source with that system's own setup script, runs the
+# unit tests, builds the version, unpacks it, and checks it from the inside
+# with its own Python (tools/verify_build.py). The builds are kept as
+# artifacts of the run for two weeks.
+name: Build and verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: '1'
+
+jobs:
+  windows:
+    name: Windows (x86_64)
+    runs-on: windows-2025
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Set up from source (setup.cmd)
+        shell: cmd
+        run: call setup.cmd
+      - name: Unit tests
+        run: .venv\Scripts\python -m unittest discover -s tests -v
+      - name: Build
+        run: .venv\Scripts\python tools\build_windows.py
+      - name: Verify the build from the inside
+        shell: pwsh
+        run: |
+          $dir = Join-Path $env:RUNNER_TEMP 'windows-build'
+          Expand-Archive dist\Retro-Pocket-Windows.zip -DestinationPath $dir
+          $build = Join-Path $dir 'Retro Pocket'
+          & "$build\python\python.exe" tools\verify_build.py --app-dir $build --arch x86_64 --network --run-emulators
+          if ($LASTEXITCODE) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Retro-Pocket-Windows
+          path: dist/Retro-Pocket-Windows.zip
+          retention-days: 14
+          compression-level: 0
+
+  linux:
+    name: Linux (x86_64)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install the distribution's emulators
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-venv libretro-mgba desmume \
+            mupen64plus-ui-console mupen64plus-video-glide64mk2
+      - name: Set up from source (setup.sh)
+        run: ./setup.sh
+      - name: Unit tests
+        run: .venv/bin/python -m unittest discover -s tests -v
+      - name: Build
+        run: .venv/bin/python tools/build_linux.py
+      - name: Verify the build from the inside
+        run: |
+          dir="$RUNNER_TEMP/linux-build"
+          mkdir -p "$dir"
+          tar -xzf dist/Retro-Pocket-Linux.tar.gz -C "$dir"
+          build="$dir/retro-pocket"
+          "$build/setup.sh"
+          # Azahar has no Ubuntu package (it is an AppImage), so the 3DS emulator may be missing here.
+          "$build/.venv/bin/python" tools/verify_build.py --app-dir "$build" --arch x86_64 --optional 3ds \
+            --network --launcher "$build/RetroPocket.sh"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Retro-Pocket-Linux
+          path: dist/Retro-Pocket-Linux.tar.gz
+          retention-days: 14
+          compression-level: 0
+
+  macos:
+    name: macOS ${{ matrix.label }} (${{ matrix.arch }})
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            arch: arm64
+            label: Apple Silicon
+            slug: Apple-Silicon
+          - runner: macos-15-intel
+            arch: x86_64
+            label: Intel
+            slug: Intel
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up from source (setup.command)
+        run: ./setup.command
+      - name: Unit tests
+        run: .venv/bin/python -m unittest discover -s tests -v
+      - name: Build
+        run: .venv/bin/python tools/build_macos.py --arch ${{ matrix.arch }}
+      - name: Verify the app from the inside
+        run: |
+          dir="$RUNNER_TEMP/macos-build"
+          mkdir -p "$dir"
+          ditto -x -k "dist/Retro-Pocket-macOS-${{ matrix.slug }}.zip" "$dir"
+          app="$dir/Retro Pocket (${{ matrix.label }}).app"
+          resources="$app/Contents/Resources"
+          PYTHONHOME="$resources/python" PYTHONNOUSERSITE=1 PYTHONDONTWRITEBYTECODE=1 \
+          SSL_CERT_FILE="$resources/python/lib/python3.12/site-packages/certifi/cacert.pem" \
+            "$app/Contents/MacOS/python3.12" tools/verify_build.py --app-dir "$resources/app" \
+            --arch ${{ matrix.arch }} --network --run-emulators --window \
+            --launcher "$app/Contents/MacOS/RetroPocket"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: Retro-Pocket-macOS-${{ matrix.slug }}
+          path: dist/Retro-Pocket-macOS-${{ matrix.slug }}.zip
+          retention-days: 14
+          compression-level: 0

@@ -150,7 +150,8 @@ class DSLaunchTests(unittest.TestCase):
         self.assertEqual(list(outside.iterdir()), [])
 
 
-@unittest.skipUnless(any(Path(c).is_file() for c in ('/usr/bin/cc', '/usr/bin/gcc')), 'no C compiler')
+@unittest.skipUnless(LINUX and any(Path(c).is_file() for c in ('/usr/bin/cc', '/usr/bin/gcc')),
+                     'the shim fixes Linux desmume-cli and needs a C compiler')
 class DSInputShimTests(unittest.TestCase):
     """Drive the compiled shim's translation with raw SDL2 event bytes."""
 
