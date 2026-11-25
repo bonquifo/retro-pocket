@@ -42,6 +42,7 @@ with open(Path(directory, 'runs'), 'a') as runs:
 '''
 
 
+@unittest.skipIf(support.MACOS, 'macOS runs N64 games in ares (test_ares.py)')
 class N64LaunchTests(unittest.TestCase):
     def setUp(self):
         scratch = tempfile.TemporaryDirectory()

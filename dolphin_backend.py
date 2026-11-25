@@ -8,7 +8,13 @@ import subprocess
 import compat
 
 
-if compat.WINDOWS:
+if compat.MACOS:
+    _INSTALLED_EXECUTABLES = tuple(folder / 'Dolphin.app'
+                                   for folder in (compat.EMULATORS / 'dolphin', *compat.applications()))
+    _X11_EXECUTABLES = ()
+    _INSTALL_HINT = 'copy Dolphin.app into emulators/dolphin or /Applications'
+    _POINTER_DEVICE = 'Quartz/0/Keyboard & Mouse'
+elif compat.WINDOWS:
     # Dolphin's Windows builds are portable folders (Dolphin-x64); keep one in
     # emulators\dolphin, or install it under Program Files.
     _INSTALLED_EXECUTABLES = tuple(
@@ -66,11 +72,12 @@ def _seed_wii_remote(directory: Path) -> None:
 def _find_executable() -> Path:
     override = os.environ.get('RETRO_POCKET_DOLPHIN')
     if override is not None:
-        path = Path(override)
+        path = compat.app_executable(override)
         if compat.is_executable(path):
             return path
         raise FileNotFoundError('RETRO_POCKET_DOLPHIN must be an absolute path to an executable file')
-    for path in _INSTALLED_EXECUTABLES:
+    for candidate in _INSTALLED_EXECUTABLES:
+        path = compat.app_executable(candidate)
         if compat.is_executable(path):
             return path
     raise FileNotFoundError(f'Dolphin not found; {_INSTALL_HINT} or set RETRO_POCKET_DOLPHIN')
@@ -82,8 +89,8 @@ def launch(rom: Path, game_id: str, save_dir: Path) -> subprocess.Popen:
         raise ValueError('Invalid Dolphin game ID')
     x11_override = os.environ.get('RETRO_POCKET_DOLPHIN_NOGUI')
     x11 = None
-    if compat.WINDOWS:
-        pass  # No X11 frontend: Dolphin.exe in batch mode.
+    if compat.WINDOWS or compat.MACOS:
+        pass  # No X11 frontend: the regular program in batch mode.
     elif x11_override is not None:
         x11 = Path(x11_override)
         if not compat.is_executable(x11):

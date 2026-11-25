@@ -1,17 +1,20 @@
-"""Operating-system differences, kept in one place: Windows and POSIX (Linux).
+"""Operating-system differences, kept in one place: Linux, macOS and Windows.
 
 Everything else imports these helpers instead of testing the platform itself.
 """
 import os
 from pathlib import Path
+import plistlib
 import shutil
 import stat
 import subprocess
 import sys
 
 WINDOWS = sys.platform == 'win32'
+MACOS = sys.platform == 'darwin'
 APP_DIR = Path(__file__).resolve().parent
-# Where tools/setup_windows.py installs emulators (and the mGBA core) on Windows.
+# Where tools/install_emulators.py installs emulators (and the mGBA core) on
+# Windows and macOS. Linux uses the distribution's packages instead.
 EMULATORS = APP_DIR / 'emulators'
 
 # Exit code given to every process of a game when the user confirms Force close
@@ -36,8 +39,42 @@ def program_files():
     return tuple(dict.fromkeys(Path(root) for root in roots if root and Path(root).is_absolute()))
 
 
+def applications():
+    """Fixed macOS install roots (never PATH): /Applications and ~/Applications."""
+    return (Path('/Applications'), Path.home() / 'Applications')
+
+
+def app_executable(path):
+    """The program inside a macOS app bundle (``X.app``), or ``path`` itself.
+
+    Lets settings name either ``/Applications/melonDS.app`` or the file in
+    ``Contents/MacOS``.
+    """
+    path = Path(path)
+    if path.suffix.lower() != '.app' or not path.is_dir():
+        return path
+    try:
+        with (path / 'Contents' / 'Info.plist').open('rb') as file:
+            name = plistlib.load(file).get('CFBundleExecutable')
+    except (OSError, ValueError, plistlib.InvalidFileException):
+        name = None
+    return path / 'Contents' / 'MacOS' / (name if isinstance(name, str) and name else path.stem)
+
+
+def bundle_of(executable):
+    """The ``X.app`` folder holding ``X.app/Contents/MacOS/<program>``, else None."""
+    executable = Path(executable)
+    contents = executable.parent.parent
+    if executable.parent.name == 'MacOS' and contents.name == 'Contents' and contents.parent.suffix == '.app':
+        return contents.parent
+    return None
+
+
 def is_executable(path) -> bool:
-    """An absolute path to a program this platform can start directly."""
+    """An absolute path to a program this platform can start directly.
+
+    A macOS ``.app`` folder is not one: resolve it with app_executable() first.
+    """
     path = Path(path)
     if not path.is_absolute() or not path.is_file():
         return False
@@ -253,6 +290,30 @@ def gamepad_connected() -> bool:
         return any(Path('/dev/input/by-id').glob('*-event-joystick'))
     except OSError:
         return False
+
+
+def https_context():
+    """TLS settings for downloads, or None for Python's defaults.
+
+    Python builds for macOS (python.org, and the standalone build inside the
+    app) don't use the system's certificate store, so certifi's is used there.
+    """
+    try:
+        import certifi
+        import ssl
+    except ImportError:
+        return None
+    return ssl.create_default_context(cafile=certifi.where())
+
+
+def data_home() -> Path:
+    """Where this platform keeps per-user application data (Retro Pocket adds its own folder)."""
+    if WINDOWS:
+        local = Path(os.environ.get('LOCALAPPDATA', ''))
+        return local if local.is_absolute() else Path.home() / 'AppData' / 'Local'
+    if MACOS:
+        return Path.home() / 'Library' / 'Application Support'
+    return Path.home() / '.local' / 'share'
 
 
 def system_scale() -> float:

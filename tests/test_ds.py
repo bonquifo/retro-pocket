@@ -5,26 +5,29 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import ds
 import support
-from support import WINDOWS
+from support import LINUX, WINDOWS
 
-# A stand-in for DeSmuME (a real child process, not a mock of Popen) that
-# checks what the emulator is given: one argument, the staged ROM. Linux runs
-# it with $XDG_CONFIG_HOME at the save folder; Windows runs the game's own
-# linked copy of DeSmuME from the "desmume" folder beside the ROM.
+# A stand-in for the DS emulator (a real child process, not a mock of Popen)
+# that checks what it is given: one argument, the staged ROM. Linux runs
+# DeSmuME with $XDG_CONFIG_HOME at the save folder; Windows (DeSmuME) and
+# macOS (melonDS) run the game's own linked copy of the emulator from a
+# folder beside the ROM.
 CHECK = r'''
 import os, sys
 from pathlib import Path
 assert len(sys.argv) == 2, sys.argv
 rom = Path(sys.argv[1])
 assert rom.is_absolute() and rom.is_file(), rom
-if os.name == 'nt':
+if os.name == 'nt' or sys.platform == 'darwin':
     here = Path(sys.argv[0]).resolve().parent
     assert Path.cwd().resolve() == here, (Path.cwd(), here)
-    assert here.name == 'desmume' and rom == here.parent / 'test-game.nds', (here, rom)
+    assert here.name in ('desmume', 'melonds') and rom == here.parent / 'test-game.nds', (here, rom)
 else:
     assert str(rom) == os.environ['XDG_CONFIG_HOME'] + '/test-game.nds', rom
 '''
+OVERRIDE = ds.OVERRIDE_ENV  # RETRO_POCKET_DESMUME, or RETRO_POCKET_MELONDS on macOS
 
 
 class DSLaunchTests(unittest.TestCase):
@@ -43,7 +46,7 @@ class DSLaunchTests(unittest.TestCase):
         self.save_dir.mkdir()
         staged.write_bytes(b'stale bytes')
         relative_save_dir = Path(os.path.relpath(self.save_dir))
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             proc = launch(rom, 'test-game', relative_save_dir)
             self.assertIsInstance(proc, subprocess.Popen)
             self.assertEqual(proc.wait(timeout=10), 0)
@@ -57,7 +60,7 @@ class DSLaunchTests(unittest.TestCase):
         target.write_bytes(b'keep me')
         staged = self.save_dir / 'test-game.nds'
         support.symlink(self, staged, target)
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             self.assertEqual(launch(b'verified', 'test-game', self.save_dir).wait(10), 0)
         self.assertEqual(target.read_bytes(), b'keep me')
         self.assertFalse(staged.is_symlink())
@@ -66,7 +69,7 @@ class DSLaunchTests(unittest.TestCase):
     def test_catalog_id_cannot_escape_staging_directory(self):
         from ds import launch
 
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             for game_id in ('../escape', '/absolute', 'bad/name', '-option', '', 'foo|bar', 'a\\b', 'C:x'):
                 with self.subTest(game_id=game_id), self.assertRaisesRegex(ValueError, 'game ID'):
                     launch(b'verified', game_id, self.save_dir)
@@ -77,8 +80,8 @@ class DSLaunchTests(unittest.TestCase):
 
         not_a_program = support.no_executable(self.root / 'desmume.bat')
         for override in ('desmume-cli', str(self.root / 'missing'), str(self.root), str(not_a_program)):
-            with self.subTest(override=override), patch.dict(os.environ, {'RETRO_POCKET_DESMUME': override}):
-                with self.assertRaisesRegex(OSError, 'RETRO_POCKET_DESMUME'):
+            with self.subTest(override=override), patch.dict(os.environ, {OVERRIDE: override}):
+                with self.assertRaisesRegex(OSError, OVERRIDE):
                     launch(b'verified', 'test-game', self.save_dir)
         self.assertFalse(self.save_dir.exists())
 
@@ -96,14 +99,13 @@ class DSLaunchTests(unittest.TestCase):
         from ds import launch
 
         with patch.dict(os.environ, support.minimal_env(), clear=True), patch('ds._INSTALLED_EXECUTABLES', ()):
-            with self.assertRaisesRegex(FileNotFoundError, 'install.*desmume.*RETRO_POCKET_DESMUME'):
+            package = 'melonds' if support.MACOS else 'desmume'
+            with self.assertRaisesRegex(FileNotFoundError, f'install.*{package}.*{OVERRIDE}'):
                 launch(b'verified', 'test-game', self.save_dir)
         self.assertFalse(self.save_dir.exists())
 
-    @unittest.skipIf(WINDOWS, 'the keyboard shim works around a Linux desmume-cli bug')
+    @unittest.skipUnless(LINUX, 'the keyboard shim works around a Linux desmume-cli bug')
     def test_launch_preloads_keyboard_shim_and_runs_in_save_dir(self):
-        import ds
-
         save_dir = self.root / 'plain-saves' / 'test-game'
         support.program(self.executable, (
             'import fnmatch, os, sys\n'
@@ -113,7 +115,7 @@ class DSLaunchTests(unittest.TestCase):
             f'assert os.environ["RETRO_POCKET_DS_KEYMAP"] == {ds.keymap()!r}\n'))
         if not any(c.is_file() for c in ds._COMPILERS):
             self.skipTest('no C compiler')
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             self.assertEqual(ds.launch(b'rom', 'test-game', save_dir).wait(timeout=60), 0)
 
     @unittest.skipUnless(WINDOWS, 'Windows DeSmuME keeps its settings beside its program')
@@ -122,7 +124,7 @@ class DSLaunchTests(unittest.TestCase):
 
         (self.root / 'desmume.ddb').write_bytes(b'save-type database')
         profile = self.save_dir / 'desmume'
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             self.assertEqual(ds.launch(b'rom', 'test-game', self.save_dir).wait(timeout=10), 0)
             copy = profile / self.executable.name
             self.assertTrue(os.path.samefile(copy, self.executable))  # A hard link, not a copy.
@@ -142,7 +144,7 @@ class DSLaunchTests(unittest.TestCase):
         outside.mkdir()
         self.save_dir.mkdir()
         support.directory_link(self.save_dir / 'desmume', outside)
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(self.executable)}):
+        with patch.dict(os.environ, {OVERRIDE: str(self.executable)}):
             with self.assertRaisesRegex(ValueError, 'symlink'):
                 launch(b'rom', 'test-game', self.save_dir)
         self.assertEqual(list(outside.iterdir()), [])

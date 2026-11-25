@@ -1,4 +1,8 @@
-"""Launch the native Nintendo DS emulator with already-verified ROM bytes."""
+"""Launch the native Nintendo DS emulator with already-verified ROM bytes.
+
+DeSmuME on Linux and Windows; melonDS on macOS (melonds_backend.py), where
+DeSmuME's frontend can't be started on a ROM and supervised.
+"""
 
 import hashlib
 import os
@@ -12,16 +16,23 @@ import compat
 from controls import LAYOUT, sdl_keycode
 
 
-if compat.WINDOWS:
-    # The official Windows build (tools/setup_windows.py installs it), or a copy
-    # in Program Files. Its own default keys already match controls.LAYOUT.
+if compat.MACOS:
+    EMULATOR, OVERRIDE_ENV = 'melonDS', 'RETRO_POCKET_MELONDS'
+    _INSTALLED_EXECUTABLES = tuple(folder / 'melonDS.app'
+                                   for folder in (compat.EMULATORS / 'melonds', *compat.applications()))
+    _INSTALL_HINT = 'run setup.command to install melonds'
+elif compat.WINDOWS:
+    EMULATOR, OVERRIDE_ENV = 'DeSmuME', 'RETRO_POCKET_DESMUME'
+    # The official Windows build (setup.cmd installs it), or a copy in
+    # Program Files. Its own default keys already match controls.LAYOUT.
     _INSTALLED_EXECUTABLES = tuple(
         directory / name
         for directory in (compat.EMULATORS / 'desmume', *(root / 'DeSmuME' for root in compat.program_files()))
         for name in ('DeSmuME_0.9.13_x64.exe', 'DeSmuME_x64.exe', 'DeSmuME.exe')
     )
-    _INSTALL_HINT = 'run tools\\setup_windows.py to install desmume'
+    _INSTALL_HINT = 'run setup.cmd to install desmume'
 else:
+    EMULATOR, OVERRIDE_ENV = 'DeSmuME', 'RETRO_POCKET_DESMUME'
     # Recent Ubuntu packages ship only desmume-cli (an SDL GUI despite the name).
     # Older distro packages also ship a graphical frontend named desmume.
     _INSTALLED_EXECUTABLES = (
@@ -34,18 +45,19 @@ else:
 
 
 def _find_executable() -> Path:
-    override = os.environ.get('RETRO_POCKET_DESMUME')
+    override = os.environ.get(OVERRIDE_ENV)
     if override is not None:
-        executable = Path(override)
+        executable = compat.app_executable(override)
         if compat.is_executable(executable):
             return executable
-        raise FileNotFoundError('RETRO_POCKET_DESMUME must be an absolute path to an executable file')
+        raise FileNotFoundError(f'{OVERRIDE_ENV} must be an absolute path to an executable file')
 
     # Don't search PATH: a ROM directory or working directory may be on it.
-    for executable in _INSTALLED_EXECUTABLES:
+    for candidate in _INSTALLED_EXECUTABLES:
+        executable = compat.app_executable(candidate)
         if compat.is_executable(executable):
             return executable
-    raise FileNotFoundError(f'DeSmuME not found; {_INSTALL_HINT} or set RETRO_POCKET_DESMUME')
+    raise FileNotFoundError(f'{EMULATOR} not found; {_INSTALL_HINT} or set {OVERRIDE_ENV}')
 
 
 _SHIM_SOURCE = Path(__file__).resolve().with_name('ds_input_shim.c')
@@ -146,6 +158,9 @@ def launch(rom: bytes | Path, game_id: str, save_dir: Path) -> subprocess.Popen:
         finally:
             temporary.unlink(missing_ok=True)
 
+    if compat.MACOS:
+        import melonds_backend  # Saves: saves/<game>/<game>.sav
+        return melonds_backend.start(executable, staged, directory)
     if compat.WINDOWS:
         # Saves: saves/<game>/desmume/<game>.dsv, the same place as on Linux.
         program = _windows_profile(executable, directory)

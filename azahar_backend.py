@@ -1,4 +1,4 @@
-"""Launch the Azahar Qt frontend (Linux or Windows) on a verified, staged 3DS image."""
+"""Launch the Azahar Qt frontend (Linux, macOS or Windows) on a verified, staged 3DS image."""
 
 import os
 from pathlib import Path
@@ -13,12 +13,16 @@ from controls import C_KEYS, DPAD_KEYS, LAYOUT, qt_keycode
 _EXECUTABLE_ENV = 'RETRO_POCKET_AZAHAR'
 _ROM_SUFFIXES = {'.cci', '.3ds', '.3dsx'}
 # Fixed install locations only; never search PATH (a ROM folder may be on it).
-if compat.WINDOWS:
+if compat.MACOS:
+    _INSTALLED_EXECUTABLES = tuple(folder / 'Azahar.app'
+                                   for folder in (compat.EMULATORS / 'azahar', *compat.applications()))
+    _INSTALL_HINT = 'run setup.command'
+elif compat.WINDOWS:
     _INSTALLED_EXECUTABLES = (
         compat.EMULATORS / 'azahar' / 'azahar.exe',
         *(root / 'Azahar' / 'azahar.exe' for root in compat.program_files()),
     )
-    _INSTALL_HINT = 'run tools\\setup_windows.py'
+    _INSTALL_HINT = 'run setup.cmd'
 else:
     _INSTALLED_EXECUTABLES = (
         Path('/usr/bin/azahar'),
@@ -88,17 +92,22 @@ def _apply_controls(text):
     return '\n'.join(lines[:start] + section + lines[end:]) + '\n'
 
 
-def user_directory(profile: Path) -> Path:
-    """Where Azahar keeps a profile's settings, saves and extra data.
+def _portable():
+    """Whether Azahar runs in portable mode: a ``user`` folder holds everything.
 
-    Linux: the XDG directories set at launch. Windows: portable mode, the
-    ``user`` folder beside the per-game copy of the program.
+    Windows: beside the per-game copy of azahar.exe. macOS: in its working
+    directory, the profile. Linux uses the XDG directories set at launch.
     """
-    return profile / 'user' if compat.WINDOWS else profile
+    return compat.WINDOWS or compat.MACOS
+
+
+def user_directory(profile: Path) -> Path:
+    """Where Azahar keeps a profile's settings, saves and extra data."""
+    return profile / 'user' if _portable() else profile
 
 
 def config_file(profile: Path) -> Path:
-    if compat.WINDOWS:
+    if _portable():
         return user_directory(profile) / 'config' / 'qt-config.ini'
     return profile / 'config' / 'azahar-emu' / 'qt-config.ini'
 
@@ -126,11 +135,12 @@ def _seed_controls(profile: Path) -> None:
 def _find_executable() -> Path:
     override = os.environ.get(_EXECUTABLE_ENV)
     if override is not None:
-        executable = Path(override)
+        executable = compat.app_executable(override)
         if compat.is_executable(executable):
             return executable
         raise FileNotFoundError(f'{_EXECUTABLE_ENV} must name a trusted absolute Azahar executable')
-    for executable in _INSTALLED_EXECUTABLES:
+    for candidate in _INSTALLED_EXECUTABLES:
+        executable = compat.app_executable(candidate)
         if compat.is_executable(executable):
             return executable
     raise FileNotFoundError(f'Azahar not found; {_INSTALL_HINT} or set {_EXECUTABLE_ENV}')
@@ -167,6 +177,16 @@ def launch(rom: Path, game_id: str, save_dir: Path) -> subprocess.Popen:
 
     namespace = save_dir.resolve() / 'azahar'
     profile = namespace / game_id
+    if compat.MACOS:
+        # Azahar for macOS uses a "user" folder in its working directory
+        # (portable mode); without one, ~/Library/Application Support/Azahar
+        # for every game.
+        user = user_directory(profile)
+        if any(compat.is_link(path) for path in (namespace, profile, user, user / 'config')):
+            raise ValueError('Azahar profile roots must not be symlinks')
+        user.mkdir(mode=0o700, parents=True, exist_ok=True)
+        _seed_controls(profile)
+        return compat.popen([executable, rom], cwd=profile)
     if compat.WINDOWS:
         # Azahar for Windows has no option for its user folder: it uses a "user"
         # folder beside azahar.exe (portable mode), else %APPDATA%\Azahar for

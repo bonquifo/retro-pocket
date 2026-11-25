@@ -1,4 +1,8 @@
-"""Launch Mupen64Plus with an already-verified Nintendo 64 cartridge."""
+"""Launch the Nintendo 64 emulator with an already-verified cartridge.
+
+Mupen64Plus on Linux and Windows; ares on macOS (ares_backend.py), where
+Mupen64Plus has no self-contained build.
+"""
 
 import os
 from pathlib import Path
@@ -11,15 +15,22 @@ from controls import C_KEYS, DPAD_KEYS, LAYOUT
 from ds import _require_placed
 
 
-if compat.WINDOWS:
-    # The official Windows bundle (tools/setup_windows.py installs it): the
-    # console frontend beside mupen64plus.dll, its plugins and its data files.
+if compat.MACOS:
+    EMULATOR, OVERRIDE_ENV = 'ares', 'RETRO_POCKET_ARES'
+    _INSTALLED_EXECUTABLES = tuple(folder / 'ares.app'
+                                   for folder in (compat.EMULATORS / 'ares', *compat.applications()))
+    _INSTALL_HINT = 'run setup.command to install ares'
+elif compat.WINDOWS:
+    EMULATOR, OVERRIDE_ENV = 'Mupen64Plus', 'RETRO_POCKET_MUPEN64PLUS'
+    # The official Windows bundle (setup.cmd installs it): the console
+    # frontend beside mupen64plus.dll, its plugins and its data files.
     _INSTALLED_EXECUTABLES = tuple(
         directory / 'mupen64plus-ui-console.exe'
         for directory in (compat.EMULATORS / 'mupen64plus',
                           *(root / 'Mupen64Plus' for root in compat.program_files())))
-    _INSTALL_HINT = 'run tools\\setup_windows.py to install mupen64plus'
+    _INSTALL_HINT = 'run setup.cmd to install mupen64plus'
 else:
+    EMULATOR, OVERRIDE_ENV = 'Mupen64Plus', 'RETRO_POCKET_MUPEN64PLUS'
     _INSTALLED_EXECUTABLES = (Path('/usr/games/mupen64plus'), Path('/usr/bin/mupen64plus'))
     _INSTALL_HINT = 'install mupen64plus-ui-console and its plugins'
 # The video plugin the Linux QA used (Ubuntu's default); the bundle has it too.
@@ -75,16 +86,17 @@ def control_settings(gamepad: bool) -> list[str]:
 
 
 def _find_executable() -> Path:
-    override = os.environ.get('RETRO_POCKET_MUPEN64PLUS')
+    override = os.environ.get(OVERRIDE_ENV)
     if override is not None:
-        executable = Path(override)
+        executable = compat.app_executable(override)
         if compat.is_executable(executable):
             return executable
-        raise FileNotFoundError('RETRO_POCKET_MUPEN64PLUS must be an absolute path to an executable file')
-    for executable in _INSTALLED_EXECUTABLES:
+        raise FileNotFoundError(f'{OVERRIDE_ENV} must be an absolute path to an executable file')
+    for candidate in _INSTALLED_EXECUTABLES:
+        executable = compat.app_executable(candidate)
         if compat.is_executable(executable):
             return executable
-    raise FileNotFoundError(f'Mupen64Plus not found; {_INSTALL_HINT}, or set RETRO_POCKET_MUPEN64PLUS')
+    raise FileNotFoundError(f'{EMULATOR} not found; {_INSTALL_HINT}, or set {OVERRIDE_ENV}')
 
 
 def _bundle_arguments(executable: Path) -> list[str]:
@@ -127,6 +139,10 @@ def launch(rom: bytes | Path, game_id: str, save_dir: Path) -> subprocess.Popen:
             temporary.replace(staged)
         finally:
             temporary.unlink(missing_ok=True)
+
+    if compat.MACOS:
+        import ares_backend  # Saves beside the ROM, in this save folder
+        return ares_backend.start(executable, staged, directory)
 
     # --configdir alone does not relocate native cartridge saves or states.
     settings = [f'Core[SaveSRAMPath]={directory}', f'Core[SaveStatePath]={directory}',

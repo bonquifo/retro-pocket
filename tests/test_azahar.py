@@ -22,6 +22,10 @@ if os.name == 'nt':
     portable = Path(sys.argv[0]).resolve().parent / 'user'
     data = portable if portable.is_dir() else Path(os.environ['APPDATA']) / 'Azahar'
     where = {'user': str(data)}
+elif sys.platform == 'darwin':
+    portable = Path.cwd() / 'user'
+    data = portable if portable.is_dir() else Path.home() / 'Library' / 'Application Support' / 'Azahar'
+    where = {'user': str(data)}
 else:
     where = {k: os.environ[k] for k in ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME')}
     data = Path(where['XDG_DATA_HOME']) / 'azahar-emu'
@@ -33,9 +37,10 @@ report = {'argv': sys.argv[1:], 'cwd': os.getcwd(), 'where': where, 'count': cou
 Path('child-report.json').write_text(json.dumps(report))
 '''
 # The usual per-user locations, which a launch must leave untouched.
-ORDINARY = ('APPDATA',) if WINDOWS else ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME')
+ORDINARY = (('APPDATA',) if WINDOWS else ('HOME',) if support.MACOS
+            else ('XDG_DATA_HOME', 'XDG_CONFIG_HOME', 'XDG_CACHE_HOME'))
 # Directories that must not lead outside the profile.
-PROFILE_ROOTS = ('user', 'user/config') if WINDOWS else ('data', 'config', 'cache', 'user')
+PROFILE_ROOTS = ('user', 'user/config') if WINDOWS or support.MACOS else ('data', 'config', 'cache', 'user')
 
 
 class AzaharLaunchTests(unittest.TestCase):
@@ -148,6 +153,33 @@ class AzaharLaunchTests(unittest.TestCase):
             self.assertTrue(os.path.samefile(profile / name, self.root / name), name)  # Hard links
         self.assertFalse((profile / 'notes.txt').exists())
         self.assertIn('[Controls]', config_file(profile).read_text())
+
+
+class AzaharMacTest(unittest.TestCase):
+    def test_macos_runs_azahar_in_the_profile_with_a_portable_user_folder(self):
+        """Azahar for macOS uses a "user" folder in its working directory; no copy of the app is needed."""
+        from azahar_backend import config_file, launch
+
+        report = ('import json, os, sys\nfrom pathlib import Path\n'
+                  'Path("report.json").write_text(json.dumps({"argv": sys.argv[1:], "cwd": os.getcwd(), '
+                  '"portable": Path("user").is_dir()}))\n')
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            exe = support.program(root / 'azahar', report)
+            rom = root / 'game.3ds'
+            rom.write_bytes(b'x')
+            with patch('compat.MACOS', True), patch('compat.WINDOWS', False), \
+                    patch.dict(os.environ, {'RETRO_POCKET_AZAHAR': str(exe)}):
+                self.assertEqual(launch(rom, '3ds-x', root / 'saves').wait(timeout=10), 0)
+                profile = root / 'saves' / 'azahar' / '3ds-x'
+                self.assertIn('[Controls]', config_file(profile).read_text())
+                self.assertEqual(config_file(profile), profile / 'user' / 'config' / 'qt-config.ini')
+            seen = json.loads((profile / 'report.json').read_text())
+            self.assertEqual(seen['argv'], [str(rom)])
+            self.assertEqual(Path(seen['cwd']).resolve(), profile.resolve())
+            self.assertTrue(seen['portable'])
+            self.assertEqual(sorted(p.name for p in profile.iterdir()),
+                             ['.retro-pocket-controls', 'report.json', 'user'])  # No copy of the program
 
 
 class AzaharAutodetectTests(unittest.TestCase):

@@ -86,6 +86,9 @@ class LibraryTest(unittest.TestCase):
         if compat.WINDOWS:
             environment = {"XDG_DATA_HOME": "relative", "LOCALAPPDATA": str(self.base)}
             expected = self.base / "RetroPocket"
+        elif compat.MACOS:
+            environment = {"XDG_DATA_HOME": "relative", "HOME": str(self.base)}
+            expected = self.base / "Library" / "Application Support" / "RetroPocket"
         else:
             environment = {"XDG_DATA_HOME": "relative", "HOME": str(self.base)}
             expected = self.base / ".local" / "share" / "retro-pocket"

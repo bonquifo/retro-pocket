@@ -7,6 +7,7 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
+import ds
 import library
 from library import Library
 import support
@@ -175,7 +176,7 @@ class ZeroCopyLaunchTests(unittest.TestCase):
 
         exe = support.program(self.base / 'desmume',
                               'import os, sys\nprint(os.stat(sys.argv[1]).st_ino, sys.argv[1])\n')
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': str(exe)}), \
+        with patch.dict(os.environ, {ds.OVERRIDE_ENV: str(exe)}), \
                 patch.object(Library, 'load', side_effect=AssertionError('ROM loaded into memory')):
             self.assertEqual(emulator_worker.run_game(self.lib, 'nds-test'), 0)
         placed = (self.base / 'data' / 'saves' / 'nds-test' / 'nds-test.nds').resolve()
@@ -194,7 +195,7 @@ class ZeroCopyLaunchTests(unittest.TestCase):
     def test_launchers_reject_a_path_not_at_the_stable_name(self):
         from ds import launch
 
-        with patch.dict(os.environ, {'RETRO_POCKET_DESMUME': sys.executable}):
+        with patch.dict(os.environ, {ds.OVERRIDE_ENV: sys.executable}):
             with self.assertRaisesRegex(ValueError, 'placed'):
                 launch(self.rom, 'nds-test', self.base / 'saves')
 

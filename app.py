@@ -702,9 +702,9 @@ class App:
             pg.quit()
 
 
-def _windowless_output(library):
-    """Started without a console (pythonw.exe): keep diagnostics in the data directory."""
-    if sys.stderr is not None:
+def _windowless_output(library, windowless):
+    """Started without a console or terminal: keep diagnostics in the data directory."""
+    if not windowless:
         return
     try:
         logs = library.root / 'logs'
@@ -716,16 +716,28 @@ def _windowless_output(library):
 
 def _report(message, windowless):
     print(message, file=sys.stderr)
-    if compat.WINDOWS and windowless:
+    if not windowless:
+        return
+    # No console to read it in: show it.
+    if compat.WINDOWS:
         import ctypes
-        try:  # No console to read it in: show it.
+        try:
             ctypes.windll.user32.MessageBoxW(None, message, 'Retro Pocket', 0x10)
         except OSError:
+            pass
+    elif compat.MACOS:
+        import subprocess
+        script = ('on run argv', 'display alert "Retro Pocket" message (item 1 of argv) as critical', 'end run')
+        try:
+            subprocess.run(['/usr/bin/osascript', *(arg for line in script for arg in ('-e', line)), message],
+                           stdin=subprocess.DEVNULL, capture_output=True, timeout=600)
+        except (OSError, subprocess.SubprocessError):
             pass
 
 
 def main():
-    windowless = sys.stderr is None  # pythonw.exe, as the Windows launcher starts it
+    # pythonw.exe (the Windows launcher), or the macOS app, which says so.
+    windowless = sys.stderr is None or os.environ.get('RETRO_POCKET_WINDOWLESS') == '1'
     parser = argparse.ArgumentParser(description='Retro Pocket: a Pokémon and Mario game library')
     parser.add_argument('--core', help='trusted local mGBA libretro core (mgba_libretro.so or .dll)')
     parser.add_argument('--data-dir', type=Path, help='override the default data directory')
@@ -738,7 +750,7 @@ def main():
     try:
         from library import Library, default_rom_dir
         library = Library(root=args.data_dir, rom_dir=args.roms_dir or default_rom_dir())
-        _windowless_output(library)
+        _windowless_output(library, windowless)
         App(library, args.core, show_all=args.all, download_covers=not args.no_cover_downloads).run()
     except (OSError, ValueError, pg.error) as e:
         _report(f'Retro Pocket: {e}', windowless)

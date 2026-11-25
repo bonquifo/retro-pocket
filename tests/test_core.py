@@ -94,7 +94,7 @@ class CoreTests(unittest.TestCase):
     def setUp(self):
         lib = installed_core()
         if lib is None:
-            self.skipTest('Install libretro-mgba (Linux) or run tools/setup_windows.py, or set MGBA_LIBRETRO')
+            self.skipTest('Install libretro-mgba (Linux) or run setup.cmd / setup.command, or set MGBA_LIBRETRO')
         self.retro_path = str(lib)
         scratch = self.enterContext(tempfile.TemporaryDirectory())
         self.save_dir = Path(scratch) / 'saves'

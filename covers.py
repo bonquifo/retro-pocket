@@ -24,6 +24,7 @@ import urllib.request
 
 import pygame as pg
 
+import compat
 from viewport import fit_rect
 
 IMAGE_SUFFIXES = ('.png', '.jpg', '.jpeg')
@@ -186,7 +187,8 @@ class BoxArt:
         self.cache_dir = Path(cache_dir)
         self.enabled = enabled
         self._open = opener or (lambda url: urllib.request.urlopen(
-            urllib.request.Request(url, headers={'User-Agent': 'retro-pocket'}), timeout=20))
+            urllib.request.Request(url, headers={'User-Agent': 'retro-pocket'}), timeout=20,
+            context=compat.https_context()))
         try:
             entries = json.loads(Path(index_path).read_text(encoding='utf-8'))['covers']
         except (OSError, ValueError, KeyError, TypeError):

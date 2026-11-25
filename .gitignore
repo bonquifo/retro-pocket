@@ -1,8 +1,12 @@
 __pycache__/
 .venv/
 *.pyc
-# Emulators downloaded by tools/setup_windows.py
+# Emulators downloaded by tools/install_emulators.py, the standalone Python
+# setup.command uses on macOS, and the macOS app builds
 emulators/
+.python/
+build/
+dist/
 # Game dumps are the owner's own and never part of the repository; keep the folder.
 roms/*
 !roms/.gitkeep

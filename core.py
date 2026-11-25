@@ -10,7 +10,7 @@ import tempfile
 from threading import Lock
 import time
 
-from compat import EMULATORS, WINDOWS, program_files
+from compat import EMULATORS, MACOS, WINDOWS, applications, data_home, program_files
 
 if WINDOWS:
     from _ctypes import FreeLibrary as _unload
@@ -70,6 +70,10 @@ def _installed_cores():
         roots += [Path(r'C:\RetroArch-Win64\cores'),
                   *(root / 'Steam' / 'steamapps' / 'common' / 'RetroArch' / 'cores' for root in program_files())]
         return [root / 'mgba_libretro.dll' for root in roots]
+    if MACOS:
+        roots = [EMULATORS / 'mgba', data_home() / 'RetroArch' / 'cores',
+                 *(apps / 'RetroArch.app' / 'Contents' / 'Resources' / 'cores' for apps in applications())]
+        return [root / 'mgba_libretro.dylib' for root in roots]
     return (sorted(Path('/usr/lib').glob('*/libretro/mgba_libretro.so')) +
             [Path('/usr/lib/libretro/mgba_libretro.so')])
 
@@ -81,8 +85,11 @@ def locate_core(path=None):
         if candidate.is_file():
             return str(candidate.resolve())
     if WINDOWS:
-        raise OSError('mGBA core not found. Run tools\\setup_windows.py, or pass '
+        raise OSError('mGBA core not found. Run setup.cmd, or pass '
                       '--core C:\\path\\to\\mgba_libretro.dll.')
+    if MACOS:
+        raise OSError('mGBA core not found. Run setup.command, or pass '
+                      '--core /path/to/mgba_libretro.dylib.')
     raise OSError('mGBA core not found. Install libretro-mgba or pass --core /path/to/mgba_libretro.so.')
 
 

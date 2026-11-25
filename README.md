@@ -1,6 +1,6 @@
 # Retro Pocket
 
-A game library and player for Pokémon and Mario games, for Windows and Linux.
+A game library and player for Pokémon and Mario games, for Linux, Windows and macOS (Apple Silicon and Intel).
 
 The catalogue opens on **your games**: everything found in your ROM folder, shown as a grid of covers grouped by system (Game Boy, Game Boy Color, Game Boy Advance, Pokémon mini, DS, 3DS, Nintendo 64, GameCube). Click **Full catalogue** or press C to also see every catalogued release, including ones you don't have yet (marked *Not owned*) and ones that can't be played here (*Not playable*). Start with `--all` to open on the full catalogue.
 
@@ -47,6 +47,41 @@ Some things work differently on Windows:
 - **A copy of the emulator for each game.** Windows DeSmuME and Azahar keep their settings next to their program, and they have no option to keep them elsewhere. Each DS and 3DS game therefore runs its own copy of the emulator, placed in its save folder and made of hard links, so it takes no disk space. A real copy is made only when the data folder is on a different drive from `emulators\`. That is what keeps each game's settings and saves separate, as on Linux. After you update an emulator, each game's copy is refreshed the next time it starts.
 - **Display scaling.** Retro Pocket's windows draw at the display's full resolution under Windows display scaling (125%, 150% and so on). To have Windows stretch them instead, set `SDL_WINDOWS_DPI_AWARENESS=unaware`.
 - **Force close** ends the game's whole process tree: the worker, Retro Pocket's GB/GBA player, and the emulator.
+
+## Run on macOS
+
+Retro Pocket for macOS comes as two apps:
+
+| App | For | Needs |
+| --- | --- | --- |
+| **Retro Pocket (Apple Silicon)** | Macs with an M-series chip | macOS 11 or later |
+| **Retro Pocket (Intel)** | Intel Macs (also runs on Apple Silicon under Rosetta) | macOS 10.15 or later |
+
+Each app is self-contained: Python, pygame-ce and the emulators for that kind of Mac are inside it. Nothing needs to be installed first.
+
+| Systems | Emulator in the app |
+| --- | --- |
+| Game Boy, Game Boy Color, Game Boy Advance | mGBA libretro core, built for that Mac, played in Retro Pocket's own window |
+| Nintendo DS | melonDS 1.1 (universal) |
+| Nintendo 64 | ares v148 (universal; macOS 11 or later) |
+| Nintendo 3DS | Azahar 2127.0.1, built for that Mac (macOS 13.4 or later) |
+
+1. Build the apps on any computer with this folder and Python 3.11 or newer: `python tools/build_macos.py` (on Windows, `.venv\Scripts\python tools\build_macos.py`). This writes `dist/Retro-Pocket-macOS-Apple-Silicon.zip` and `dist/Retro-Pocket-macOS-Intel.zip`, about 230 MB each, and checks every program inside them. The archives are pinned by size and SHA-256 like the Windows ones; the mGBA core is the libretro buildbot's current build. `--arch arm64` or `--arch x86_64` builds just one.
+2. Copy the zip to the Mac, double-click it, and move the app to Applications.
+3. The apps aren't signed with an Apple developer ID, so macOS blocks the first start. Open the app once, then go to System Settings → Privacy & Security and choose **Open Anyway** (on macOS 14 and earlier, Control-click the app and choose Open). After that it starts normally. The app then lifts macOS's download quarantine from the emulators inside it, so they don't each ask too.
+4. Put your dumps in **`~/Retro Pocket/roms`** (in your home folder; the app creates it). Library data, saves and logs are in `~/Library/Application Support/RetroPocket`, and the library's messages go to `logs/retro-pocket.log` there.
+
+To run from this folder instead (for development), double-click **`setup.command`**. It downloads a pinned Python for this Mac into `.python`, creates `.venv`, installs pygame-ce and puts the emulators in `emulators/`. Then double-click **`RetroPocket.command`**, which runs the library from Terminal with its messages shown; dumps go in `roms/` as on the other systems. As on Windows, `RETRO_POCKET_CORE`, `RETRO_POCKET_MELONDS`, `RETRO_POCKET_ARES`, `RETRO_POCKET_AZAHAR`, `RETRO_POCKET_DOLPHIN` and `RETRO_POCKET_POKEMINI` can name an emulator elsewhere (an `.app` or the program inside it). Without them, `emulators/` and `/Applications` are searched.
+
+GameCube, Wii and Pokémon mini emulators are not included. Dolphin is found as `Dolphin.app` in `/Applications`. PokeMini has no macOS release; a build of your own is found in `emulators/pokemini/` or Homebrew's `bin` folder.
+
+Some things work differently on macOS:
+
+- **Nintendo DS runs in melonDS**, not DeSmuME, because DeSmuME's macOS app can't be started on a game and supervised. Retro Pocket gives melonDS the same keys (melonDS has no keyboard layout of its own). Each game runs its own linked copy of melonDS with its settings in `saves/<game>/melonds/portable/`; Config → Input changes apply to that game. Saves are melonDS `.sav` files next to the game in `saves/<game>/`, not DeSmuME `.dsv` files; converting between them isn't covered here. View → Screen size changes the window size.
+- **Nintendo 64 runs in ares**: Mupen64Plus has no macOS build that works without Homebrew. The keys are the same as on the other systems, Esc quits as with Mupen64Plus, and each game has its own ares settings (`saves/<game>/ares/settings.bml`). ares doesn't set up a gamepad automatically: assign one under Settings → Input, and it is kept for that game. Its saves are ares's own files next to the game.
+- **Nintendo 3DS**: each game's Azahar data is in `saves/<game>/azahar/<game>/user/`, as on Windows.
+- **Full screen** uses macOS's own full screen: Control-Command-F or the full-screen button (F11 shows the desktop on a Mac).
+- **Leaving a game**: Esc in Game Boy, Game Boy Advance and N64 games; Command-Q in melonDS and Azahar (Azahar asks to confirm).
 
 ## Run on Ubuntu
 
@@ -101,7 +136,7 @@ Game Boy, Game Boy Color, Game Boy Advance, Nintendo DS, Nintendo 3DS and Ninten
 | ZL / ZR (3DS) | 1 / 2 | 3DS C-stick and N64 C buttons: I / J / K / L |
 | Start / Select | Enter / Right Shift | Azahar can't tell the Shift keys apart, so either Shift works as Select on 3DS. The N64 has no Select |
 | Touchscreen (DS, 3DS) | Mouse on the lower screen | |
-| Leave the game | Esc | N64, and DS on Linux: Esc quits the emulator. DS on Windows: close DeSmuME's window. 3DS: close the window or press Ctrl+Q, then choose Yes when Azahar asks to exit |
+| Leave the game | Esc | N64, and DS on Linux: Esc quits the emulator. DS on Windows: close DeSmuME's window. DS on macOS: Command-Q. 3DS: close the window or press Ctrl+Q (Command-Q on a Mac), then choose Yes when Azahar asks to exit |
 
 The integrated Game Boy player also has clickable on-screen buttons, and the middle and right mouse buttons press A and B.
 
@@ -134,14 +169,14 @@ Use the game's own save menu. Every save is kept per game under `saves/<game>/` 
 
 Save states (the emulators' own snapshot features) are not managed by Retro Pocket.
 
-### Moving saves between Linux and Windows
+### Moving saves between Linux, Windows and macOS
 
-The save files have the same formats on both systems. Copy them from `~/.local/share/retro-pocket/saves/` on Linux to `%LOCALAPPDATA%\RetroPocket\saves\` on Windows (or back), with the game closed:
+Linux and Windows use the same emulators, so their save files have the same formats. Copy them from `~/.local/share/retro-pocket/saves/` on Linux to `%LOCALAPPDATA%\RetroPocket\saves\` on Windows (or back), with the game closed. On macOS (`~/Library/Application Support/RetroPocket/saves/`) the Game Boy, Game Boy Advance and 3DS saves are the same files; DS and N64 saves come from different emulators there (see Run on macOS).
 
 - Game Boy, Game Boy Color, Game Boy Advance: `<game>/cartridge.sav`.
 - Nintendo DS: `<game>/desmume/<game>.dsv`.
 - Nintendo 64: the `.eep` (or `.sra`, `.fla`, `.mpk`) file in `<game>/`.
-- Nintendo 3DS: the Azahar data folders. Linux keeps them in `<game>/azahar/<game>/data/azahar-emu/`, Windows in `<game>\azahar\<game>\user\`. Copy the `sdmc` and `nand` folders between them.
+- Nintendo 3DS: the Azahar data folders. Linux keeps them in `<game>/azahar/<game>/data/azahar-emu/`, Windows and macOS in `<game>/azahar/<game>/user/`. Copy the `sdmc` and `nand` folders between them.
 
 Emulators run in separate processes, so an emulator crash does not close the library. Close an emulator normally to let it finish saving; closing the library does not force the game to quit. If an emulator freezes, use **Force close** and confirm the warning about unsaved progress. If a game fails to launch or crashes, use **Copy log path** to locate the diagnostic log. Saves and launch logs are kept separately under `saves/` and `logs/` inside the app's data directory.
 
@@ -156,4 +191,4 @@ To run the tests:
 .venv\Scripts\python -m unittest discover -s tests -v    # Windows
 ```
 
-On Windows, `tests\smoke_windows.py OUTPUT_DIR [GAME_ID ...]` starts real games from your ROM folder the way Play does, captures each emulator's window to a PNG and closes it again.
+On Windows, `tests\smoke_windows.py OUTPUT_DIR [GAME_ID ...]` starts real games from your ROM folder the way Play does, captures each emulator's window to a PNG and closes it again. On macOS, `.venv/bin/python tests/smoke_macos.py [GAME_ID ...]` does the same for this folder's setup, checking that each emulator opens a window and keeps running; with `--app "/Applications/Retro Pocket (Intel).app"` it tests a built app with its own Python and emulators (the Intel app under Rosetta on an Apple Silicon Mac).

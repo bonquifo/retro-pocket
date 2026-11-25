@@ -79,6 +79,12 @@ def open_window(title, design):
     return window
 
 
+def _mac_fullscreen_shortcut(event):
+    """Control-Command-F, macOS's full-screen shortcut (F11 shows the desktop there)."""
+    mods = getattr(event, 'mod', 0)
+    return compat.MACOS and event.key == pg.K_f and mods & pg.KMOD_META and mods & pg.KMOD_CTRL
+
+
 EDGE, GRIP = 6, 18       # Window coordinates: resize border width, bottom-right grip size
 DOUBLE_CLICK = 0.4       # Seconds between top-bar clicks that toggle full screen
 _RESIZE_CURSORS = {
@@ -112,6 +118,15 @@ class WindowFrame:
     def toggle_fullscreen(self):
         window = self.window
         self._drag = None
+        if pg.display.get_driver() == 'cocoa':
+            # macOS has a window manager with its own full screen (a Space of its own).
+            if self._restore is None:
+                self._restore = 'native'
+                window.set_fullscreen(desktop=True)
+            else:
+                self._restore = None
+                window.set_windowed()
+            return
         if self._restore is None:
             self._restore = (window.position, window.size, window.borderless)
             window.borderless = True
@@ -142,7 +157,7 @@ class WindowFrame:
         ``draggable(pos)`` says whether a window-coordinate point is on the
         top bar (and not on one of its buttons).
         """
-        if event.type == pg.KEYDOWN and event.key == pg.K_F11:
+        if event.type == pg.KEYDOWN and (event.key == pg.K_F11 or _mac_fullscreen_shortcut(event)):
             self.toggle_fullscreen()
             return True
         if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:

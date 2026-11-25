@@ -106,6 +106,30 @@ class CompatTest(unittest.TestCase):
         self.assertIsInstance(compat.gamepad_connected(), bool)
         self.assertGreaterEqual(compat.system_scale(), 1.0)
 
+    def test_macos_app_bundles_resolve_to_their_program(self):
+        import plistlib
+
+        bundle = self.root / 'Azahar.app'
+        (bundle / 'Contents' / 'MacOS').mkdir(parents=True)
+        (bundle / 'Contents' / 'Info.plist').write_bytes(plistlib.dumps({'CFBundleExecutable': 'azahar'}))
+        program = bundle / 'Contents' / 'MacOS' / 'azahar'
+        self.assertEqual(compat.app_executable(bundle), program)
+        self.assertEqual(compat.app_executable(program), program)  # Already a program
+        self.assertEqual(compat.bundle_of(program), bundle)
+        self.assertIsNone(compat.bundle_of(self.root / 'emulator'))
+        (bundle / 'Contents' / 'Info.plist').write_bytes(b'not a plist')
+        self.assertEqual(compat.app_executable(bundle), bundle / 'Contents' / 'MacOS' / 'Azahar')
+        self.assertFalse(compat.is_executable(bundle))  # The folder is not the program
+
+    def test_data_home_follows_each_platforms_convention(self):
+        home = compat.data_home()
+        if WINDOWS:
+            self.assertEqual(home.name, 'Local')
+        elif support.MACOS:
+            self.assertEqual(home, Path.home() / 'Library' / 'Application Support')
+        else:
+            self.assertEqual(home, Path.home() / '.local' / 'share')
+
     @unittest.skipUnless(WINDOWS, 'junctions are a Windows feature')
     def test_junctions_count_as_links(self):
         target = self.root / 'target'

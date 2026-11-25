@@ -97,6 +97,18 @@ Every launch still checks the full hash of the game file. Emulator memory (DeSmu
 | Search field | Idle (placeholder and `/` hint), typing (accent border, caret) and filtered (query, match count, clear button) states rendered in the header. Unit tests: clicking a tile ends typing and keeps the filter; the clear button empties it. |
 | Note | SDL's own full screen needs a window manager (without one the X window kept its size), so full screen is a borderless window the size of the display. DS, N64 and 3DS games run in their emulators' own windows, which these controls do not change. |
 
+## macOS port (2026-11-25, prepared on Windows; not yet run on a Mac)
+
+The macOS code and both apps were built and checked on the Windows PC; nothing has run on macOS yet. Choices were made from the emulators' sources and release files:
+
+| Check | Result |
+| --- | --- |
+| Emulator releases | melonDS 1.1 (universal, signed, no outside libraries), ares v148 (universal, signed), Azahar 2127.0.1 (arm64 and x86_64 builds, signed, macOS 13.4+), the buildbot mGBA core (arm64 signed; x86_64). Mupen64Plus 2.6.0's macOS bundle was rejected: Intel only, unsigned, and it loads SDL2, libpng, FreeType and libsamplerate from a Homebrew install in `/usr/local/opt`. |
+| Emulator behaviour, from their sources | melonDS reads its settings from a `portable` folder beside `melonDS.app` and starts with no keyboard mapping; on macOS, Qt reports arrow keys with the keypad modifier and melonDS marks the right Shift key with bit 31. ares takes `--settings-file`, has no default key bindings, names keys by their index in its Quartz keyboard list, and writes saves beside the game. Azahar for macOS uses a `user` folder in its working directory (portable mode). |
+| Apps | `tools/build_macos.py` built both zips (238 MB and 226 MB) and its checks passed: required files and permissions, every Mach-O (about 160 per app) contains the app's architecture, all arm64 code is signed, every symlink resolves, bytecode matches Python 3.12. Python 3.12.16 (python-build-standalone) has libpython and SSL built in, so it runs from `Contents/MacOS`; no extension links the separate libpython. pygame-ce 2.5.7's wheel is universal2 and signed. |
+| Unit tests (on Windows) | 174 run, 165 passed, 9 skipped. The melonDS, ares and Azahar macOS code paths ran with stand-in programs, including a fake `melonDS.app` bundle, and with the platform switched to macOS for the DS, N64 and 3DS launch paths. |
+| To check on the Mac | `tests/smoke_macos.py` (from `setup.command`) and `tests/smoke_macos.py --app` for each app: windows open, games keep running, saves land in `saves/<game>/`. Then by hand: the first-open approval, keys in melonDS (arrows with the keypad modifier, right Shift), ares, Azahar; whether macOS asks for Input Monitoring for ares; the library window on a Retina display; Control-Command-F full screen. |
+
 ## Windows port (2026-11-25, Windows 11, Python 3.12.10, pygame-ce 2.5.7 / SDL 2.32.10, 3840×2160 display at 150%)
 
 Emulators installed by `setup.cmd`: the libretro buildbot's mGBA core (GBA savestate format v11), DeSmuME 0.9.13 x64, Mupen64Plus 2.6.0 and Azahar 2127.0.1 (MSVC build).

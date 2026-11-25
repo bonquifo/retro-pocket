@@ -1,1 +1,3 @@
 pygame-ce==2.5.7
+# Python on macOS doesn't use the system's certificate store: certifi's for box art and setup downloads.
+certifi==2026.11.20; sys_platform == "darwin"

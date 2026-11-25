@@ -16,6 +16,13 @@ if compat.WINDOWS:
     _INSTALLED_EXECUTABLES = tuple(
         directory / 'PokeMini.exe'
         for directory in (compat.EMULATORS / 'pokemini', *(root / 'PokeMini' for root in compat.program_files())))
+elif compat.MACOS:
+    # No official macOS build: a native SDL2 build in emulators/pokemini or on Homebrew's prefix.
+    _INSTALLED_EXECUTABLES = tuple(
+        Path(directory) / name
+        for directory in (compat.EMULATORS / 'pokemini', '/opt/homebrew/bin', '/usr/local/bin')
+        for name in ('PokeMini', 'pokemini')
+    )
 else:
     _INSTALLED_EXECUTABLES = tuple(
         Path(directory) / name

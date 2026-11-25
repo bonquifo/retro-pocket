@@ -66,14 +66,13 @@ def _file_digests(path, algorithms):
 
 def _default_root():
     """$XDG_DATA_HOME/retro-pocket if set; else %LOCALAPPDATA%\\RetroPocket on Windows,
-    ~/.local/share/retro-pocket elsewhere."""
+    ~/Library/Application Support/RetroPocket on macOS, ~/.local/share/retro-pocket on Linux."""
     xdg = Path(os.environ.get("XDG_DATA_HOME", ""))
     if xdg.is_absolute():
         return xdg / "retro-pocket"
-    if compat.WINDOWS:
-        local = Path(os.environ.get("LOCALAPPDATA", ""))
-        return (local if local.is_absolute() else Path.home() / "AppData" / "Local") / "RetroPocket"
-    return Path.home() / ".local" / "share" / "retro-pocket"
+    if compat.WINDOWS or compat.MACOS:
+        return compat.data_home() / "RetroPocket"
+    return compat.data_home() / "retro-pocket"
 
 
 def _variants(entries, max_size):

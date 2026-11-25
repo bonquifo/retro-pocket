@@ -1,7 +1,7 @@
 @echo off
 rem Retro Pocket for Windows: create the Python environment, install pygame-ce
-rem and download the emulators into emulators\ (see tools\setup_windows.py).
-rem Run it again at any time to repair or update. Arguments go to setup_windows.py.
+rem and download the emulators into emulators\ (see tools\install_emulators.py).
+rem Run it again at any time to repair or update. Arguments go to install_emulators.py.
 setlocal
 cd /d "%~dp0"
 
@@ -24,7 +24,7 @@ echo Creating the Python environment with %PY% ...
 
 :packages
 ".venv\Scripts\python.exe" -m pip install --disable-pip-version-check -q -r requirements.txt || goto :fail
-".venv\Scripts\python.exe" tools\setup_windows.py %* || goto :fail
+".venv\Scripts\python.exe" tools\install_emulators.py %* || goto :fail
 echo.
 echo Setup complete. Put your game dumps in the roms folder and start "RetroPocket.cmd".
 exit /b 0

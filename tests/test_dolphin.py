@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 import support
-from support import WINDOWS
+from support import LINUX, MACOS, WINDOWS
 
 # A Dolphin stand-in: frontend option, --user DIR, --exec ROM; records each run in DIR.
 STAND_IN = r'''
@@ -24,7 +24,7 @@ with open(Path(args[2]) / 'probe', 'a') as probe:
 
 
 class DolphinLaunchTests(unittest.TestCase):
-    @unittest.skipIf(WINDOWS, 'the native X11 frontend is Linux only')
+    @unittest.skipUnless(LINUX, 'the native X11 frontend is Linux only')
     def test_x11_distro_frontend_uses_nogui_arguments(self):
         from dolphin_backend import launch
 
@@ -69,7 +69,8 @@ class DolphinLaunchTests(unittest.TestCase):
         self.assertIn('Buttons/A = X | `Click 1`', config.read_text())
         self.assertIn('D-Pad/Up = Up', config.read_text())
         # The keyboard and mouse device as Dolphin names it on this platform.
-        device = 'DInput/0/Keyboard Mouse' if WINDOWS else 'XInput2/0/Virtual core pointer'
+        device = ('DInput/0/Keyboard Mouse' if WINDOWS else 'Quartz/0/Keyboard & Mouse' if MACOS
+                  else 'XInput2/0/Virtual core pointer')
         self.assertIn(f'Device = {device}\n', config.read_text())
         config.write_text('[Wiimote1]\nButtons/A = P\n')
         self.assertEqual(launch(self.rom, 'wii-battle-revolution', self.saves).wait(timeout=10), 0)
@@ -100,7 +101,7 @@ class DolphinLaunchTests(unittest.TestCase):
         support.decoy(self.root / ('Dolphin' if WINDOWS else 'dolphin-emu'), self.executable)
         with patch.dict(os.environ, support.minimal_env(PATH=self.root, EXPECTED_ROM=self.rom), clear=True):
             with patch('dolphin_backend._INSTALLED_EXECUTABLES', ()):
-                hint = 'emulators.dolphin' if WINDOWS else 'install dolphin-emu'
+                hint = 'emulators.dolphin' if WINDOWS else 'Dolphin.app' if MACOS else 'install dolphin-emu'
                 with self.assertRaisesRegex(FileNotFoundError, hint):
                     launch(self.rom, 'one', self.saves)
             with patch('dolphin_backend._INSTALLED_EXECUTABLES', (self.root / 'missing', self.executable)):
