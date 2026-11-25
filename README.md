@@ -6,7 +6,7 @@ A game library and player for Pokémon and Mario games, for Linux, Windows and m
 
 ## Downloads
 
-Every push to `main` builds and checks all four versions on GitHub Actions. Download them from the latest successful run on the [Actions page](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml), under **Artifacts**:
+Download the latest version from the [Releases page](https://github.com/bonquifo/retro-pocket/releases/latest). Every push to `main` also builds and checks all four versions on GitHub Actions; those builds are under **Artifacts** on each run of the [Actions page](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml) for two weeks. To publish a release, push a version tag (`git tag v1.2.3`, then `git push origin v1.2.3`): the same workflow builds and checks all four versions from that commit and attaches them to a new release if every one passes.
 
 | Version | File | To start |
 | --- | --- | --- |
