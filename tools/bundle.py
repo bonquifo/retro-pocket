@@ -46,6 +46,43 @@ def version():
     return '0.0.0'
 
 
+def pinned(package):
+    """The version requirements.txt pins for ``package`` (the one list Dependabot keeps current)."""
+    for line in (ROOT / 'requirements.txt').read_text(encoding='utf-8').splitlines():
+        requirement = line.split('#', 1)[0].split(';', 1)[0].strip()
+        name, _, version = requirement.partition('==')
+        if name.strip().lower() == package.lower() and version.strip():
+            return version.strip()
+    raise ValueError(f'requirements.txt pins no version of {package}')
+
+
+def pypi_wheel(package, patterns):
+    """(url, size, sha256) of the pinned version's wheel on PyPI, the first file matching ``patterns``.
+
+    The SHA-256 is PyPI's own (what pip checks), so the download is verified
+    as pip would verify it.
+    """
+    import fnmatch
+    import urllib.request
+    version = pinned(package)
+    url = f'https://pypi.org/pypi/{package}/{version}/json'
+    request = urllib.request.Request(url, headers={'User-Agent': 'retro-pocket-build'})
+    context = None
+    try:
+        import certifi
+        import ssl
+        context = ssl.create_default_context(cafile=certifi.where())
+    except ImportError:
+        pass
+    with urllib.request.urlopen(request, timeout=60, context=context) as response:
+        files = json.load(response)['urls']
+    for pattern in patterns:
+        for file in files:
+            if fnmatch.fnmatchcase(file['filename'], pattern) and file['packagetype'] == 'bdist_wheel':
+                return file['url'], file['size'], file['digests']['sha256']
+    raise ValueError(f'{package} {version} has no wheel on PyPI matching {patterns}')
+
+
 def build_info(kind, asset):
     """build-info.json for a build: what it is, and which release file updates it."""
     commit = ''

@@ -28,7 +28,7 @@ The Windows and macOS builds include these programs unchanged, each under its ow
 | melonDS 1.1 | macOS | GPL 3.0 | [melonDS-emu/melonDS](https://github.com/melonDS-emu/melonDS) |
 | ares v148 | macOS | ISC | [ares-emulator/ares](https://github.com/ares-emulator/ares) |
 | CPython 3.12 (python-build-standalone) | Windows, macOS | PSF | [astral-sh/python-build-standalone](https://github.com/astral-sh/python-build-standalone) |
-| pygame-ce 2.5.7 | all | LGPL 2.1 | [pygame-community/pygame-ce](https://github.com/pygame-community/pygame-ce) |
+| pygame-ce @PYGAME_VERSION@ | all | LGPL 2.1 | [pygame-community/pygame-ce](https://github.com/pygame-community/pygame-ce) |
 | certifi | macOS | MPL 2.0 | [certifi/python-certifi](https://github.com/certifi/python-certifi) |
 
 The one change: Azahar's macOS release packs its Qt frameworks without their symbolic links, so the build puts the standard links back (the files themselves are unchanged).

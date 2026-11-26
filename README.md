@@ -217,7 +217,7 @@ Updates trust GitHub and this repository: whoever can publish a release here can
 3. unpacks the build and checks it from the inside with its own Python (`tools/verify_build.py`);
 4. installs an older copy of the build and lets it update itself to the new one, as a user's copy would (`tools/check_update.py`).
 
-The builds are kept as artifacts for two weeks. Dependabot opens weekly pull requests for newer GitHub Actions and Python packages, and each one goes through the same checks.
+The builds are kept as artifacts for two weeks. Dependabot opens weekly pull requests for newer GitHub Actions and Python packages, and each one goes through the same checks. `requirements.txt` is the one place Python packages are pinned: the setup scripts install from it, the Windows and macOS builds fetch the same versions' wheels from PyPI (checked against PyPI's SHA-256, as pip checks them), and the checks fail if a build carries any other pygame-ce. Merging a Dependabot bump is all it takes to ship a new version in the next release.
 
 To release a version, either:
 

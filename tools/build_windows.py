@@ -32,11 +32,8 @@ ZIP_NAME = 'Retro-Pocket-Windows.zip'
 PYTHON = ('https://github.com/astral-sh/python-build-standalone/releases/download/20261124/'
           'cpython-3.12.16%2B20261124-x86_64-pc-windows-msvc-install_only.tar.gz', 47497711,
           '8152ff5b6c6c044ddbbaa3531dda59cb9ce5bd6cb670d4c9ac2e3ab91afa8778')
-WHEELS = [
-    ('https://files.pythonhosted.org/packages/1f/d4/43b006affa13e2f4572aa28a0d1f64c91c330d289c30a022b5416245714c/'
-     'pygame_ce-2.5.7-cp312-cp312-win_amd64.whl', 10414958,
-     'b6b7eec2779fac11ed265a18ab926b3829654120a5c9a07c36eeedeb012b8c3c'),
-]
+# Python packages, at the versions requirements.txt pins (resolved on PyPI at build time).
+WHEELS = [('pygame-ce', ['*-cp312-cp312-win_amd64.whl'])]
 SITE_PACKAGES = 'python/Lib/site-packages/'
 # Parts of the standalone Python Retro Pocket doesn't use.
 PYTHON_EXCLUDE = ('include/', 'libs/', 'Scripts/', 'tcl/', 'Lib/test/', 'Lib/idlelib/', 'Lib/turtledemo/',
@@ -93,7 +90,8 @@ def build(output: Path):
     zip_path = output / ZIP_NAME
     print(f'{FOLDER} {bundle.version()} (Windows):')
     python, _ = emulators.cached(*PYTHON, bundle.CACHE)
-    wheels = [emulators.cached(url, size, sha256, bundle.CACHE)[0] for url, size, sha256 in WHEELS]
+    wheels = [emulators.cached(*bundle.pypi_wheel(package, patterns), bundle.CACHE)[0]
+              for package, patterns in WHEELS]
     partial = zip_path.with_name(zip_path.name + '.part')
     out = bundle.Archive(partial, FOLDER)
     try:

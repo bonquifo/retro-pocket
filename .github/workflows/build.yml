@@ -243,7 +243,11 @@ jobs:
           sha256sum * > SHA256SUMS
           cat SHA256SUMS
           cd ..
+          # The notes name the pygame-ce version requirements.txt pins (what every build carries).
+          pygame=$(python3 -c "import sys; sys.path.insert(0, 'tools'); import bundle; print(bundle.pinned('pygame-ce'))")
+          sed "s/@PYGAME_VERSION@/$pygame/g" .github/release-notes.md > "$RUNNER_TEMP/notes.md"
+          if grep -n '@[A-Z_]*@' "$RUNNER_TEMP/notes.md"; then echo 'unfilled placeholder in the release notes'; exit 1; fi
           # A tag push already made the tag; a release from the Actions tab makes it on this commit.
           gh release create "v$VERSION" dist/* --target "$GITHUB_SHA" --title "Retro Pocket $VERSION" \
-            --notes-file .github/release-notes.md --generate-notes
+            --notes-file "$RUNNER_TEMP/notes.md" --generate-notes
           echo "Published https://github.com/$GITHUB_REPOSITORY/releases/tag/v$VERSION" | tee -a "$GITHUB_STEP_SUMMARY"

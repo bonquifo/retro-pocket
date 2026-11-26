@@ -44,15 +44,10 @@ PYTHON = {
     'x86_64': (_PBS + 'cpython-3.12.16%2B20261124-x86_64-apple-darwin-install_only.tar.gz', 25113881,
                'ccce24cfd3f56f62561d2c9480fcc567ca3a9bac68450cd73e11aeb631befa1f'),
 }
-_PYPI = 'https://files.pythonhosted.org/packages/'
-WHEELS = [  # Universal (or pure Python) wheels, the same in both apps.
-    (_PYPI + '57/a7/cd305034f505bfa1a1acdafd3d86af54da14b29151a0d99f348306272773/'
-     'pygame_ce-2.5.7-cp312-cp312-macosx_10_13_universal2.whl', 17210332,
-     'dca2f8ba56bf3b4b8c73c4863d0603773403f4f66bc2fe25784ea74aee3fffc3'),
-    (_PYPI + '6d/39/5eec3296860b94ac20bb8ed807725b88f6adfab3f343df592afd975f5f86/'
-     'certifi-2026.11.20-py3-none-any.whl', 127913,
-     '7422df25243767b9877031a2248cb14d09ddac9beee846f4cef3d5c9191d488f'),
-]
+# Python packages, at the versions requirements.txt pins (resolved on PyPI at
+# build time): a universal wheel if there is one, else one for the app's architecture.
+WHEELS = [('pygame-ce', ['*-cp312-cp312-macosx_*_universal2.whl', '*-cp312-cp312-macosx_*_{arch}.whl']),
+          ('certifi', ['*-py3-none-any.whl'])]
 
 
 @dataclass(frozen=True)
@@ -253,7 +248,8 @@ def build(target: Target, output: Path):
     print(f'{app} {bundle.version()}:')
     url, size, sha256 = PYTHON[target.arch]
     python, _ = emulators.cached(url, size, sha256, CACHE)
-    wheels = [emulators.cached(url, size, sha256, CACHE)[0] for url, size, sha256 in WHEELS]
+    wheels = [emulators.cached(*bundle.pypi_wheel(package, [p.format(arch=target.arch) for p in patterns]),
+                               CACHE)[0] for package, patterns in WHEELS]
     partial = zip_path.with_name(zip_path.name + '.part')
     out = AppZip(partial, app)
     try:

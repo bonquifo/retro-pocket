@@ -31,7 +31,6 @@ import traceback
 
 TOOLS = Path(__file__).resolve().parent
 REPO = TOOLS.parent
-EXPECTED_PYGAME = '2.5.7'
 
 
 def cpu():
@@ -127,9 +126,11 @@ def main(argv=None):
         checks.run('launcher', lambda: run_program([args.launcher, '--help'], 'usage'))
 
     def window():
+        import bundle
         import pygame as pg
-        if pg.version.ver != EXPECTED_PYGAME:
-            raise RuntimeError(f'pygame-ce {pg.version.ver}, expected {EXPECTED_PYGAME}')
+        expected = bundle.pinned('pygame-ce')  # requirements.txt: what every build must carry
+        if pg.version.ver != expected:
+            raise RuntimeError(f'pygame-ce {pg.version.ver}, but requirements.txt pins {expected}')
         pg.display.init()
         pg.font.init()
         try:
