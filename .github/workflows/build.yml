@@ -5,7 +5,9 @@
 # and GitHub's machines), each version is:
 #   1. set up from source with its system's own setup script, and unit-tested;
 #   2. built, with its version from git: 1.2.0 on a release, 1.2.0-3-gabc1234
-#      three commits later (tools/build_*.py);
+#      three commits later (tools/build_*.py); the macOS apps are then signed
+#      with the Developer ID and notarized by Apple, when the repository has
+#      the secrets for it (tools/sign_macos.py);
 #   3. unpacked and checked from the inside with its own Python
 #      (tools/verify_build.py);
 #   4. updated in place by an older copy of itself, the way a user's copy
@@ -171,9 +173,12 @@ jobs:
     name: macOS ${{ matrix.label }} (${{ matrix.arch }})
     needs: prepare
     runs-on: ${{ matrix.runner }}
-    timeout-minutes: 60
+    timeout-minutes: 90
     env:
       RETRO_POCKET_VERSION: ${{ needs.prepare.outputs.version }}
+      # Signed with the Developer ID and notarized when the repository has the secrets (README:
+      # "Signing the Mac apps"). Pull requests from forks and Dependabot get no secrets: unsigned.
+      SIGN: ${{ secrets.MACOS_CERTIFICATE_P12 != '' && secrets.NOTARY_KEY != '' }}
     strategy:
       fail-fast: false
       matrix:
@@ -198,6 +203,18 @@ jobs:
         run: .venv/bin/python -m unittest discover -s tests -v
       - name: Build
         run: .venv/bin/python tools/build_macos.py --arch ${{ matrix.arch }}
+      - name: Sign with the Developer ID, notarize and staple
+        if: env.SIGN == 'true'
+        env:
+          MACOS_CERTIFICATE_P12: ${{ secrets.MACOS_CERTIFICATE_P12 }}
+          MACOS_CERTIFICATE_PASSWORD: ${{ secrets.MACOS_CERTIFICATE_PASSWORD }}
+          NOTARY_KEY: ${{ secrets.NOTARY_KEY }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: .venv/bin/python tools/sign_macos.py "dist/Retro-Pocket-macOS-${{ matrix.slug }}.zip"
+      - name: Note an unsigned release
+        if: env.SIGN != 'true' && needs.prepare.outputs.release == 'true'
+        run: echo "::warning::The ${{ matrix.label }} app is not signed (no Developer ID secrets), so macOS asks before its first start"
       - name: Check the app from the inside
         run: |
           dir="$RUNNER_TEMP/macos-build"
@@ -209,9 +226,12 @@ jobs:
           SSL_CERT_FILE="$resources/python/lib/python3.12/site-packages/certifi/cacert.pem" \
             "$app/Contents/MacOS/python3.12" tools/verify_build.py --app-dir "$resources/app" \
             --arch ${{ matrix.arch }} --network --run-emulators --window \
-            --launcher "$app/Contents/MacOS/RetroPocket" --expect-version "$RETRO_POCKET_VERSION"
+            --launcher "$app/Contents/MacOS/RetroPocket" --expect-version "$RETRO_POCKET_VERSION" \
+            ${{ env.SIGN == 'true' && '--notarized' || '' }}
       - name: Update an older copy to this build
-        run: .venv/bin/python tools/check_update.py "dist/Retro-Pocket-macOS-${{ matrix.slug }}.zip"
+        run: |
+          .venv/bin/python tools/check_update.py "dist/Retro-Pocket-macOS-${{ matrix.slug }}.zip" \
+            ${{ env.SIGN == 'true' && '--signed' || '' }}
       - uses: actions/upload-artifact@v7
         with:
           name: Retro-Pocket-macOS-${{ matrix.slug }}

@@ -14,6 +14,8 @@ finish and checks that:
   - the installation now is the new version, and starts (--version)
   - the ROM folder (and Linux's Python environment) came along
   - the helper left no staging or old folders behind and logged no failure
+  - with --signed (macOS): the updated app's Developer ID signature and
+    stapled notarization ticket are intact, as macOS checks them
 
 CI runs it on every build of all four versions.
 """
@@ -55,6 +57,8 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__.split('\n')[0])
     parser.add_argument('archive', type=Path)
     parser.add_argument('--timeout', type=int, default=600, help='seconds to wait for the helper')
+    parser.add_argument('--signed', action='store_true',
+                        help="macOS: the updated app's signature and notarization ticket must hold")
     args = parser.parse_args(argv)
     archive = args.archive.resolve()
     kind = kind_of(archive)
@@ -121,8 +125,18 @@ def main(argv=None):
     version = subprocess.run(command(kind, root, '--version'), capture_output=True, text=True, timeout=120)
     if new_version not in version.stdout:
         raise SystemExit(f'the updated copy reports {version.stdout!r} {version.stderr!r}')
+    signed = ''
+    if args.signed:  # The update unpacks and moves the app itself: nothing in it may change
+        for argv, expect in ((['/usr/bin/codesign', '--verify', '--deep', '--strict', '--verbose=2', str(root)],
+                              'satisfies its Designated Requirement'),
+                             (['/usr/bin/xcrun', 'stapler', 'validate', str(root)], 'worked')):
+            result = subprocess.run(argv, capture_output=True, text=True)
+            if result.returncode or expect not in result.stdout + result.stderr:
+                raise SystemExit(f'the updated copy fails {Path(argv[0]).name} {argv[1]}:\n'
+                                 f'{(result.stdout + result.stderr).strip()[-2000:]}')
+        signed = '; signature and notarization ticket intact'
     print(f'{kind}: updated to {new_version}; {", ".join(map(str, carried)) or "nothing"} carried over; '
-          f'{version.stdout.strip()}')
+          f'{version.stdout.strip()}{signed}')
     shutil.rmtree(work, ignore_errors=True)
     return 0
 

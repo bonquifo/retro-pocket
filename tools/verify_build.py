@@ -16,6 +16,9 @@ pygame-ce and emulators, as playing a game would:
     them) and report their version or usage; on macOS, Apple's code
     signatures are checked too
   - --launcher PATH: the build's own launcher starts app.py (--help)
+  - --notarized (macOS): the app is notarized, with the ticket stapled, and
+    Gatekeeper accepts it; Python, the mGBA core and each emulator are
+    signed by the same Developer ID team, with the hardened runtime
 
 Exits 1 if any check fails. CI runs it on every build (.github/workflows).
 """
@@ -24,6 +27,7 @@ import importlib
 import os
 from pathlib import Path
 import platform
+import re
 import subprocess
 import sys
 import tempfile
@@ -74,6 +78,8 @@ def main(argv=None):
     parser.add_argument('--window', action='store_true', help="open a real window, not SDL's dummy one")
     parser.add_argument('--launcher', type=Path, help="the build's launcher, run with --help")
     parser.add_argument('--expect-version', help='the version the build must report')
+    parser.add_argument('--notarized', action='store_true',
+                        help='macOS: the app must be Developer ID-signed, notarized and stapled')
     args = parser.parse_args(argv)
 
     app_dir = args.app_dir.resolve()
@@ -184,6 +190,9 @@ def main(argv=None):
             return f'{program} ({", ".join(sorted(built_for)) or "script"})'
         checks.run(f'{system.upper()} emulator', find)
 
+    if args.notarized:
+        checks.run('Developer ID and notarization', lambda: notarization(app_dir, programs))
+
     if args.network:
         def box_art():
             import covers
@@ -202,6 +211,38 @@ def main(argv=None):
     print('\nRESULT:', f'{len(checks.failed)} failed: {", ".join(checks.failed)}' if checks.failed
           else 'all checks passed')
     return 1 if checks.failed else 0
+
+
+def notarization(app_dir: Path, programs):
+    """What macOS checks before opening a download, and what tools/sign_macos.py promises."""
+    from core import locate_core
+    app = app_dir.parents[2]  # <name>.app/Contents/Resources/app
+    if app.suffix != '.app':
+        raise RuntimeError(f'{app} is not an app')
+    run_program(['/usr/bin/codesign', '--verify', '--deep', '--strict', '--verbose=2', app],
+                'satisfies its designated requirement')
+    run_program(['/usr/bin/xcrun', 'stapler', 'validate', app], 'worked')
+    result = subprocess.run(['/usr/sbin/spctl', '--assess', '--type', 'execute', '--verbose=4', str(app)],
+                            capture_output=True, text=True)
+    verdict = result.stdout + result.stderr
+    source = next((line for line in verdict.splitlines() if line.startswith('source=')), 'no source')
+    if result.returncode or 'accepted' not in verdict:
+        raise RuntimeError(f'Gatekeeper rejects the app ({source})')
+    if 'Notarized Developer ID' not in source and 'override=security disabled' not in verdict:
+        raise RuntimeError(f'Gatekeeper accepts the app, but not as notarized ({source})')
+    teams = {}
+    for program in (Path(sys.executable), Path(locate_core()), *programs.values()):
+        details = subprocess.run(['/usr/bin/codesign', '-d', '--verbose=2', str(program)],
+                                 capture_output=True, text=True).stderr
+        team = re.search(r'^TeamIdentifier=(\S+)', details, re.M)
+        flags = re.search(r'flags=0x[0-9a-f]+\(([^)]*)\)', details)
+        if not team or team.group(1) == 'not' or not flags or 'runtime' not in flags.group(1):
+            raise RuntimeError(f'{program} is not Developer ID-signed with the hardened runtime')
+        teams[program.name] = team.group(1)
+    if len(set(teams.values())) != 1:
+        raise RuntimeError(f'signed by different teams: {teams}')
+    gatekeeper = source.split('=', 1)[-1] if 'source=' in source else 'Gatekeeper off here, ticket stapled'
+    return f'{gatekeeper}; team {next(iter(teams.values()))}, hardened runtime: {", ".join(teams)}'
 
 
 def run_emulators(checks, programs, scratch, arch):

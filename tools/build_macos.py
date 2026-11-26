@@ -16,8 +16,11 @@ Mac. Each app is self-contained:
       Resources/python/          its standard library, pygame-ce and certifi
       Resources/app/             Retro Pocket, with its emulators in emulators/
 
-Nothing in the app is signed by a developer, so macOS asks before the first
-start (see README.md). Downloads are cached in build/cache/.
+As built here, nothing in the app is signed by a developer, so macOS asks
+before the first start (see README.md). tools/sign_macos.py then signs it
+with a Developer ID and has Apple notarize it, as CI does when the
+repository has the signing secrets.
+Downloads are cached in build/cache/.
 """
 import argparse
 from dataclasses import dataclass

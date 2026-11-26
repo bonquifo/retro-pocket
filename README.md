@@ -226,6 +226,27 @@ To release a version, either:
 
 The release is published, with the four builds, a `SHA256SUMS` file and notes listing the changes, only if every check passed. Within a day, installed copies offer the update.
 
+### Signing the Mac apps
+
+With an Apple Developer Program membership, CI signs both Mac apps with your Developer ID and has Apple notarize them (`tools/sign_macos.py`), so macOS opens them without asking. Every program and library inside is signed with the hardened runtime, including the emulators. Without the secrets below, the apps are built unsigned, as are pull requests from forks and Dependabot, which get no secrets. The checks then confirm that the app is notarized with the ticket stapled, that Gatekeeper accepts it, and that the signature survives an update.
+
+1. **A Developer ID Application certificate.** On your Mac, open Keychain Access and choose **Keychain Access → Certificate Assistant → Request a Certificate From a Certificate Authority**. Enter your email, choose **Saved to disk**, and save the file. At [developer.apple.com → Certificates](https://developer.apple.com/account/resources/certificates/list), click **+**, choose **Developer ID Application**, and upload that file. Only the account holder can make one. Download the certificate and double-click it to add it to your keychain. If you already have one, it is under **My Certificates** in Keychain Access as "Developer ID Application: …".
+2. **Export it with its key.** In Keychain Access, under **My Certificates**, right-click it, choose **Export**, save it as a `.p12` file, and set a password.
+3. **An App Store Connect API key for notarization.** In [App Store Connect](https://appstoreconnect.apple.com/access/integrations/api), open **Users and Access → Integrations → App Store Connect API** (the first time, the account holder clicks **Request Access**). Under **Team Keys**, click **+** and give the key the **Developer** role. Download the `.p8` file (Apple offers it only once), and note its **Key ID** and the **Issuer ID** shown above the list.
+4. **Add five repository secrets.** On GitHub, go to the repository's **Settings → Secrets and variables → Actions → New repository secret**. In Terminal, `pbcopy` copies a file for pasting:
+
+   | Secret | Value |
+   |---|---|
+   | `MACOS_CERTIFICATE_P12` | the `.p12` in base64: `base64 -i Certificates.p12 \| pbcopy` |
+   | `MACOS_CERTIFICATE_PASSWORD` | the password from step 2 |
+   | `NOTARY_KEY` | the `.p8` file's text: `pbcopy < AuthKey_XXXXXXXXXX.p8` |
+   | `NOTARY_KEY_ID` | the Key ID |
+   | `NOTARY_ISSUER_ID` | the Issuer ID |
+
+   Then delete the `.p12` and `.p8` files from your Mac. The certificate stays in your keychain, and you can make a new key anytime.
+
+A Developer ID signature carries the certificate's name: your name, or your organization's. Anyone can read it from a downloaded app. To sign on your own Mac instead, save the notarization credentials once with `xcrun notarytool store-credentials retro-pocket`, then run `python tools/sign_macos.py dist/Retro-Pocket-macOS-Apple-Silicon.zip --identity "Developer ID Application: …" --notary-profile retro-pocket`.
+
 ## Verification and limitations
 
 Only listed variants of playable titles are accepted: every file is checked against its exact catalogued size and SHA-1 or SHA-256 digest before play. A successful digest match checks identity and integrity, not the absence of emulator bugs. Keep the distro’s emulators up to date. See `SOURCES*.md` for catalogue provenance and omissions and `QA.md` for the resize and gameplay test scope. Catalogue entries do not imply that a title was played through or that its external services still work.
