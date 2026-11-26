@@ -18,6 +18,11 @@ import updater  # noqa: E402
 WINDOWS = os.name == 'nt'
 
 
+def posix_links(folder: Path):
+    """Whether symlinks work as in a Mac app: Windows can't follow 'Versions/Current/X' (forward slashes)."""
+    return not WINDOWS and support.can_symlink(folder)
+
+
 def macho(filetype, cpu=0x0100000c):
     """A 64-bit Mach-O header (no load commands) of the given file type."""
     return struct.pack('<IIIIIIII', 0xfeedfacf, cpu, 0, filetype, 0, 0, 0, 0) + b'\0' * 64
@@ -81,7 +86,7 @@ class PlanTest(unittest.TestCase):
         self.plugin = write(self.azahar / 'Contents/PlugIns/platforms/libqcocoa.dylib', macho(6))
         self.framework = self.azahar / 'Contents/Frameworks/QtCore.framework'
         self.qtcore = write(self.framework / 'Versions/A/QtCore', macho(6))
-        if support.can_symlink(self.folder):
+        if posix_links(self.folder):
             (self.framework / 'Versions/Current').symlink_to('A', target_is_directory=True)
             (self.framework / 'QtCore').symlink_to('Versions/Current/QtCore')
         else:  # No symlinks here: the library at the framework's top instead
@@ -137,7 +142,7 @@ class ZipTest(unittest.TestCase):
         }
         for name, (data, mode) in files.items():
             write(app / name, data, mode)
-        links = support.can_symlink(folder)
+        links = posix_links(folder)
         if links:
             framework = app / 'Contents/Frameworks/Example.framework'
             write(framework / 'Versions/A/Example', macho(6))
