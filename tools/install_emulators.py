@@ -27,6 +27,7 @@ import stat
 import struct
 import sys
 import tempfile
+import time
 import urllib.request
 import zipfile
 
@@ -127,8 +128,22 @@ def _https():
         return None
 
 
-def download(url, size, target, sha256=None):
-    """Fetch ``url`` into ``target``; check its size and SHA-256 when pinned. Returns the SHA-256."""
+def download(url, size, target, sha256=None, attempts=3):
+    """Fetch ``url`` into ``target``; check its size and SHA-256 when pinned. Returns the SHA-256.
+
+    A dropped connection or short download is retried a few times, waiting longer each time.
+    """
+    for attempt in range(1, attempts + 1):
+        try:
+            return _download(url, size, target, sha256)
+        except (OSError, ValueError) as exc:
+            if attempt == attempts:
+                raise
+            print(f'  {url}: {exc}; trying again', file=sys.stderr)
+            time.sleep(5 * attempt)
+
+
+def _download(url, size, target, sha256):
     limit = (size or 512 * 1024 * 1024) + 1
     digest = hashlib.sha256()
     received = 0

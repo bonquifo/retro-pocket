@@ -12,10 +12,13 @@ import pygame as pg
 
 import compat
 import covers
+import updater
 from core import locate_core  # noqa: F401  (re-exported for callers)
 from library import DEFAULT_SERIES
 from session import EmulatorSession, exit_message
 from viewport import WindowFrame, draw_fullscreen_icon, fit_rect, open_window, render_text, surface_point
+
+__all__ = ['App', 'main', 'locate_core']  # locate_core: re-exported for callers
 
 BG, CARD, SURFACE = '#121820', '#1c2632', '#283546'
 INK, MUTED, ACCENT, DARK = '#f2f6fc', '#bac9da', '#a9ebad', '#123323'
@@ -52,7 +55,7 @@ def fold(text):
 
 
 class App:
-    def __init__(self, library, core_path=None, *, show_all=False, download_covers=False):
+    def __init__(self, library, core_path=None, *, show_all=False, download_covers=False, check_updates=False):
         self.library, self.core_path = library, core_path
         pg.display.init()
         pg.font.init()
@@ -91,6 +94,13 @@ class App:
         if self.scanning:
             self.status = LOADING
             threading.Thread(target=self.scan_roms, daemon=True).start()
+        # Newer releases, for the Windows, macOS and Linux builds (not a source checkout).
+        self.updates = updater.Updates(root, updater.installation() if root is not None else None,
+                                       enabled=check_updates)
+        self.updates.start()
+        self.update_state = self.updates.state
+        if self.updates.message and not self.scanning:
+            self.status = self.updates.message
 
     def scan_roms(self):
         # The status never names the ROM folder's location.
@@ -332,13 +342,22 @@ class App:
         self.screen.fill(BG)
         self.actions.clear()
         self.draw_library()
+        # Buttons along the bottom, right-aligned; the status line takes the rest.
+        buttons = []
         if self.session is not None:
-            label = 'Confirm force close' if self.confirm_force else 'Force close'
-            self.action(label, (645, 576, 168, 38), self.force_close)
-        elif self.last_log:
-            self.action('Copy log path', (660, 576, 153, 38), self.copy_log)
-        self.text(self.status, 28, 589, size=20, color=ACCENT,
-                  width=607 if self.last_log or self.session else W-56)
+            buttons.append(('Confirm force close' if self.confirm_force else 'Force close', self.force_close, False))
+        else:
+            if self.last_log:
+                buttons.append(('Copy log path', self.copy_log, False))
+            label = self.update_label()
+            if label:
+                buttons.append((label, self.update_action, True))
+        right = W - 27
+        for label, callback, primary in buttons:
+            width = self.fonts[23].size(label)[0] + 30
+            self.action(label, (right - width, 576, width, 38), callback, primary=primary)
+            right -= width + 8
+        self.text(self.status, 28, 589, size=20, color=ACCENT, width=right - 28 - (4 if buttons else 0))
         self.presentation = self.window.get_surface()
         self.viewport = fit_rect((W, H), self.presentation.get_size())
         # Drawing the logical screen is cheap; scaling and presenting it to a
@@ -524,6 +543,53 @@ class App:
             except pg.error:
                 self.status = f'Log: {self.last_log}'
 
+    # ----- Updates -------------------------------------------------------------
+
+    def update_label(self):
+        updates = self.updates
+        if updates.state == 'available':
+            return f'Update to {updates.release.version}'
+        if updates.state == 'ready':
+            return 'Restart to update'
+        return None
+
+    def update_action(self):
+        updates = self.updates
+        if updates.state == 'available':
+            if updates.can_install():
+                updates.install()
+                self.status = f'Downloading Retro Pocket {updates.release.version}…'
+            else:  # A read-only place (such as a system folder): the download page instead.
+                import webbrowser
+                webbrowser.open(updates.release.page)
+                self.status = (f"This copy can't update itself where it is. Retro Pocket "
+                               f'{updates.release.version} is on its release page.')
+        elif updates.state == 'ready':
+            if self.session is not None:
+                self.status = 'Close the game first, then restart to update.'
+                return
+            try:
+                updates.finish(relaunch=True)
+            except OSError as exc:
+                self.status = f'Could not start the update: {exc}'
+                return
+            self.running = False  # The helper installs the update once this window has closed.
+
+    def follow_updates(self):
+        """Show update progress in the status line as it changes."""
+        updates = self.updates
+        state = updates.state
+        if state == 'downloading':
+            self.status = f'Downloading Retro Pocket {updates.release.version}… {int(updates.progress * 100)}%'
+        elif state != self.update_state:
+            if state == 'ready':
+                self.status = f'Retro Pocket {updates.release.version} is ready: restart to finish updating.'
+            elif state == 'failed':
+                self.status = updates.message
+            elif state == 'available' and not self.status:
+                self.status = f'Retro Pocket {updates.release.version} is available.'
+        self.update_state = state
+
     def set_category(self, name):
         """Show one category; an active search filter carries over."""
         if name == self.category:
@@ -664,6 +730,7 @@ class App:
                 hit[1]()
 
     def update(self):
+        self.follow_updates()
         if self.box_art is not None:
             for game_id in self.box_art.drain():
                 self.cover_paths.pop(game_id, None)  # Its art arrived: draw it next frame.
@@ -746,15 +813,54 @@ def main():
     parser.add_argument('--all', action='store_true', help='start on the full catalogue, not just your games')
     parser.add_argument('--no-cover-downloads', action='store_true',
                         help="don't download box art; use your own pictures and generated covers")
+    parser.add_argument('--no-update-check', action='store_true',
+                        help="don't ask GitHub whether a newer version is out (also $RETRO_POCKET_NO_UPDATE_CHECK=1)")
+    parser.add_argument('--update', action='store_true',
+                        help='install the newest release now, without opening the library, and exit')
+    parser.add_argument('--version', action='store_true', help='print the version and exit')
     args = parser.parse_args()
+    if args.version:
+        build = updater.installation()
+        print(f'Retro Pocket {build.version} ({build.kind})' if build else 'Retro Pocket (from source)')
+        return 0
     try:
         from library import Library, default_rom_dir
         library = Library(root=args.data_dir, rom_dir=args.roms_dir or default_rom_dir())
         _windowless_output(library, windowless)
-        App(library, args.core, show_all=args.all, download_covers=not args.no_cover_downloads).run()
+        if args.update:
+            return update_now(library.root)
+        App(library, args.core, show_all=args.all, download_covers=not args.no_cover_downloads,
+            check_updates=not args.no_update_check).run()
     except (OSError, ValueError, pg.error) as e:
-        _report(f'Retro Pocket: {e}', windowless)
+        _report(f'Retro Pocket: {e}', windowless and not args.update)  # --update runs unattended
         return 1
+    return 0
+
+
+def update_now(data_dir):
+    """--update: download, check and install the newest release; the helper finishes after this exits."""
+    build = updater.installation()
+    if build is None:
+        print('Retro Pocket is running from source: update it with git pull.')
+        return 1
+    release = updater.latest(build)
+    if release is None:
+        print(f'Retro Pocket {build.version} is the newest version.')
+        return 0
+    if not updater.can_replace(build):
+        print(f"Retro Pocket {release.version} is out, but this copy can't replace itself where it is "
+              f'({build.root}). Download it from {release.page}')
+        return 1
+    print(f'Updating Retro Pocket {build.version} to {release.version}...')
+    updates = updater.Updates(data_dir, build)
+    updates.release, updates.state = release, 'available'
+    archive = updater.download(release, Path(data_dir) / 'updates')
+    try:
+        updates.new_root = updater.stage(build, release, archive)
+    finally:
+        archive.unlink(missing_ok=True)
+    updates.finish(relaunch=False)
+    print(f'Retro Pocket {release.version} is being installed; the log is {updates.log_file}.')
     return 0
 
 

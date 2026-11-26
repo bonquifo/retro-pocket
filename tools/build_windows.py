@@ -44,7 +44,8 @@ PYTHON_EXCLUDE = ('include/', 'libs/', 'Scripts/', 'tcl/', 'Lib/test/', 'Lib/idl
 LAUNCHER = ('@echo off\r\n'
             'rem Start Retro Pocket without a console window. Options are passed on (see app.py --help).\r\n'
             'start "" "%~dp0python\\pythonw.exe" "%~dp0app.py" %*\r\n')
-REQUIRED = ('Retro Pocket.cmd', 'app.py', '_win32.py', 'catalog.json', 'python/python.exe', 'python/pythonw.exe',
+REQUIRED = ('Retro Pocket.cmd', 'app.py', '_win32.py', 'updater.py', 'build-info.json', 'catalog.json',
+            'python/python.exe', 'python/pythonw.exe',
             'python/Lib/os.py', SITE_PACKAGES + 'pygame/__init__.py', 'roms/README.txt',
             *(f'emulators/{name}/{package.check}' for name, package in emulators.PLATFORMS['windows-x86_64'].items()))
 
@@ -90,13 +91,14 @@ def verify(zip_path: Path):
 def build(output: Path):
     output.mkdir(parents=True, exist_ok=True)
     zip_path = output / ZIP_NAME
-    print(f'{FOLDER} (Windows):')
+    print(f'{FOLDER} {bundle.version()} (Windows):')
     python, _ = emulators.cached(*PYTHON, bundle.CACHE)
     wheels = [emulators.cached(url, size, sha256, bundle.CACHE)[0] for url, size, sha256 in WHEELS]
     partial = zip_path.with_name(zip_path.name + '.part')
     out = bundle.Archive(partial, FOLDER)
     try:
         out.file('Retro Pocket.cmd', LAUNCHER.encode())
+        out.file('build-info.json', bundle.build_info('windows', ZIP_NAME))
         out.file('roms/README.txt', bundle.ROMS_README.replace('\n', '\r\n').encode())
         for name, path in bundle.retro_pocket_files():
             bundle.add_python_file(out, name, path.read_bytes())

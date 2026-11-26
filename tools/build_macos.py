@@ -21,7 +21,6 @@ start (see README.md). Downloads are cached in build/cache/.
 """
 import argparse
 from dataclasses import dataclass
-import datetime
 from pathlib import Path, PurePosixPath
 import plistlib
 import posixpath
@@ -37,7 +36,6 @@ from bundle import CACHE, ROOT, add_python_file  # noqa: E402
 import install_emulators as emulators  # noqa: E402
 
 AppZip = bundle.Archive
-VERSION = '1.0'
 
 _PBS = 'https://github.com/astral-sh/python-build-standalone/releases/download/20261124/'
 PYTHON = {
@@ -152,6 +150,7 @@ def add_retro_pocket(out: AppZip):
 
 
 def info_plist(target: Target):
+    release = bundle.updater.parse_version(bundle.version())
     return plistlib.dumps({
         'CFBundleName': 'Retro Pocket',
         'CFBundleDisplayName': 'Retro Pocket',
@@ -159,8 +158,8 @@ def info_plist(target: Target):
         'CFBundleExecutable': 'RetroPocket',
         'CFBundlePackageType': 'APPL',
         'CFBundleInfoDictionaryVersion': '6.0',
-        'CFBundleShortVersionString': VERSION,
-        'CFBundleVersion': datetime.date.today().strftime('%Y.%m.%d'),
+        'CFBundleShortVersionString': '.'.join(map(str, release[:3])),
+        'CFBundleVersion': '.'.join(map(str, release)),  # 1.2.3.4: four commits after 1.2.3
         'LSMinimumSystemVersion': target.minimum,
         'LSArchitecturePriority': [target.arch],
         'LSApplicationCategoryType': 'public.app-category.games',
@@ -174,7 +173,12 @@ REQUIRED = {  # path in the app: must be executable
     'Contents/Resources/python/lib/python3.12/os.py': False,
     SITE_PACKAGES + 'pygame/__init__.py': False, SITE_PACKAGES + 'certifi/cacert.pem': False,
     'Contents/Resources/app/app.py': False, 'Contents/Resources/app/catalog.json': False,
+    'Contents/Resources/app/updater.py': False, 'Contents/Resources/app/build-info.json': False,
 }
+
+
+def zip_name(target):
+    return f'Retro-Pocket-macOS-{target.slug}.zip'
 
 
 def _slices(data: bytes):
@@ -244,9 +248,9 @@ def verify(zip_path: Path, target: Target):
 
 def build(target: Target, output: Path):
     app = f'Retro Pocket ({target.label}).app'
-    zip_path = output / f'Retro-Pocket-macOS-{target.slug}.zip'
+    zip_path = output / zip_name(target)
     output.mkdir(parents=True, exist_ok=True)
-    print(f'{app}:')
+    print(f'{app} {bundle.version()}:')
     url, size, sha256 = PYTHON[target.arch]
     python, _ = emulators.cached(url, size, sha256, CACHE)
     wheels = [emulators.cached(url, size, sha256, CACHE)[0] for url, size, sha256 in WHEELS]
@@ -260,6 +264,7 @@ def build(target: Target, output: Path):
         for wheel in wheels:
             bundle.add_wheel(out, wheel, SITE_PACKAGES, bundle.PYGAME_EXCLUDE)
         add_retro_pocket(out)
+        out.file('Contents/Resources/app/build-info.json', bundle.build_info('macos', zip_name(target)))
         bundle.add_emulators(out, target.packages, 'Contents/Resources/app/emulators')
     finally:
         out.close()

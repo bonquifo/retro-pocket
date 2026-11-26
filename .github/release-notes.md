@@ -9,6 +9,8 @@ A game library and player for Pokémon and Mario games. Bring your own game dump
 | `Retro-Pocket-macOS-Intel.zip` | Intel Macs, macOS 10.15 or later (also runs on Apple Silicon under Rosetta) | As for Apple Silicon. |
 | `Retro-Pocket-Linux.tar.gz` | 64-bit Linux | Unpack, install the emulators from your distribution (Ubuntu: `sudo apt install python3-venv libretro-mgba desmume mupen64plus-ui-console mupen64plus-video-glide64mk2`), then run `./setup.sh` and `./RetroPocket.sh`. |
 
+**Updating:** Retro Pocket 1.1.0 and later find new releases themselves and offer an **Update** button. Your saves, settings and ROMs are kept. Version 1.0.0 predates this, so replace it by hand once: put the new version where the old one was, and move your `roms` folder over on Windows and Linux.
+
 On a Mac, Nintendo 3DS games need macOS 13.4 or later. Supported dumps: `.gb`, `.gbc`, `.gba`, `.nds`, `.z64`, `.min`, uncompressed GameCube `.iso` and decrypted 3DS `.3ds`. Retro Pocket recognises them by their contents (each listed release has a known size and digest), so file names don't matter. See the README for controls, saves and details.
 
 Each file was built from this release's commit on GitHub Actions and checked before publishing. The unit tests ran on each system, and each build was unpacked and run with its own Python. The checks covered the Game Boy Advance emulator running a test game, every emulator being found and built for the right processor, and box art downloading over HTTPS. On Windows and macOS the emulators also started, and on macOS Apple's code signatures were verified.

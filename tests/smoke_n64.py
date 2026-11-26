@@ -7,7 +7,6 @@ The fixture uses the emulator's HLE boot, not Nintendo boot code or a BIOS.
 
 import hashlib
 from pathlib import Path
-import subprocess
 import tempfile
 
 from n64 import launch

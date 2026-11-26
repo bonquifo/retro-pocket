@@ -1,0 +1,13 @@
+# Weekly pull requests for newer versions of the GitHub Actions in the
+# workflow and of the Python packages in requirements.txt. Each pull request
+# runs the full build and checks for all four versions before it is merged.
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly

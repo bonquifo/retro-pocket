@@ -1,13 +1,63 @@
 """Shared pieces of Retro Pocket's build scripts (build_windows.py, build_macos.py, build_linux.py)."""
+import datetime
 import importlib.util
+import json
+import os
 from pathlib import Path, PurePosixPath
 import stat
+import subprocess
 import sys
 import time
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 CACHE = ROOT / 'build' / 'cache'
+sys.path.insert(0, str(ROOT))
+import updater  # noqa: E402  (pure Python: version parsing and the build-info format)
+
+
+def _git(*arguments):
+    result = subprocess.run(['git', *arguments], cwd=ROOT, capture_output=True, text=True, timeout=30)
+    return result.stdout.strip() if result.returncode == 0 else ''
+
+
+def version():
+    """The version a build reports.
+
+    $RETRO_POCKET_VERSION (CI sets it for releases: "1.2.0"), else git's
+    description of the commit: "1.2.0" on a release tag, "1.2.0-3-gabc1234"
+    three commits later, "0.0.0-<commits>-g<hash>" before the first release.
+    """
+    explicit = os.environ.get('RETRO_POCKET_VERSION', '').strip()
+    if explicit:
+        explicit = explicit[1:] if explicit.startswith('v') else explicit
+        if updater.parse_version(explicit) is None:
+            raise ValueError(f'RETRO_POCKET_VERSION must look like 1.2.3, not {explicit!r}')
+        return explicit
+    try:
+        described = _git('describe', '--tags', '--match', 'v[0-9]*.[0-9]*.[0-9]*', '--abbrev=7')
+        if described and updater.parse_version(described):
+            return described[1:]
+        commits, commit = _git('rev-list', '--count', 'HEAD'), _git('rev-parse', '--short=7', 'HEAD')
+        if commits and commit:
+            return f'0.0.0-{commits}-g{commit}'
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return '0.0.0'
+
+
+def build_info(kind, asset):
+    """build-info.json for a build: what it is, and which release file updates it."""
+    commit = ''
+    try:
+        commit = os.environ.get('GITHUB_SHA') or _git('rev-parse', 'HEAD')
+    except (OSError, subprocess.SubprocessError):
+        pass
+    return json.dumps({
+        'version': version(), 'kind': kind, 'asset': asset, 'commit': commit,
+        'repository': os.environ.get('GITHUB_REPOSITORY') or updater.DEFAULT_REPOSITORY,
+        'built': datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+    }, indent=2).encode()
 
 # Retro Pocket's own files in a build: the program and its catalogue.
 APP_FILES = ('*.py', 'catalog*.json', 'covers-index.json', 'README.md', 'SOURCES*.md')

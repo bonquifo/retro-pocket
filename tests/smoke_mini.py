@@ -4,7 +4,6 @@ Use an isolated 24-bit X11 display, xdotool, libX11 and RETRO_POCKET_POKEMINI.
 The original MINX test cartridge is generated here; no ROM or BIOS downloads.
 """
 
-import ctypes as C
 from pathlib import Path
 import tempfile
 

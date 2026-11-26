@@ -6,7 +6,7 @@ A game library and player for Pokémon and Mario games, for Linux, Windows and m
 
 ## Downloads
 
-Download the latest version from the [Releases page](https://github.com/bonquifo/retro-pocket/releases/latest). Every push to `main` also builds and checks all four versions on GitHub Actions; those builds are under **Artifacts** on each run of the [Actions page](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml) for two weeks. To publish a release, push a version tag (`git tag v1.2.3`, then `git push origin v1.2.3`): the same workflow builds and checks all four versions from that commit and attaches them to a new release if every one passes.
+Download the latest version from the [Releases page](https://github.com/bonquifo/retro-pocket/releases/latest). Once installed, it updates itself (see Updates). Every push to `main` also builds and checks all four versions on GitHub Actions; those builds are under **Artifacts** on each run of the [Actions page](https://github.com/bonquifo/retro-pocket/actions/workflows/build.yml) for two weeks.
 
 | Version | File | To start |
 | --- | --- | --- |
@@ -25,7 +25,7 @@ The catalogue opens on **your games**: everything found in your ROM folder, show
 
 ### Covers
 
-Covers are the games' real box art from [libretro-thumbnails](https://github.com/libretro-thumbnails) (RetroArch's box art collection). `covers-index.json` lists, for every release that has a box, the exact file at a pinned commit with its size and SHA-256. Retro Pocket downloads that file the first time the cover is shown (your own games first), keeps it only if it matches, and caches it in `covers/downloaded/` in the data directory. Nothing else is fetched. Start with `--no-cover-downloads` to stay offline.
+Covers are the games' real box art from [libretro-thumbnails](https://github.com/libretro-thumbnails) (RetroArch's box art collection). `covers-index.json` lists, for every release that has a box, the exact file at a pinned commit with its size and SHA-256. Retro Pocket downloads that file the first time the cover is shown (your own games first), keeps it only if it matches, and caches it in `covers/downloaded/` in the data directory. Start with `--no-cover-downloads` to fetch no box art. Apart from box art, the downloadable builds only contact GitHub to look for updates (see Updates).
 
 Releases without a box (download-only eShop and Virtual Console titles, Switch, mobile and arcade games) and covers that haven't downloaded yet show a plain card with the system and title.
 
@@ -136,7 +136,7 @@ Put your own raw dumps (`.gb`, `.gbc`, `.gba`, `.nds`, `.z64`, `.min`, uncompres
 
 The first check reads every candidate file once, which takes a few minutes for large 3DS images. The results are cached in `rom-index.json` in the data directory, and later starts only re-read files that have changed. Every launch still re-checks the game's bytes before the emulator starts.
 
-The ROM folder is the only way to add a game; to play a dump stored somewhere else, copy or link it into that folder. The app does not unpack ZIPs. At launch, the game file is checked by reading it once, 1 MB at a time, and the emulator gets a hard link to the checked file rather than a copy. Neither step loads the game into Retro Pocket's memory or uses extra disk space. Linking falls back to a copy only if your data directory is on a different filesystem (on Windows, a different drive) from the ROM. Large 3DS images take a few seconds to check. Retro Pocket never downloads ROMs: nothing is included, searched for online, or fetched. The only thing it downloads is box art (see Covers).
+The ROM folder is the only way to add a game; to play a dump stored somewhere else, copy or link it into that folder. The app does not unpack ZIPs. At launch, the game file is checked by reading it once, 1 MB at a time, and the emulator gets a hard link to the checked file rather than a copy. Neither step loads the game into Retro Pocket's memory or uses extra disk space. Linking falls back to a copy only if your data directory is on a different filesystem (on Windows, a different drive) from the ROM. Large 3DS images take a few seconds to check. Retro Pocket never downloads ROMs: nothing is included, searched for online, or fetched. It downloads only box art (see Covers) and its own updates (see Updates).
 
 ## Controls
 
@@ -195,6 +195,36 @@ Linux and Windows use the same emulators, so their save files have the same form
 - Nintendo 3DS: the Azahar data folders. Linux keeps them in `<game>/azahar/<game>/data/azahar-emu/`, Windows and macOS in `<game>/azahar/<game>/user/`. Copy the `sdmc` and `nand` folders between them.
 
 Emulators run in separate processes, so an emulator crash does not close the library. Close an emulator normally to let it finish saving; closing the library does not force the game to quit. If an emulator freezes, use **Force close** and confirm the warning about unsaved progress. If a game fails to launch or crashes, use **Copy log path** to locate the diagnostic log. Saves and launch logs are kept separately under `saves/` and `logs/` inside the app's data directory.
+
+## Updates
+
+The downloadable Windows, macOS and Linux versions keep themselves up to date. At most once a day, when the library opens, it asks GitHub for the latest release of this repository. If that is newer, an **Update to 1.2.0** button appears at the bottom right:
+
+1. Clicking it downloads this version's file from the release. The file is accepted only if its size and SHA-256 match what GitHub publishes for it, and it is unpacked next to the installation and checked to be the expected version for the same system.
+2. **Restart to update** closes the library. A small helper (PowerShell on Windows, a shell script on macOS and Linux) puts the installed version aside, moves the new one into place, carries your `roms` folder over (on Linux also `.venv`, then reruns `setup.sh`), deletes the old version and opens the library again. If any step fails, the installed version is put back.
+3. The next start shows whether the update worked. The helper's log is `logs/update.log` in the data directory.
+
+Saves, settings, box art and the ROM index live in the data directory, which updates never touch. A copy that can't replace itself (in a read-only folder, or opened on macOS straight from the download without moving it to Applications) opens the release page instead. From a terminal, `app.py --update` installs the newest release without opening the library, and `app.py --version` shows the version. To turn the daily check off, start with `--no-update-check` or set `RETRO_POCKET_NO_UPDATE_CHECK=1`. A source checkout (this folder run with `RetroPocket.cmd`, `.command` or `.sh`) doesn't update itself: use `git pull`.
+
+Updates trust GitHub and this repository: whoever can publish a release here can update every copy. Keep the GitHub account behind two-factor authentication.
+
+## Development and releases
+
+`.github/workflows/build.yml` builds and checks all four versions on every push to `main`, on every pull request, and every Monday, to catch changes in the emulators and in GitHub's machines. A quick version and lint job runs first. Then, on Windows, Linux, macOS on Apple Silicon and macOS on Intel, each job:
+
+1. sets up from source with that system's own setup script and runs the unit tests;
+2. builds the version. It reports its version from git: `1.2.0` on a release tag, `1.2.0-3-gabc1234` three commits later;
+3. unpacks the build and checks it from the inside with its own Python (`tools/verify_build.py`);
+4. installs an older copy of the build and lets it update itself to the new one, as a user's copy would (`tools/check_update.py`).
+
+The builds are kept as artifacts for two weeks. Dependabot opens weekly pull requests for newer GitHub Actions and Python packages, and each one goes through the same checks.
+
+To release a version, either:
+
+- on the Actions tab, open **Build, check and release**, choose **Run workflow**, and enter the version (such as `1.2.0`); or
+- push a tag: `git tag v1.2.0`, then `git push origin v1.2.0`.
+
+The release is published, with the four builds, a `SHA256SUMS` file and notes listing the changes, only if every check passed. Within a day, installed copies offer the update.
 
 ## Verification and limitations
 

@@ -27,8 +27,8 @@ FOLDER = 'retro-pocket'
 TAR_NAME = 'Retro-Pocket-Linux.tar.gz'
 EXECUTABLE = {'setup.sh', 'RetroPocket.sh'}
 EXTRA = ('ds_input_shim.c', 'requirements.txt', 'setup.sh', 'RetroPocket.sh')
-REQUIRED = ('app.py', 'catalog.json', 'ds_input_shim.c', 'requirements.txt', 'setup.sh', 'RetroPocket.sh',
-            'roms/README.txt')
+REQUIRED = ('app.py', 'updater.py', 'build-info.json', 'catalog.json', 'ds_input_shim.c', 'requirements.txt',
+            'setup.sh', 'RetroPocket.sh', 'roms/README.txt')
 
 
 def _add(tar, name, data: bytes, mode):
@@ -55,10 +55,11 @@ def build(output: Path):
     with tarfile.open(partial, 'w:gz') as tar:
         for name, source in bundle.retro_pocket_files(exclude={'_win32.py'}, extra=EXTRA):
             _add(tar, name, source.read_bytes(), 0o755 if name in EXECUTABLE else 0o644)
+        _add(tar, 'build-info.json', bundle.build_info('linux', TAR_NAME), 0o644)
         _add(tar, 'roms/README.txt', bundle.ROMS_README.encode(), 0o644)
     verify(partial)
     partial.replace(path)
-    print(f'retro-pocket (Linux): {path} ({path.stat().st_size // 1024} KB, checked)')
+    print(f'retro-pocket {bundle.version()} (Linux): {path} ({path.stat().st_size // 1024} KB, checked)')
     return path
 
 

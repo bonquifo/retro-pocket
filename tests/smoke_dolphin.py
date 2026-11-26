@@ -8,7 +8,7 @@ import tempfile
 import time
 
 from dolphin_backend import launch
-from smoke_ds import Display, command, eventually
+from smoke_ds import Display, eventually
 
 
 def close_window(window):

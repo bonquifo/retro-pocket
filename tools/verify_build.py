@@ -74,6 +74,7 @@ def main(argv=None):
     parser.add_argument('--run-emulators', action='store_true', help='also start each emulator')
     parser.add_argument('--window', action='store_true', help="open a real window, not SDL's dummy one")
     parser.add_argument('--launcher', type=Path, help="the build's launcher, run with --help")
+    parser.add_argument('--expect-version', help='the version the build must report')
     args = parser.parse_args(argv)
 
     app_dir = args.app_dir.resolve()
@@ -97,6 +98,20 @@ def main(argv=None):
             raise RuntimeError(f'imported Retro Pocket from {compat.APP_DIR}, not the build')
         return 'Windows' if compat.WINDOWS else 'macOS' if compat.MACOS else 'Linux'
     checks.run('build code', code)
+
+    def build_info():
+        import compat
+        import updater
+        build = updater.installation()
+        if build is None:
+            raise RuntimeError(f'no usable {updater.BUILD_INFO}: this build could not update itself')
+        expected = 'windows' if compat.WINDOWS else 'macos' if compat.MACOS else 'linux'
+        if build.kind != expected:
+            raise RuntimeError(f'the build says it is for {build.kind}, not {expected}')
+        if args.expect_version and build.version != args.expect_version:
+            raise RuntimeError(f'version {build.version}, expected {args.expect_version}')
+        return f'{build.version}, updates from {build.repository} ({build.asset}), replaces {build.root.name}'
+    checks.run('build info', build_info)
 
     def catalogue():
         from library import Library
